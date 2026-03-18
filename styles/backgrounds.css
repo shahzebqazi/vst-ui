@@ -247,12 +247,14 @@ body {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 12px;
   width: 100%;
 }
 
 .app-title .title-icon {
   opacity: 0.9;
+  margin-inline-end: 0.15em;
+  padding-inline-end: 0.5em;
 }
 
 .shell-overview {
@@ -300,7 +302,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: 8px;
+  gap: 14px;
   padding: 6px 0 8px;
   margin: 0;
   border: none;
@@ -338,6 +340,8 @@ body {
   line-height: 1;
   opacity: 0.65;
   flex-shrink: 0;
+  margin-inline-end: 6px;
+  padding-inline-end: 4px;
 }
 
 .nav-disclosure__chevron::before {
@@ -372,7 +376,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
   min-height: var(--stack-tile-min-h);
   padding: 10px 12px;
@@ -403,6 +407,12 @@ body {
   opacity: 0.88;
   line-height: 1.2;
   margin-top: 2px;
+  min-width: 1.75rem;
+  text-align: center;
+  box-sizing: content-box;
+  /* Clear separation from title/description (icon fonts bleed visually) */
+  padding-inline-end: 12px;
+  margin-inline-end: 4px;
 }
 
 .stack-tile__copy {
