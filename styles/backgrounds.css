@@ -121,14 +121,23 @@ body {
 
 @media (max-width: 767px) {
   .app-shell {
-    padding-left: 6px;
-    padding-right: 6px;
+    width: 100%;
+    padding: 16px;
   }
 
   .app-shell--intro .left-panel--stack.panel,
   .app-shell--split-narrow .left-panel--stack.panel {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .app-shell--intro .left-panel--stack,
+  .app-shell--split-narrow .left-panel--stack {
+    max-width: none;
+  }
+
+  .app-shell--intro .left-panel--stack {
+    margin-top: 16px;
   }
 }
 
