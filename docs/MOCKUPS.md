@@ -40,7 +40,7 @@ flowchart TB
   comp --> cm
 ```
 
-_Under **Plugins mock-ups**: Utility, Pan, EQ, Saturator, then **Components** → `components.html` (200×200 mini windows + wireframes). Presets and Export are not in the menu._
+_Under **Plugins mock-ups**: Utility, Pan, EQ, Saturator, then **Components** → `components.html` (controls + wireframes below). Presets and Export are not in the menu._
 
 ## Standalone App Launch image (blueprint page)
 

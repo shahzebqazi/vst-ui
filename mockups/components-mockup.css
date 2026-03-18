@@ -1,4 +1,4 @@
-/* Components page: 200×200 mini windows (transparent) + wireframes below */
+/* Components page: raw controls + wireframes below (no window chrome) */
 
 *,
 *::before,
@@ -36,64 +36,18 @@ body {
   color: rgba(15, 23, 42, 0.75);
 }
 
-/* —— 200×200 mockup window: chrome + body —— */
-.mini-window {
-  width: 200px;
-  height: 200px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(15, 23, 42, 0.18);
-  border-radius: 8px;
-  overflow: hidden;
-  background: transparent;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.mini-window__chrome {
-  flex: 0 0 28px;
+/* Live component preview (no faux window) */
+.component-demo {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 0 6px;
-  background: rgba(255, 255, 255, 0.35);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
-}
-
-.mini-window__close {
-  width: 22px;
-  height: 22px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  border-radius: 4px;
-  background: rgba(15, 23, 42, 0.08);
-  color: rgba(15, 23, 42, 0.65);
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-}
-
-.mini-window__close:hover {
-  background: rgba(220, 38, 38, 0.15);
-  color: #b91c1c;
-}
-
-.mini-window__close:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 1px;
-}
-
-.mini-window__body {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
+  justify-content: flex-start;
+  padding: 12px 0 4px;
   background: transparent;
+}
+
+.component-demo--tall {
+  min-height: 120px;
+  align-items: center;
 }
 
 /* —— Knob —— */
@@ -150,9 +104,8 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  height: 100%;
-  max-height: 152px;
   justify-content: center;
+  padding: 8px 0;
 }
 
 .ui-vslider input[type="range"] {
@@ -261,7 +214,7 @@ body {
   border-color: #334155;
 }
 
-/* —— Wireframe block (outside mini-window) —— */
+/* —— Wireframe block (below live control) —— */
 .component-wireframe {
   margin-top: 14px;
   padding: 14px;
