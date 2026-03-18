@@ -16,11 +16,11 @@ flowchart LR
 ```mermaid
 flowchart TB
   blueprints[Blueprints]
-  b1[Mockup and wireframe]
+  b1[Standalone App Launch image]
   blueprints --> b1
 ```
 
-## Blueprint 1 — Mockup and wireframe
+## Blueprint 1 — Standalone App Launch image
 
 `mockups/blueprint-01-mockup-wireframe.html` + `mockups/blueprint-mockup-wireframe.css`:
 

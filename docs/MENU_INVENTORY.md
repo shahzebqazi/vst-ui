@@ -30,7 +30,7 @@ _Iframe targets under **Blueprints** in `index.html`._
 
 | Screen file | Shell label | Notes |
 | ----------- | ----------- | ----- |
-| `mockups/blueprint-01-mockup-wireframe.html` | Mockup and wireframe | Blueprint 1: launch art, “You are a…” mockup, labeled wireframe |
+| `mockups/blueprint-01-mockup-wireframe.html` | Standalone App Launch image | Launch art, “You are a…” mockup, labeled wireframe |
 
 _Legacy HTML under `mockups/` (main, example-*, history, etc.) remains on disk but is not listed in the shell until re-added._
 
