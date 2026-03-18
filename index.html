@@ -3,27 +3,128 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Capture Plugin Living Doc</title>
+    <title>VST UI Mockups</title>
     <link rel="stylesheet" href="styles/backgrounds.css" />
   </head>
   <body class="bg-blueprint">
     <main class="app-shell">
-      <section class="panel left-panel">
-        <h1>Capture Plugin Menus</h1>
-        <div class="theme-switcher" aria-label="Theme switcher">
-          <button type="button" data-theme="bg-blueprint">Blueprint</button>
-          <button type="button" data-theme="bg-paper">Paper</button>
-          <button type="button" data-theme="bg-dark-dots">Dark Dots</button>
+      <section class="panel left-panel" aria-label="Mockup controls">
+        <h1 class="app-title">
+          <span class="title-icon" aria-hidden="true">&#xf1e6;</span>VST UI Mockups
+        </h1>
+
+        <div class="control-block">
+          <h2 class="section-title section-title--themes" id="themes-heading">Themes</h2>
+          <div
+            class="btn-row theme-row"
+            role="group"
+            aria-labelledby="themes-heading"
+          >
+            <button type="button" class="chrome-btn" data-theme="bg-blueprint">
+              <span class="btn-glyph" aria-hidden="true">&#xf00a;</span>
+              Blueprint
+            </button>
+            <button type="button" class="chrome-btn" data-theme="bg-paper">
+              <span class="btn-glyph" aria-hidden="true">&#xf15c;</span>
+              Paper
+            </button>
+            <button type="button" class="chrome-btn" data-theme="bg-dark-dots">
+              <span class="btn-glyph" aria-hidden="true">&#xf186;</span>
+              Dark Dots
+            </button>
+          </div>
         </div>
 
-        <ul class="menu-list">
-          <li><a href="mockups/home.html" target="mockupViewport">Home</a></li>
-          <li><a href="mockups/capture-modes.html" target="mockupViewport">Capture Modes</a></li>
-          <li><a href="mockups/history.html" target="mockupViewport">History</a></li>
-          <li><a href="mockups/export.html" target="mockupViewport">Export</a></li>
-          <li><a href="mockups/settings.html" target="mockupViewport">Settings</a></li>
-          <li><a href="mockups/help.html" target="mockupViewport">Help</a></li>
-        </ul>
+        <div class="control-block">
+          <h2 class="section-title section-title--mockups" id="mockups-heading">
+            Mockups
+          </h2>
+          <div
+            class="btn-row mockup-row"
+            role="group"
+            aria-labelledby="mockups-heading"
+          >
+            <a
+              class="chrome-btn mockup-link is-active"
+              href="mockups/home.html"
+              target="mockupViewport"
+              data-mockup="home"
+            >
+              <span class="btn-glyph" aria-hidden="true">&#xf015;</span>
+              Main
+            </a>
+            <a
+              class="chrome-btn mockup-link"
+              href="mockups/capture-modes.html"
+              target="mockupViewport"
+              data-mockup="capture-modes"
+            >
+              <span class="btn-glyph" aria-hidden="true">&#xf1de;</span>
+              Controls
+            </a>
+            <a
+              class="chrome-btn mockup-link"
+              href="mockups/history.html"
+              target="mockupViewport"
+              data-mockup="history"
+            >
+              <span class="btn-glyph" aria-hidden="true">&#xf1da;</span>
+              Presets
+            </a>
+            <a
+              class="chrome-btn mockup-link"
+              href="mockups/export.html"
+              target="mockupViewport"
+              data-mockup="export"
+            >
+              <span class="btn-glyph" aria-hidden="true">&#xf019;</span>
+              Export
+            </a>
+            <a
+              class="chrome-btn mockup-link"
+              href="mockups/settings.html"
+              target="mockupViewport"
+              data-mockup="settings"
+            >
+              <span class="btn-glyph" aria-hidden="true">&#xf013;</span>
+              Settings
+            </a>
+            <a
+              class="chrome-btn mockup-link"
+              href="mockups/help.html"
+              target="mockupViewport"
+              data-mockup="help"
+            >
+              <span class="btn-glyph" aria-hidden="true">&#xf059;</span>
+              Help
+            </a>
+          </div>
+        </div>
+
+        <details class="documents-block control-block">
+          <summary
+            class="section-title section-title--documents"
+            id="documents-heading"
+          >
+            <span class="summary-chevron" aria-hidden="true"></span>
+            Documents
+          </summary>
+          <div
+            class="btn-row doc-row"
+            role="group"
+            aria-labelledby="documents-heading"
+          >
+            <a
+              class="chrome-btn doc-link"
+              href="documents/executive-design-requirements.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="btn-glyph" aria-hidden="true">&#xf0f6;</span>
+              Executive design requirements
+            </a>
+          </div>
+        </details>
       </section>
 
       <section class="panel right-panel">
@@ -39,11 +140,27 @@
 
     <script>
       (function () {
-        var buttons = document.querySelectorAll("[data-theme]");
-        buttons.forEach(function (button) {
-          button.addEventListener("click", function () {
+        var themeButtons = document.querySelectorAll("[data-theme]");
+        var mockupLinks = document.querySelectorAll(".mockup-link");
+
+        themeButtons.forEach(function (btn) {
+          btn.addEventListener("click", function () {
             document.body.classList.remove("bg-blueprint", "bg-paper", "bg-dark-dots");
-            document.body.classList.add(button.getAttribute("data-theme"));
+            document.body.classList.add(btn.getAttribute("data-theme"));
+            themeButtons.forEach(function (b) {
+              b.classList.toggle("is-active", b === btn);
+            });
+          });
+        });
+
+        document.querySelector("[data-theme=\"bg-blueprint\"]").classList.add("is-active");
+
+        mockupLinks.forEach(function (link) {
+          link.addEventListener("click", function () {
+            mockupLinks.forEach(function (l) {
+              l.classList.remove("is-active");
+            });
+            link.classList.add("is-active");
           });
         });
       })();

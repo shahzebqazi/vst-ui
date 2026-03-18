@@ -1,6 +1,6 @@
-# Capture Plugin Living Design Docs
+# VST UI Mockups — Living Design Docs
 
-This repository hosts a static, GitHub Pages-friendly living design doc for a Capture Plugin concept.
+This repository hosts a static, GitHub Pages-friendly living design doc for VST UI mockups.
 
 ## Contents
 
