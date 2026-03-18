@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Switch mockup</title>
+    <link rel="stylesheet" href="components-mockup.css" />
+  </head>
+  <body>
+    <main class="components-page components-page--single">
+      <p class="component-back-link">
+        <a href="components-list.html">← Component mockups</a>
+      </p>
+      <section class="component-showcase" aria-labelledby="t-sw">
+        <h1 class="component-showcase__name" id="t-sw">Switch mockup</h1>
+        <div class="component-demo">
+          <button
+            type="button"
+            class="ui-switch"
+            role="switch"
+            aria-checked="true"
+            aria-label="Bypass"
+            id="demo-switch"
+          >
+            <span class="ui-switch__thumb" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="component-wireframe" aria-label="Wireframe">
+          <div class="component-wireframe__canvas component-wireframe__canvas--switch">
+            <div class="wf" aria-hidden="true"></div>
+          </div>
+          <p class="wireframe-legend">
+            <strong>Wireframe</strong> — Toggle track and thumb.
+          </p>
+        </div>
+      </section>
+    </main>
+    <script>
+      (function () {
+        var sw = document.getElementById("demo-switch");
+        if (sw) {
+          sw.addEventListener("click", function () {
+            var on = sw.getAttribute("aria-checked") === "true";
+            sw.setAttribute("aria-checked", on ? "false" : "true");
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

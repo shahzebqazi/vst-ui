@@ -40,7 +40,7 @@ flowchart TB
   comp --> cm
 ```
 
-_Under **Plugins mock-ups**: Utility, Pan, EQ, Saturator, then **Components** → `components.html` (controls + wireframes below). Presets and Export are not in the menu._
+_Under **Plugins mock-ups**: **Component mockups** → `components-list.html` (ordered list + shell note). Each control is a separate document (`component-mockup-knob.html`, etc.): mock + wireframe only. Shell preview uses `iframe#mockup-iframe` inside `.phone-frame`. Presets and Export are not in the menu._
 
 ## Standalone App Launch image (blueprint page)
 
