@@ -106,6 +106,17 @@ Do this for every menu. No exceptions.
 
 Commit and push after each step.
 
+## Sync Procedure: Inventory to Docs and HTML
+
+Whenever menu items change, run this sequence in order:
+
+1. Update the relevant menu section in `docs/MENU_INVENTORY.md`, then commit and push.
+2. Mirror those menu changes into `docs/REQUIREMENTS.md`, then commit and push.
+3. Update Mermaid structures in `docs/MOCKUPS.md` and `docs/DIAGRAMS.md`, then commit and push.
+4. Update corresponding screen content in `mockups/*.html` and any shell navigation references in `index.html`, then commit and push.
+
+Do not skip steps, and do not mark the sync complete until every updated layer has been committed and pushed.
+
 ## HTML Mockup Rules
 
 - Left column: menu list.
