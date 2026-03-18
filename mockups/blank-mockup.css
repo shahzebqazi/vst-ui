@@ -1,4 +1,9 @@
-/* Icon-only placeholder mockups (no chrome, no copy) */
+/*
+ * Icon-only placeholder mockups (no in-page window chrome).
+ * When loaded in the shell mockup viewport, the host frame adds the shared
+ * title strip (red / yellow / green). The red control closes the mockup for
+ * every page shown in that iframe—no per-mockup markup required.
+ */
 * {
   box-sizing: border-box;
 }

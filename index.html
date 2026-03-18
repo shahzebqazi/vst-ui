@@ -140,8 +140,8 @@
                   <span class="stack-tile__copy">
                     <span class="stack-tile__title">Standalone App Launch image</span>
                     <span class="stack-tile__desc"
-                      >Launch screen in viewport; wireframe and card appear below when this mockup
-                      is open.</span
+                      >Launch art, “You are a…” mockup card, and labeled wireframe in one
+                      screen.</span
                     >
                   </span>
                 </a>
@@ -228,49 +228,6 @@
                   </a>
                 </div>
               </div>
-
-              <div
-                class="launch-mockup-supplement"
-                id="launch-mockup-supplement"
-                hidden
-                aria-label="Standalone launch wireframe and mockup card"
-              >
-                <p class="launch-mockup-supplement__heading">Standalone App Launch — detail</p>
-                <p class="launch-mockup-supplement__lede">
-                  Wireframe and “You are a…” card for the same blueprint (viewport shows launch
-                  image only).
-                </p>
-                <section class="launch-mockup-supplement__card-block" aria-label="You are a mockup">
-                  <div class="launch-mockup-supplement__card">
-                    <p class="launch-mockup-supplement__card-label">Mockup</p>
-                    <h2 class="launch-mockup-supplement__card-title">You are a…</h2>
-                    <p class="launch-mockup-supplement__card-hint">
-                      Placeholder headline—swap for persona, product, or onboarding copy.
-                    </p>
-                  </div>
-                </section>
-                <section
-                  class="launch-mockup-supplement__wireframe"
-                  aria-label="Structural wireframe"
-                >
-                  <div class="launch-mockup-supplement__canvas">
-                    <div class="launch-mockup-supplement__canvas-header"></div>
-                    <div class="launch-mockup-supplement__canvas-row">
-                      <div class="launch-mockup-supplement__canvas-side"></div>
-                      <div class="launch-mockup-supplement__canvas-main">
-                        <div class="launch-mockup-supplement__canvas-block launch-mockup-supplement__canvas-block--tall"></div>
-                        <div class="launch-mockup-supplement__canvas-block"></div>
-                      </div>
-                    </div>
-                    <div class="launch-mockup-supplement__canvas-footer"></div>
-                  </div>
-                  <p class="launch-mockup-supplement__legend">
-                    <strong>Wireframe</strong> — This is a wireframe: boxes and lines only, no final
-                    visuals. In this project, every generated wireframe includes this note so
-                    reviewers always know they’re looking at structure, not shipped UI.
-                  </p>
-                </section>
-              </div>
             </div>
           </details>
 
@@ -333,7 +290,19 @@
 
       <section class="right-panel" id="right-panel" aria-hidden="true">
         <div class="phone-frame phone-frame--phone" id="phone-frame" data-size="phone">
-          <div class="phone-frame__chrome" aria-hidden="true"></div>
+          <div class="phone-frame__chrome" role="group" aria-label="Window">
+            <div class="phone-frame__traffic" aria-hidden="true">
+              <button
+                type="button"
+                class="phone-frame__traffic-light phone-frame__traffic-light--close"
+                id="mockup-frame-close"
+                aria-label="Close mockup"
+                title="Close"
+              ></button>
+              <span class="phone-frame__traffic-light phone-frame__traffic-light--yellow"></span>
+              <span class="phone-frame__traffic-light phone-frame__traffic-light--green"></span>
+            </div>
+          </div>
           <iframe
             title="Mockup viewport"
             name="mockupViewport"
@@ -367,7 +336,7 @@
         var THEME_CLASSES = ["bg-blueprint", "bg-paper", "bg-dark-dots"];
         var disclosureUi = document.getElementById("disclosure-ui");
         var disclosureDocs = document.getElementById("disclosure-docs");
-        var launchMockupSupplement = document.getElementById("launch-mockup-supplement");
+        var mockupFrameClose = document.getElementById("mockup-frame-close");
 
         var MOCKUP_SIZES = {
           phone: { w: 390, h: 844, className: "phone-frame--phone" },
@@ -443,7 +412,6 @@
             l.classList.toggle("is-active", l === link);
           });
           placeholder.hidden = true;
-          syncLaunchSupplement();
         }
 
         function syncOverviewVisibility() {
@@ -454,20 +422,12 @@
           }
         }
 
-        function syncLaunchSupplement() {
-          if (!launchMockupSupplement) return;
-          var bp =
-            document.querySelector('.mockup-link[data-mockup="blueprint-01"].is-active');
-          launchMockupSupplement.hidden = !(mockupsSectionOpen() && bp);
-        }
-
         function clearMockup() {
           iframe.src = "about:blank";
           mockupLinks.forEach(function (l) {
             l.classList.remove("is-active");
           });
           placeholder.hidden = false;
-          syncLaunchSupplement();
         }
 
         function mockupsSectionOpen() {
@@ -522,7 +482,6 @@
             syncOverviewVisibility();
             syncNavDensity();
             applyLayout();
-            syncLaunchSupplement();
             persistShellState();
           });
         });
@@ -570,17 +529,16 @@
             : defaultMockupSizeKey();
         applyMockupSize(sizeKey);
         restoreMockupFromState(initialShell);
-        syncLaunchSupplement();
         if (initialShell) {
           persistShellState();
         }
 
-        window.addEventListener("message", function (ev) {
-          if (ev.source !== iframe.contentWindow) return;
-          if (!ev.data || ev.data.type !== "vst-ui-close-mockup") return;
-          clearMockup();
-          persistShellState();
-        });
+        if (mockupFrameClose) {
+          mockupFrameClose.addEventListener("click", function () {
+            clearMockup();
+            persistShellState();
+          });
+        }
 
         themeButtons.forEach(function (btn) {
           btn.addEventListener("click", function () {
@@ -616,7 +574,6 @@
             });
             link.classList.add("is-active");
             placeholder.hidden = true;
-            syncLaunchSupplement();
             persistShellState();
           });
         });

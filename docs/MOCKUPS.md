@@ -42,8 +42,8 @@ _Presets and Export are not listed in the shell menu._
 
 `mockups/blueprint-01-mockup-wireframe.html` + `mockups/blueprint-mockup-wireframe.css`:
 
-- **Viewport** — Non-scrollable **desktop-style title bar** (title **Launch image**, red close control posts to parent to clear the mockup). Body: launch gradient, logo mark, **spinner** + progress bar, **Launch image** heading.
-- **Host page** — When this mockup is selected under **Mockups**, **Standalone App Launch — detail** on `index.html` shows the **“You are a…”** card and **wireframe** canvas (same structure as before; moved out of the iframe).
+- **Standalone app launch art** — primary viewport content; same gradient / mark / progress bar language as `main.html`.
+- **Mockups and Wireframes** — collapsible section below launch art. When expanded: **“You are a…” mockup** (labeled card) and **wireframe** canvas (**black** 2px strokes) plus project-standard wireframe subtext.
 
 ## Settings Screen Skeleton
 
