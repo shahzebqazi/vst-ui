@@ -44,8 +44,11 @@
           <td>Background modifiers and mockup viewport size presets.</td>
         </tr>
         <tr>
-          <td>Mockups</td>
-          <td>Screens: Main, Utility / Pan / EQ / Saturator (example plugins), Presets, Export, Settings, Help → <code>mockups/</code>.</td>
+          <td>Blueprints</td>
+          <td
+            >Blueprint entries load HTML from <code>mockups/</code> into the viewport (e.g.
+            <strong>Mockup and wireframe</strong> — launch art, “You are a…” mockup, labeled wireframe).</td
+          >
         </tr>
         <tr>
           <td>Documents</td>
@@ -54,8 +57,8 @@
         <tr>
           <td>Viewport</td>
           <td
-            >Frame appears only when <strong>Mockups</strong> is open; loads HTML when the user picks a
-            screen. UI configuration / Documents alone do not show an empty frame. Background theme is
+            >Frame appears only when <strong>Blueprints</strong> is open; loads HTML when the user picks an
+            entry. UI configuration / Documents alone do not show an empty frame. Background theme is
             persisted (localStorage).</td
           >
         </tr>
@@ -73,12 +76,13 @@
       <li>Panel: translucent left rail; mockup card: opaque, elevated.</li>
       <li>List actions: stack tiles with title and optional description.</li>
     </ul>
-    <h3>3.3 Mockup pages</h3>
+    <h3>3.3 Blueprint pages</h3>
     <ul>
       <li
-        ><code>mockups/main.html</code> is the standalone launch screen (gradient, app mark, progress
-        bar). Other screens use <code>blank-mockup.css</code> (icon-only placeholders). The shell
-        <strong>Main</strong> tile shows the app logo and a miniature preview of the launch mockup.</li
+        ><code>mockups/blueprint-01-mockup-wireframe.html</code> combines standalone launch art (same
+        language as <code>main.html</code>), a <strong>You are a…</strong> mockup card, and a
+        black-on-white wireframe with project-standard wireframe subtext. Legacy pages under
+        <code>mockups/</code> may remain for reference.</li
       >
       <li>Prefer semantic HTML and focus order matching visual order.</li>
     </ul>
@@ -145,16 +149,18 @@
       </tbody>
     </table>
 
-    <h2>7. Launch mockup &amp; placeholders</h2>
+    <h2>7. Launch art &amp; wireframes</h2>
     <p>
-      <code>mockups/main.html</code> shows the standalone launch image (favicon as mark). Other
-      mockups remain icon placeholders. Favicon: <code>assets/favicon.svg</code>.
+      Standalone launch art (gradient, favicon mark, progress bar) lives in
+      <code>mockups/main.html</code> and is reused in Blueprint 1. Wireframes in this repo use a white
+      canvas with black structural lines and explicit <strong>Wireframe</strong> subtext. Favicon:
+      <code>assets/favicon.svg</code>.
     </p>
 
     <p class="doc-footer" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
       Related: <a href="../docs/MENU_INVENTORY.md">docs/MENU_INVENTORY.md</a> ·
       <a href="../docs/MOCKUPS.md">docs/MOCKUPS.md</a>
     </p>
-    <a class="back" href="../index.html">← Back to Project menu</a>
+    <a class="back" href="../index.html">← Back to Iconoclast</a>
   </body>
 </html>

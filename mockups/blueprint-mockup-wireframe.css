@@ -1,0 +1,232 @@
+/* Blueprint 1: launch art + “You are a…” mockup + wireframe canvas */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a1a;
+}
+
+.blueprint-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* —— Standalone launch art (matches main.html mood) —— */
+.landing-art {
+  position: relative;
+  min-height: 42vh;
+  min-height: min(380px, 50dvh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 6vw, 48px);
+  text-align: center;
+  color: #e8f2ff;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 20%, rgba(91, 140, 255, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 50% at 80% 90%, rgba(45, 106, 170, 0.25) 0%, transparent 45%),
+    linear-gradient(168deg, #0d2844 0%, #1a4a7a 38%, #0f1f35 72%, #060d18 100%);
+}
+
+.landing-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.landing-art__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 320px;
+}
+
+.landing-art__mark {
+  width: clamp(72px, 22vw, 112px);
+  height: clamp(72px, 22vw, 112px);
+  margin: 0 auto 28px;
+  border-radius: 28%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  display: grid;
+  place-items: center;
+}
+
+.landing-art__mark img {
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+}
+
+.landing-art__bar {
+  height: 4px;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.landing-art__bar::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 40%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #5b8cff, #9ec5ff);
+  animation: blueprint-launch-progress 2.2s ease-in-out infinite;
+}
+
+@keyframes blueprint-launch-progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+.landing-art__caption {
+  margin-top: 20px;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+/* —— You are a… mockup —— */
+.you-are-mockup {
+  padding: clamp(28px, 6vw, 48px) clamp(20px, 5vw, 40px);
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.you-are-mockup__card {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.you-are-mockup__label {
+  margin: 0 0 8px;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.you-are-mockup__title {
+  margin: 0 0 12px;
+  font-size: clamp(1.75rem, 6vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.you-are-mockup__hint {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+/* —— Wireframe —— */
+.wireframe-block {
+  padding: clamp(28px, 6vw, 48px) clamp(16px, 4vw, 32px) 48px;
+  background: #e8eaed;
+}
+
+.wireframe-canvas {
+  max-width: 360px;
+  margin: 0 auto;
+  min-height: 280px;
+  padding: 16px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wireframe-canvas__header {
+  height: 36px;
+  border: 2px solid #000000;
+  flex-shrink: 0;
+}
+
+.wireframe-canvas__row {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  min-height: 160px;
+}
+
+.wireframe-canvas__col--side {
+  width: 28%;
+  min-width: 72px;
+  border: 2px solid #000000;
+}
+
+.wireframe-canvas__col--main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wireframe-canvas__block {
+  flex: 1;
+  min-height: 48px;
+  border: 2px solid #000000;
+}
+
+.wireframe-canvas__block--tall {
+  flex: 1.4;
+  min-height: 72px;
+}
+
+.wireframe-canvas__footer {
+  height: 28px;
+  border: 2px solid #000000;
+  flex-shrink: 0;
+}
+
+.wireframe-legend {
+  max-width: 420px;
+  margin: 20px auto 0;
+  padding: 0 8px;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: #334155;
+  text-align: center;
+}
+
+.wireframe-legend strong {
+  color: #0f172a;
+}

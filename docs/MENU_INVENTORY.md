@@ -24,16 +24,15 @@ For each menu below, answer:
 | ---------- | --------------------- | -------------------- | ----- |
 | TODO | row | MUST | |
 
-## Example plugin mockups (shell)
+## Blueprints (shell)
 
-_Four standalone iframe targets under **Mockups** in `index.html`._
+_Iframe targets under **Blueprints** in `index.html`._
 
 | Screen file | Shell label | Notes |
 | ----------- | ----------- | ----- |
-| `mockups/example-utility.html` | Utility | Blank canvas + centered title |
-| `mockups/example-pan.html` | Pan | Blank canvas + centered title |
-| `mockups/example-eq.html` | EQ | Blank canvas + centered title |
-| `mockups/example-saturator.html` | Saturator | Blank canvas + centered title |
+| `mockups/blueprint-01-mockup-wireframe.html` | Mockup and wireframe | Blueprint 1: launch art, “You are a…” mockup, labeled wireframe |
+
+_Legacy HTML under `mockups/` (main, example-*, history, etc.) remains on disk but is not listed in the shell until re-added._
 
 ## Menu: History
 

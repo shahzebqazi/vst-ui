@@ -11,34 +11,22 @@ flowchart LR
   leftMenu -->|SelectMenu| rightViewport
 ```
 
-## Menu Navigation Wireframe
+## Blueprints navigation (shell)
 
 ```mermaid
 flowchart TB
-  menuRoot[MenuRoot]
-  mainMenu[Main]
-  util[Utility]
-  pan[Pan]
-  eq[EQ]
-  sat[Saturator]
-  historyMenu[History]
-  exportMenu[Export]
-  settingsMenu[Settings]
-  helpMenu[Help]
-  menuRoot --> mainMenu
-  menuRoot --> util
-  menuRoot --> pan
-  menuRoot --> eq
-  menuRoot --> sat
-  menuRoot --> historyMenu
-  menuRoot --> exportMenu
-  menuRoot --> settingsMenu
-  menuRoot --> helpMenu
+  blueprints[Blueprints]
+  b1[Mockup and wireframe]
+  blueprints --> b1
 ```
 
-## Example plugin mockups
+## Blueprint 1 — Mockup and wireframe
 
-Four standalone pages (`example-utility.html`, `example-pan.html`, `example-eq.html`, `example-saturator.html`): full-viewport blank canvas with centered plugin title each.
+`mockups/blueprint-01-mockup-wireframe.html` + `mockups/blueprint-mockup-wireframe.css`:
+
+- **Standalone app launch art** — same gradient / mark / progress bar language as `main.html`.
+- **“You are a…” mockup** — labeled mockup card with placeholder copy.
+- **Wireframe** — white canvas, **black** 2px box strokes; **subtext** states this is a wireframe and that **every wireframe in this project** should carry that kind of label.
 
 ## Settings Screen Skeleton
 
@@ -55,4 +43,4 @@ flowchart TB
 ## Notes
 
 - Replace placeholder rows with user-defined menu items from `docs/MENU_INVENTORY.md`.
-- Keep one mockup section per top-level menu as the inventory evolves.
+- Add more blueprint rows in `index.html` as the inventory grows; each loads a different iframe target.

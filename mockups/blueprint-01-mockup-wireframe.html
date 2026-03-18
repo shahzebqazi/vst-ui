@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blueprint 1 — Mockup and wireframe</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="blueprint-mockup-wireframe.css" />
+  </head>
+  <body>
+    <div class="blueprint-page">
+      <!-- Standalone app launch art (same language as main.html) -->
+      <section class="landing-art" aria-label="Standalone application launch screen">
+        <div class="landing-art__inner">
+          <div class="landing-art__mark" aria-hidden="true">
+            <img src="../assets/favicon.svg" alt="" width="64" height="64" />
+          </div>
+          <div class="landing-art__bar" aria-hidden="true"></div>
+          <p class="landing-art__caption">Launch image</p>
+        </div>
+      </section>
+
+      <!-- “You are a…” mockup -->
+      <section class="you-are-mockup" aria-label="You are a mockup">
+        <div class="you-are-mockup__card">
+          <p class="you-are-mockup__label">Mockup</p>
+          <h1 class="you-are-mockup__title">You are a…</h1>
+          <p class="you-are-mockup__hint">
+            Placeholder headline—swap for persona, product, or onboarding copy.
+          </p>
+        </div>
+      </section>
+
+      <!-- Wireframe: white canvas, black lines -->
+      <section class="wireframe-block" aria-label="Structural wireframe">
+        <div class="wireframe-canvas">
+          <div class="wireframe-canvas__header"></div>
+          <div class="wireframe-canvas__row">
+            <div class="wireframe-canvas__col wireframe-canvas__col--side"></div>
+            <div class="wireframe-canvas__col wireframe-canvas__col--main">
+              <div class="wireframe-canvas__block wireframe-canvas__block--tall"></div>
+              <div class="wireframe-canvas__block"></div>
+            </div>
+          </div>
+          <div class="wireframe-canvas__footer"></div>
+        </div>
+        <p class="wireframe-legend">
+          <strong>Wireframe</strong> — This is a wireframe: boxes and lines only, no final visuals.
+          In this project, every generated wireframe includes this note so reviewers always know
+          they’re looking at structure, not shipped UI.
+        </p>
+      </section>
+    </div>
+  </body>
+</html>
