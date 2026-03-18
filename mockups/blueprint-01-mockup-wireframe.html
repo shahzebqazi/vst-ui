@@ -3,62 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Standalone App Launch image — Blueprint 1</title>
+    <title>Launch image</title>
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="blueprint-mockup-wireframe.css" />
   </head>
   <body>
-    <div class="blueprint-page">
-      <!-- Standalone app launch (primary viewport content) -->
-      <section class="landing-art" aria-label="Standalone application launch screen">
-        <div class="landing-art__inner">
-          <div class="landing-art__mark" aria-hidden="true">
-            <img src="../assets/favicon.svg" alt="" width="64" height="64" />
+    <div class="launch-window" role="application" aria-label="Launch image preview">
+      <header class="launch-window__titlebar">
+        <button
+          type="button"
+          class="launch-window__close"
+          id="launch-close"
+          aria-label="Close mockup"
+          title="Close"
+        ></button>
+        <span class="launch-window__title">Launch image</span>
+      </header>
+      <div class="launch-window__body">
+        <div class="landing-art" aria-hidden="false">
+          <div class="landing-art__inner">
+            <div class="landing-art__mark" aria-hidden="true">
+              <img src="../assets/favicon.svg" alt="" width="64" height="64" />
+            </div>
+            <div class="landing-art__spinner" aria-hidden="true"></div>
+            <div class="landing-art__bar" aria-hidden="true"></div>
+            <h1 class="landing-art__title">Launch image</h1>
           </div>
-          <div class="landing-art__bar" aria-hidden="true"></div>
-          <p class="landing-art__caption">Launch image</p>
         </div>
-      </section>
-
-      <!-- Mockup card + wireframe live outside launch; collapsible -->
-      <details class="blueprint-mockups-wireframes" open>
-        <summary class="blueprint-mockups-wireframes__summary">
-          <span class="blueprint-mockups-wireframes__summary-text">Mockups and Wireframes</span>
-          <span class="blueprint-mockups-wireframes__hint" aria-hidden="true"
-            >Show / hide</span
-          >
-        </summary>
-        <div class="blueprint-mockups-wireframes__body">
-          <section class="you-are-mockup" aria-label="You are a mockup">
-            <div class="you-are-mockup__card">
-              <p class="you-are-mockup__label">Mockup</p>
-              <h1 class="you-are-mockup__title">You are a…</h1>
-              <p class="you-are-mockup__hint">
-                Placeholder headline—swap for persona, product, or onboarding copy.
-              </p>
-            </div>
-          </section>
-
-          <section class="wireframe-block" aria-label="Structural wireframe">
-            <div class="wireframe-canvas">
-              <div class="wireframe-canvas__header"></div>
-              <div class="wireframe-canvas__row">
-                <div class="wireframe-canvas__col wireframe-canvas__col--side"></div>
-                <div class="wireframe-canvas__col wireframe-canvas__col--main">
-                  <div class="wireframe-canvas__block wireframe-canvas__block--tall"></div>
-                  <div class="wireframe-canvas__block"></div>
-                </div>
-              </div>
-              <div class="wireframe-canvas__footer"></div>
-            </div>
-            <p class="wireframe-legend">
-              <strong>Wireframe</strong> — This is a wireframe: boxes and lines only, no final
-              visuals. In this project, every generated wireframe includes this note so reviewers
-              always know they’re looking at structure, not shipped UI.
-            </p>
-          </section>
-        </div>
-      </details>
+      </div>
     </div>
+    <script>
+      (function () {
+        var btn = document.getElementById("launch-close");
+        if (btn)
+          btn.addEventListener("click", function () {
+            try {
+              parent.postMessage({ type: "vst-ui-close-mockup" }, "*");
+            } catch (e) {}
+          });
+      })();
+    </script>
   </body>
 </html>
