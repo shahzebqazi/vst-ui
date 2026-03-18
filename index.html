@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Capture Plugin Living Doc</title>
+    <link rel="stylesheet" href="styles/backgrounds.css" />
+  </head>
+  <body class="bg-blueprint">
+    <main class="app-shell">
+      <section class="panel left-panel">
+        <h1>Capture Plugin Menus</h1>
+        <div class="theme-switcher" aria-label="Theme switcher">
+          <button type="button" data-theme="bg-blueprint">Blueprint</button>
+          <button type="button" data-theme="bg-paper">Paper</button>
+          <button type="button" data-theme="bg-dark-dots">Dark Dots</button>
+        </div>
+
+        <ul class="menu-list">
+          <li><a href="mockups/home.html" target="mockupViewport">Home</a></li>
+          <li><a href="mockups/capture-modes.html" target="mockupViewport">Capture Modes</a></li>
+          <li><a href="mockups/history.html" target="mockupViewport">History</a></li>
+          <li><a href="mockups/export.html" target="mockupViewport">Export</a></li>
+          <li><a href="mockups/settings.html" target="mockupViewport">Settings</a></li>
+          <li><a href="mockups/help.html" target="mockupViewport">Help</a></li>
+        </ul>
+      </section>
+
+      <section class="panel right-panel">
+        <div class="phone-frame">
+          <iframe
+            title="Mobile mockup viewport"
+            name="mockupViewport"
+            src="mockups/home.html"
+          ></iframe>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        var buttons = document.querySelectorAll("[data-theme]");
+        buttons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            document.body.classList.remove("bg-blueprint", "bg-paper", "bg-dark-dots");
+            document.body.classList.add(button.getAttribute("data-theme"));
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
