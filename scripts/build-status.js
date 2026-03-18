@@ -28,6 +28,16 @@
     return label + ": build " + buildId;
   }
 
+  function buildRefreshUrl(currentUrl, buildId) {
+    if (typeof URL !== "function") {
+      return currentUrl;
+    }
+    var nextUrl = new URL(currentUrl, currentUrl);
+    var shortId = shortBuildId(buildId) || String(Date.now());
+    nextUrl.searchParams.set("refresh", shortId);
+    return nextUrl.toString();
+  }
+
   async function fetchJson(fetchImpl, url, options) {
     var response = await fetchImpl(url, options);
     if (!response.ok) {
@@ -42,20 +52,30 @@
     target.dataset.statusState = state;
   }
 
+  function updateRefreshLink(link, buildId) {
+    if (!link) return;
+    var href = buildRefreshUrl(window.location.href, buildId || "");
+    link.href = href;
+    link.dataset.buildId = shortBuildId(buildId || "") || "latest";
+  }
+
   async function initBuildStatus(target, fetchImpl) {
     if (!target || typeof fetchImpl !== "function") return;
 
     var configUrl = target.getAttribute("data-build-status-url") || "build-status.json";
+    var refreshLink = document.getElementById("pages-status-refresh");
     var config;
 
     try {
       config = await fetchJson(fetchImpl, configUrl, { cache: "no-store" });
     } catch (error) {
       applyStatusText(target, "GitHub Pages: build unavailable", "error");
+      updateRefreshLink(refreshLink, "");
       return;
     }
 
     applyStatusText(target, formatBuildStatusText(config), "loading");
+    updateRefreshLink(refreshLink, config.fallbackBuildId);
 
     try {
       var commit = await fetchJson(fetchImpl, buildCommitApiUrl(config), {
@@ -63,14 +83,17 @@
         headers: { Accept: "application/vnd.github+json" },
       });
       applyStatusText(target, formatBuildStatusText(config, commit), "ready");
+      updateRefreshLink(refreshLink, commit && commit.sha);
     } catch (error) {
       applyStatusText(target, formatBuildStatusText(config), "fallback");
+      updateRefreshLink(refreshLink, config.fallbackBuildId);
     }
   }
 
   var api = {
     shortBuildId: shortBuildId,
     buildCommitApiUrl: buildCommitApiUrl,
+    buildRefreshUrl: buildRefreshUrl,
     formatBuildStatusText: formatBuildStatusText,
     initBuildStatus: initBuildStatus,
   };

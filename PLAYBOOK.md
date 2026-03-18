@@ -71,6 +71,7 @@ Apply these when editing **`index.html`**, **`styles/backgrounds.css`**, **`mock
   **`build-status.json`** + **`scripts/build-status.js`**:
   - `build-status.json` stores repo metadata (`owner`, `repo`, `branch`) and an optional fallback build id.
   - `scripts/build-status.js` reads that file, fetches the latest public GitHub commit for the configured branch, and renders the header text as the current GitHub Pages build/status indicator.
+  - The header may also expose a **cache-busting refresh link** under the build/status text. For static GitHub Pages sites this should reload the current page with a unique query string (for example `?refresh=<build-id>`) rather than claiming to hard-refresh or clear browser cache.
   - If the GitHub API is unavailable, the header may fall back to the committed fallback build id or an unavailable message.
 - After deploy-affecting changes, ensure:
   - **`index.html`** exists at the published root.
@@ -109,6 +110,7 @@ Examples: `docs: sync MENU_INVENTORY`, `mockups: tighten settings layout`, `styl
 - `build-status.json` — GitHub Pages status header config / fallback build id
 - `styles/backgrounds.css`
 - `scripts/build-status.js` — header status loader for latest public GitHub commit
+- `scripts/build-status.test.js` — regression tests for build status / refresh URL helpers
 - `scripts/shell.js` — shell logic for `index.html` (theme, disclosures, mockup iframes, persistence)
 - `index.html`
 - `mockups/*.html` per screen

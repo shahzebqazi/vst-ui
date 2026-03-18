@@ -30,3 +30,9 @@ test("buildCommitApiUrl targets the configured branch", function () {
 
   assert.equal(url, "https://api.github.com/repos/shahzebqazi/vst-ui/commits/main");
 });
+
+test("buildRefreshUrl adds a cache-busting query using the build id", function () {
+  const url = status.buildRefreshUrl("https://sqazi.sh/vst-ui/?foo=bar", "9d33387abcdef");
+
+  assert.equal(url, "https://sqazi.sh/vst-ui/?foo=bar&refresh=9d33387");
+});
