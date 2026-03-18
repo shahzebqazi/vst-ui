@@ -152,6 +152,44 @@ body {
   width: 100%;
 }
 
+/* All three nav sections open: minimize vertical padding (shell + panel) */
+.app-shell.app-shell--nav-compact {
+  padding-top: max(8px, 1vh);
+  padding-bottom: max(8px, 1vh);
+}
+
+.app-shell--intro.app-shell--nav-compact .left-panel--stack {
+  margin-top: 0.75rem;
+}
+
+/* Blueprints-only (or partial) on narrow: match comfortable offset from single-section intro */
+.app-shell--split-narrow:not(.app-shell--nav-compact) .left-panel--stack {
+  margin-top: clamp(2.75rem, 12vh, 6.5rem);
+}
+
+.app-shell--split-narrow.app-shell--nav-compact .left-panel--stack {
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .app-shell--split-wide:not(.app-shell--nav-compact) .left-panel--stack {
+    margin-top: clamp(1.5rem, 8vh, 5rem);
+  }
+
+  .app-shell--split-wide.app-shell--nav-compact {
+    padding-top: max(8px, 1vh);
+    align-items: start;
+  }
+
+  .app-shell--split-wide.app-shell--nav-compact .left-panel--stack {
+    margin-top: 0.35rem;
+  }
+
+  .app-shell--split-wide.app-shell--nav-compact .right-panel {
+    min-height: min(72vh, 780px);
+  }
+}
+
 /* —— Wide + split: menu left, mockup right —— */
 @media (min-width: 768px) {
   .app-shell--split-wide {
