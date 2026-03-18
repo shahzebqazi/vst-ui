@@ -128,14 +128,21 @@
             <div class="nav-disclosure__body">
               <div class="stack-list" role="group" aria-label="Screen mockups">
                 <a
-                  class="stack-tile stack-tile--link mockup-link"
+                  class="stack-tile stack-tile--link mockup-link mockup-link--main"
                   href="mockups/main.html"
                   target="mockupViewport"
                   data-mockup="main"
                 >
-                  <span class="stack-tile__glyph" aria-hidden="true">&#xf015;</span>
+                  <span class="stack-tile__glyph stack-tile__glyph--logo">
+                    <img src="assets/favicon.svg" width="22" height="22" alt="" />
+                  </span>
                   <span class="stack-tile__copy">
                     <span class="stack-tile__title">Main</span>
+                    <span
+                      class="stack-tile__mockup-preview"
+                      aria-hidden="true"
+                      title="Standalone launch (matches mockup)"
+                    ></span>
                   </span>
                 </a>
                 <a

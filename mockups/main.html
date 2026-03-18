@@ -3,18 +3,118 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main mockup</title>
+    <title>Main — standalone launch</title>
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="blank-mockup.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+        background: #0a1628;
+        overflow: hidden;
+      }
+      .landing {
+        position: relative;
+        min-height: 100%;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(16px, 5vw, 48px);
+        text-align: center;
+        color: #e8f2ff;
+        background:
+          radial-gradient(ellipse 120% 80% at 50% 20%, rgba(91, 140, 255, 0.35) 0%, transparent 55%),
+          radial-gradient(ellipse 80% 50% at 80% 90%, rgba(45, 106, 170, 0.25) 0%, transparent 45%),
+          linear-gradient(168deg, #0d2844 0%, #1a4a7a 38%, #0f1f35 72%, #060d18 100%);
+        background-attachment: fixed;
+      }
+      .landing::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px
+        );
+        background-size: 28px 28px;
+        pointer-events: none;
+        opacity: 0.6;
+      }
+      .landing-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 320px;
+      }
+      .landing-mark {
+        width: clamp(72px, 22vw, 112px);
+        height: clamp(72px, 22vw, 112px);
+        margin: 0 auto 28px;
+        border-radius: 28%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow:
+          0 24px 64px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        display: grid;
+        place-items: center;
+      }
+      .landing-mark img {
+        width: 55%;
+        height: 55%;
+        object-fit: contain;
+      }
+      .launch-bar {
+        height: 4px;
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.12);
+        overflow: hidden;
+      }
+      .launch-bar::after {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 40%;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #5b8cff, #9ec5ff);
+        animation: launch-progress 2.2s ease-in-out infinite;
+      }
+      @keyframes launch-progress {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(350%);
+        }
+      }
+      .landing .caption {
+        margin-top: 20px;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.55;
+      }
+    </style>
   </head>
   <body>
-    <main class="blank-mockup" aria-label="Main mockup">
-      <div class="blank-mockup__icon" aria-hidden="true">
-        <svg viewBox="0 0 32 32" focusable="false">
-          <path
-            d="M8 22V10h3v4.5h3V10h3v12h-3v-5h-3v5H8zM23 11.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"
-          />
-        </svg>
+    <main class="landing" role="img" aria-label="Standalone application launch screen">
+      <div class="landing-inner">
+        <div class="landing-mark" aria-hidden="true">
+          <img src="../assets/favicon.svg" alt="" width="64" height="64" />
+        </div>
+        <div class="launch-bar" aria-hidden="true"></div>
+        <p class="caption">Launch image</p>
       </div>
     </main>
   </body>

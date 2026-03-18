@@ -76,8 +76,9 @@
     <h3>3.3 Mockup pages</h3>
     <ul>
       <li
-        >Mockup HTML under <code>mockups/</code> is iframe-only: blank light-gray canvas with a single
-        centered icon via shared <code>blank-mockup.css</code> (no in-frame chrome or copy).</li
+        ><code>mockups/main.html</code> is the standalone launch screen (gradient, app mark, progress
+        bar). Other screens use <code>blank-mockup.css</code> (icon-only placeholders). The shell
+        <strong>Main</strong> tile shows the app logo and a miniature preview of the launch mockup.</li
       >
       <li>Prefer semantic HTML and focus order matching visual order.</li>
     </ul>
@@ -144,11 +145,10 @@
       </tbody>
     </table>
 
-    <h2>7. Mockup placeholders</h2>
+    <h2>7. Launch mockup &amp; placeholders</h2>
     <p>
-      Each screen file under <code>mockups/</code> is a minimal placeholder (centered icon only).
-      Product branding, launch imagery, and real layouts are TBD. Site favicon:
-      <code>assets/favicon.svg</code>.
+      <code>mockups/main.html</code> shows the standalone launch image (favicon as mark). Other
+      mockups remain icon placeholders. Favicon: <code>assets/favicon.svg</code>.
     </p>
 
     <p class="doc-footer" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
