@@ -119,18 +119,11 @@
     }
   }
 
-  /** One-time migration from older localStorage keys. */
   function normalizeShellState(s) {
     if (!s || typeof s !== "object") return s;
     if (s.disclosureBlueprints && !s.disclosureMockups) {
       s.disclosureMockups = true;
     }
-    if (s.mockupId === "components-list") {
-      s.mockupId = "components-chromeless";
-    }
-    /* Mockup selection should never auto-restore. */
-    s.mockupId = null;
-    s.mockupChromeless = false;
     return s;
   }
 
@@ -145,9 +138,6 @@
       disclosureUi: !!(disclosureUi && disclosureUi.open),
       disclosureMockups: !!(disclosureMockups && disclosureMockups.open),
       disclosureDocs: !!(disclosureDocs && disclosureDocs.open),
-      /* Never persist a selected mockup: opening Mockups must stay blank until click. */
-      mockupId: null,
-      mockupChromeless: false,
       mockupSize: phoneFrame.dataset.size || defaultMockupSizeKey(),
     });
   }
@@ -220,15 +210,6 @@
     if (placeholder) placeholder.hidden = true;
   }
 
-  function restoreMockupFromState(s) {
-    if (!s || !s.mockupId || !disclosureMockups || !disclosureMockups.open) return;
-    var link = document.querySelector('.mockup-link[data-mockup="' + s.mockupId + '"]');
-    if (!link) return;
-    mockupLinks.forEach(function (l) {
-      l.classList.toggle("is-active", l === link);
-    });
-  }
-
   function syncOverviewVisibility() {
     var anyOpen = anyDisclosureOpen();
     if (overview) {
@@ -298,12 +279,7 @@
       syncNavDensity();
       applyLayout();
       if (d === disclosureMockups && disclosureMockups) {
-        if (disclosureMockups.open) {
-          /* Opening Mockups should show only the placeholder until an explicit click. */
-          clearMockup();
-        } else {
-          clearMockup();
-        }
+        clearMockup();
       }
       persistShellState();
     });
@@ -351,7 +327,6 @@
       ? initialShell.mockupSize
       : defaultMockupSizeKey();
   applyMockupSize(sizeKey);
-  /* Never restore a previously selected mockup on page load. */
   applyActiveMockupViewport();
   if (initialShell) {
     persistShellState();
