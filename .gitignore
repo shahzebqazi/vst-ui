@@ -4,3 +4,6 @@ Thumbs.db
 
 # Third-party: Neural Amp Modeler (trainer) — cloned locally, not vendored in git
 neural-amp-modeler/
+
+# Local agent metadata
+.ralphy/
