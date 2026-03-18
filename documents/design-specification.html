@@ -2,101 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Design specification — UX/UI &amp; engineering handoff</title>
-    <link rel="stylesheet" href="doc-styles.css" />
+    <meta http-equiv="refresh" content="0;url=design-guide.html" />
+    <link rel="canonical" href="design-guide.html" />
+    <title>Moved — Design guide</title>
   </head>
   <body>
-    <h1>Design specification</h1>
-    <p class="meta">
-      <strong>Audience:</strong> UX/UI, frontend, backend (handoff) ·
-      <strong>Scope:</strong> Experience, UI structure, implementation notes ·
-      <strong>Not covered here:</strong> Executive/infrastructure — see
-      <a href="executive-overview.html">Executive overview</a> and
-      <a href="requirements-cto.html">CTO requirements</a>
-    </p>
-
-    <div class="callout">
-      This document describes <strong>what users see</strong> and <strong>how teams implement</strong>
-      against the mockups. Backend engineers should use the “Backend handoff” section for contracts
-      and boundaries when a real product is built.
-    </div>
-
-    <h2>1. UX principles</h2>
-    <ul>
-      <li><strong>Clarity:</strong> Primary actions (theme, mockup, documents) grouped and labeled at section level.</li>
-      <li><strong>Consistency:</strong> Mobile viewport fixed at <strong>390×844</strong> for comparable screenshots.</li>
-      <li><strong>Progressive disclosure:</strong> Documents collapsed by default to preserve focus on mockups.</li>
-      <li><strong>Accessibility:</strong> Interactive controls retain <code>aria-label</code> / group labels when icons are primary.</li>
-    </ul>
-
-    <h2>2. Information architecture (shell)</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Area</th>
-          <th>Role</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Themes</td>
-          <td>CSS-only backgrounds (Blueprint, Paper, Dark Dots) for review context.</td>
-        </tr>
-        <tr>
-          <td>Mockups</td>
-          <td>Six screens: Main, Controls, Presets, Export, Settings, Help → iframe targets under <code>mockups/</code>.</td>
-        </tr>
-        <tr>
-          <td>Documents</td>
-          <td>Executive overview, CTO requirements, this design spec.</td>
-        </tr>
-        <tr>
-          <td>Viewport</td>
-          <td>Phone frame; loads selected mockup HTML.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2>3. Frontend implementation</h2>
-    <h3>3.1 Stack (current)</h3>
-    <ul>
-      <li>Static HTML, CSS (<code>styles/backgrounds.css</code>), minimal vanilla JS.</li>
-      <li>Nerd Font families loaded for UI chrome; icons via patched font glyphs.</li>
-    </ul>
-    <h3>3.2 Visual tokens</h3>
-    <ul>
-      <li>Panel: translucent left rail; mockup card: opaque, elevated.</li>
-      <li>Theme buttons / mockup buttons: icon-first; label on hover (tooltip pattern).</li>
-    </ul>
-    <h3>3.3 Mockup pages</h3>
-    <ul>
-      <li>Each file under <code>mockups/</code> should remain self-contained for iframe embedding.</li>
-      <li>Prefer semantic HTML and focus order matching visual order.</li>
-    </ul>
-
-    <h2>4. Backend handoff</h2>
     <p>
-      The published site has <strong>no backend</strong>. For a future VST or web companion, backend
-      teams should treat this repo as <strong>reference UI only</strong>.
+      This document is now the <a href="design-guide.html">Design guide</a>.
     </p>
-    <ul>
-      <li><strong>API boundary (future):</strong> Presets, export jobs, or user settings would live behind authenticated APIs; mockups do not prescribe payload shapes—derive OpenAPI when product scope is fixed.</li>
-      <li><strong>Data ownership:</strong> DAW-local vs cloud TBD; not specified in static mockups.</li>
-      <li><strong>Real-time:</strong> No WebSocket or streaming assumptions in current mockups.</li>
-    </ul>
-
-    <h2>5. Deliverables checklist</h2>
-    <ul>
-      <li>UX/UI: Keep mockup HTML aligned with agreed menu labels and flows.</li>
-      <li>Frontend: When porting to app shell, preserve viewport aspect and theme semantics where applicable.</li>
-      <li>Backend: Document new endpoints in repo or API portal when runtime work begins.</li>
-    </ul>
-
-    <p class="doc-footer" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-      Related: <a href="../docs/MENU_INVENTORY.md">docs/MENU_INVENTORY.md</a> ·
-      <a href="../docs/MOCKUPS.md">docs/MOCKUPS.md</a>
-    </p>
-    <a class="back" href="../index.html">← Back to VST UI Mockups</a>
   </body>
 </html>

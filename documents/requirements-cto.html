@@ -2,70 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CTO requirements — infrastructure &amp; technical</title>
-    <link rel="stylesheet" href="doc-styles.css" />
+    <meta http-equiv="refresh" content="0;url=software-engineering-requirements-specification.html" />
+    <link rel="canonical" href="software-engineering-requirements-specification.html" />
+    <title>Moved — Software engineering requirements specification</title>
   </head>
   <body>
-    <h1>CTO requirements</h1>
-    <p class="meta">
-      <strong>Audience:</strong> CTO, engineering leadership, DevOps ·
-      <strong>Scope:</strong> Infrastructure, security, repository, and delivery ·
-      <strong>Companion:</strong> <a href="executive-overview.html">Executive overview</a>
-    </p>
-
-    <div class="callout">
-      This document is <strong>not</strong> a UX or visual spec. For frontend/backend product
-      implementation detail, use the <a href="design-specification.html">design specification</a>.
-    </div>
-
-    <h2>1. Repository &amp; branching</h2>
-    <ul>
-      <li>Primary branch: <code>main</code>; protected merges recommended.</li>
-      <li>Site root: <code>index.html</code>, <code>styles/</code>, <code>mockups/</code>, <code>documents/</code>.</li>
-      <li>All deployable assets must be committed; no build-time secrets in client-side bundles.</li>
-    </ul>
-
-    <h2>2. Hosting &amp; canonical URL</h2>
-    <ul>
-      <li><strong>Canonical public URL:</strong> <code>https://sqazi.sh/vst-ui/</code></li>
-      <li>Implement via GitHub Pages, reverse proxy, or equivalent static host; TLS required.</li>
-      <li>Ensure path prefix <code>/vst-ui/</code> resolves correctly for relative links (<code>styles/</code>, <code>mockups/</code>, <code>documents/</code>).</li>
-      <li>If host differs from canonical, set <code>rel="canonical"</code> on <code>index.html</code> (already present).</li>
-    </ul>
-
-    <h2>3. Security</h2>
-    <ul>
-      <li>Static content only; no server-side execution in this repo’s published surface.</li>
-      <li>Subresource integrity optional for third-party fonts (currently external TTF URLs—evaluate self-hosting for supply-chain hardening).</li>
-      <li>Repository access: least privilege; audit who can push to <code>main</code>.</li>
-    </ul>
-
-    <h2>4. Performance &amp; reliability</h2>
-    <ul>
-      <li>Target: first paint under typical mobile conditions; minimize blocking font loads or self-host WOFF2.</li>
-      <li>Caching: long-cache static assets with versioned filenames if build pipeline is introduced later.</li>
-      <li>Monitoring: uptime check on canonical URL; alert on TLS/DNS failure.</li>
-    </ul>
-
-    <h2>5. Disaster recovery</h2>
-    <ul>
-      <li>Full site recoverable from Git; document deploy procedure in runbook.</li>
-      <li>DNS records for <code>sqazi.sh</code> documented outside this file (internal wiki).</li>
-    </ul>
-
-    <h2>6. Future infrastructure (out of current scope)</h2>
     <p>
-      A production VST or companion backend would imply code signing, update channels, crash/analytics
-      pipelines, and secrets management—none of which apply to this static mockups site until
-      explicitly chartered.
+      This document was renamed. Continue to the
+      <a href="software-engineering-requirements-specification.html"
+        >Software engineering requirements specification</a
+      >.
     </p>
-
-    <p class="doc-footer" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-      Related: <a href="executive-overview.html">Executive overview</a> ·
-      <a href="design-specification.html">Design specification</a> ·
-      <a href="../docs/REQUIREMENTS.md">docs/REQUIREMENTS.md</a> (repo)
-    </p>
-    <a class="back" href="../index.html">← Back to VST UI Mockups</a>
   </body>
 </html>

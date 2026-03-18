@@ -102,7 +102,7 @@ Examples: `docs: sync MENU_INVENTORY`, `mockups: tighten settings layout`, `styl
 - `styles/backgrounds.css`
 - `index.html`
 - `mockups/*.html` per screen
-- `documents/*.html` — executive, CTO, design specs as linked from the shell
+- `documents/*.html` — executive overview, software engineering requirements specification, design guide
 
 ---
 

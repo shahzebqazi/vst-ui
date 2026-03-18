@@ -33,8 +33,8 @@ Menu item definitions are maintained in `docs/MENU_INVENTORY.md`.
 Published design documents (under **Documents** on the live site):
 
 - **Executive overview** — program & infrastructure (executive audience).
-- **CTO requirements** — technical & hosting requirements for engineering leadership.
-- **Design specification** — UX/UI and frontend/backend handoff.
+- **Software engineering requirements specification** — formal platform, security, repository, and delivery requirements.
+- **Design guide** — UX, UI, and implementation handoff for product teams.
 
 ## Prompt Gates
 
