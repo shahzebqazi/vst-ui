@@ -17,18 +17,36 @@ flowchart LR
 flowchart TB
   menuRoot[MenuRoot]
   homeMenu[Home]
-  captureModesMenu[CaptureModes]
+  controlsMenu[Controls]
   historyMenu[History]
   exportMenu[Export]
   settingsMenu[Settings]
   helpMenu[Help]
   menuRoot --> homeMenu
-  menuRoot --> captureModesMenu
+  menuRoot --> controlsMenu
   menuRoot --> historyMenu
   menuRoot --> exportMenu
   menuRoot --> settingsMenu
   menuRoot --> helpMenu
 ```
+
+## Controls Screen (desktop-focused)
+
+```mermaid
+flowchart TB
+  controlsHeader[ControlsHeader]
+  paramsCol[ParametersAccordion]
+  canvasSplit[SplitCanvasTwoTiles]
+  controlsHeader --> paramsCol
+  controlsHeader --> canvasSplit
+  tileA[TileA_Oscillator_ChromePlusWidgets]
+  tileB[TileB_FilterEnv_ChromePlusWidgets]
+  canvasSplit --> tileA
+  canvasSplit --> tileB
+```
+
+- **Narrow iframe:** parameters stack above canvas; tiles stack or sit in one column.
+- **Desktop iframe (960×600):** parameters column + two tiles side by side; minimized/Ableton sizes out of scope for this layout.
 
 ## Settings Screen Skeleton
 

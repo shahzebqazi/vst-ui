@@ -24,13 +24,22 @@ For each menu below, answer:
 | ---------- | --------------------- | -------------------- | ----- |
 | TODO | row | MUST | |
 
-## Menu: Capture Modes
+## Menu: Controls
 
-<!-- TODO: replace placeholder rows -->
+_Screen: `mockups/capture-modes.html` (shell label: Controls)._
 
 | Item Label | Type (row/tab/action) | Priority (MUST/NICE) | Notes |
 | ---------- | --------------------- | -------------------- | ----- |
-| TODO | row | MUST | |
+| Parameters — Global / voice | section (accordion) | MUST | Poly/mono, voice count |
+| Parameters — Oscillator | section | MUST | Wave / source selection |
+| Parameters — Filter | section | MUST | Cutoff, resonance, key track (expanded in mock) |
+| Parameters — Envelope | section | MUST | ADSR / stage steps, levels |
+| Parameters — Modulation | section | NICE | Matrix / routing rows |
+| Parameters — Output | section | MUST | Master, limiter, metering |
+| Desktop split canvas | region | MUST | Two tiles side by side (desktop viewport) |
+| Per-tile chrome — Move / Resize / Lock / More | toolbar per tile | MUST | Layout UX; real impl = drag/resize |
+| Tile body widgets | embedded controls | MUST | Knobs, sliders, fields, meters |
+| Add control / + Knob / + Slider / + Meter | action buttons | NICE | Authoring empty tile slots |
 
 ## Menu: History
 
