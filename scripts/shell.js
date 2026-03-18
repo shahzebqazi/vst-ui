@@ -11,7 +11,6 @@
   var iframe = document.getElementById("mockup-iframe");
   var chromelessPanel = document.getElementById("chromeless-panel");
   var chromelessIframe = document.getElementById("chromeless-iframe");
-  var placeholder = document.getElementById("mockup-placeholder");
   var themeButtons = document.querySelectorAll("[data-theme]");
   var sizeButtons = document.querySelectorAll("[data-mockup-size]");
   var mockupLinks = document.querySelectorAll(".mockup-link");
@@ -19,7 +18,6 @@
   var disclosureMockups = document.getElementById("disclosure-mockups");
   var overview = document.getElementById("shell-overview");
   var THEME_STORAGE_KEY = "vst-ui-wallpaper";
-  var SHELL_STATE_KEY = "vst-ui-shell-state";
   var THEME_CLASSES = ["bg-blueprint", "bg-paper", "bg-dark-dots"];
   var disclosureUi = document.getElementById("disclosure-ui");
   var disclosureDocs = document.getElementById("disclosure-docs");
@@ -107,48 +105,6 @@
     shell.classList.toggle("app-shell--nav-compact", compact);
   }
 
-  function readShellState() {
-    try {
-      var raw = localStorage.getItem(SHELL_STATE_KEY);
-      if (!raw) return null;
-      var o = JSON.parse(raw);
-      if (!o || typeof o !== "object") return null;
-      return o;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function normalizeShellState(s) {
-    if (!s || typeof s !== "object") return s;
-    if (s.disclosureBlueprints && !s.disclosureMockups) {
-      s.disclosureMockups = true;
-    }
-    return s;
-  }
-
-  function writeShellState(state) {
-    try {
-      localStorage.setItem(SHELL_STATE_KEY, JSON.stringify(state));
-    } catch (e) {}
-  }
-
-  function persistShellState() {
-    writeShellState({
-      disclosureUi: !!(disclosureUi && disclosureUi.open),
-      disclosureMockups: !!(disclosureMockups && disclosureMockups.open),
-      disclosureDocs: !!(disclosureDocs && disclosureDocs.open),
-      mockupSize: phoneFrame.dataset.size || defaultMockupSizeKey(),
-    });
-  }
-
-  function applyDisclosuresFromState(s) {
-    if (!s) return;
-    if (disclosureUi) disclosureUi.open = !!s.disclosureUi;
-    if (disclosureMockups) disclosureMockups.open = !!s.disclosureMockups;
-    if (disclosureDocs) disclosureDocs.open = !!s.disclosureDocs;
-  }
-
   function setViewportMode(chromeless) {
     if (chromeless) {
       rightPanel.classList.add("right-panel--chromeless-active");
@@ -175,29 +131,37 @@
     return disclosureMockups && disclosureMockups.open;
   }
 
+  function activeMockupLink() {
+    return document.querySelector(".mockup-link.is-active");
+  }
+
+  function shouldShowMockupPanel() {
+    return !!(mockupsSectionOpen() && activeMockupLink());
+  }
+
+  function hideAllMockupViewports() {
+    rightPanel.classList.remove("right-panel--chromeless-active");
+    phoneFrame.hidden = true;
+    phoneFrame.setAttribute("aria-hidden", "true");
+    if (chromelessPanel) {
+      chromelessPanel.hidden = true;
+      chromelessPanel.setAttribute("aria-hidden", "true");
+    }
+    disconnectChromelessResizeTracking();
+    if (chromelessIframe) chromelessIframe.style.height = "";
+  }
+
   /**
-   * Idle: hide both viewports so no blank / about:blank mockup appears.
-   * Active: load only the selected mockup URL (never assign about:blank to visible UI).
+   * Idle: hide the entire mockup pane so no blank component or placeholder renders.
+   * Active: load only the selected mockup URL.
    */
   function applyActiveMockupViewport() {
-    if (!rightPanel || rightPanel.hidden) return;
-    if (!mockupsSectionOpen()) return;
-
-    var active = document.querySelector(".mockup-link.is-active");
-    if (!active) {
-      rightPanel.classList.remove("right-panel--chromeless-active");
-      phoneFrame.hidden = true;
-      phoneFrame.setAttribute("aria-hidden", "true");
-      if (chromelessPanel) {
-        chromelessPanel.hidden = true;
-        chromelessPanel.setAttribute("aria-hidden", "true");
-      }
-      if (placeholder) placeholder.hidden = false;
-      disconnectChromelessResizeTracking();
-      if (chromelessIframe) chromelessIframe.style.height = "";
+    if (!rightPanel || !shouldShowMockupPanel()) {
+      hideAllMockupViewports();
       return;
     }
 
+    var active = activeMockupLink();
     var url = active.getAttribute("href");
     var chromeless = active.getAttribute("data-mockup-chrome") === "chromeless";
     if (chromeless && chromelessIframe) {
@@ -207,7 +171,6 @@
       setViewportMode(false);
       iframe.src = url;
     }
-    if (placeholder) placeholder.hidden = true;
   }
 
   function syncOverviewVisibility() {
@@ -222,17 +185,17 @@
     mockupLinks.forEach(function (l) {
       l.classList.remove("is-active");
     });
+    applyLayout();
     applyActiveMockupViewport();
   }
 
   window.clearVstChromelessMockup = function () {
     clearMockup();
-    persistShellState();
   };
 
   function applyLayout() {
     var wide = mq.matches;
-    var split = mockupsSectionOpen();
+    var split = shouldShowMockupPanel();
     shell.dataset.layoutWide = wide ? "true" : "false";
     shell.dataset.layoutSplit = split ? "true" : "false";
     shell.classList.remove(
@@ -244,6 +207,7 @@
       shell.classList.add("app-shell--intro");
       rightPanel.setAttribute("aria-hidden", "true");
       rightPanel.hidden = true;
+      hideAllMockupViewports();
     } else {
       rightPanel.hidden = false;
       rightPanel.setAttribute("aria-hidden", "false");
@@ -278,10 +242,7 @@
       syncOverviewVisibility();
       syncNavDensity();
       applyLayout();
-      if (d === disclosureMockups && disclosureMockups) {
-        clearMockup();
-      }
-      persistShellState();
+      applyActiveMockupViewport();
     });
   });
 
@@ -316,26 +277,17 @@
     });
   }
 
-  var initialShell = normalizeShellState(readShellState());
-  applyDisclosuresFromState(initialShell);
   restoreThemeFromStorage();
   syncOverviewVisibility();
   syncNavDensity();
   applyLayout();
-  var sizeKey =
-    initialShell && validMockupSizeKey(initialShell.mockupSize)
-      ? initialShell.mockupSize
-      : defaultMockupSizeKey();
+  var sizeKey = defaultMockupSizeKey();
   applyMockupSize(sizeKey);
   applyActiveMockupViewport();
-  if (initialShell) {
-    persistShellState();
-  }
 
   if (mockupFrameClose) {
     mockupFrameClose.addEventListener("click", function () {
       clearMockup();
-      persistShellState();
     });
   }
 
@@ -347,7 +299,6 @@
       try {
         localStorage.setItem(THEME_STORAGE_KEY, theme);
       } catch (e) {}
-      persistShellState();
       themeButtons.forEach(function (b) {
         b.classList.toggle("is-active", b === btn);
         b.setAttribute("aria-pressed", b === btn ? "true" : "false");
@@ -358,7 +309,6 @@
   sizeButtons.forEach(function (btn) {
     btn.addEventListener("click", function () {
       applyMockupSize(btn.getAttribute("data-mockup-size"));
-      persistShellState();
     });
   });
 
@@ -370,8 +320,8 @@
         l.classList.remove("is-active");
       });
       link.classList.add("is-active");
+      applyLayout();
       applyActiveMockupViewport();
-      persistShellState();
     });
   });
 })();
