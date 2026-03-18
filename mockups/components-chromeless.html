@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component mockups</title>
+    <link rel="stylesheet" href="chromeless-mockup.css" />
+  </head>
+  <body>
+    <div class="chromeless-mockup">
+      <button type="button" class="chromeless-mockup__close" aria-label="Close mockup" title="Close">
+        ×
+      </button>
+      <div class="chromeless-mockup__icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" focusable="false">
+          <path
+            d="M6 8h6v6H6V8zm14 0h6v6h-6V8zM6 18h6v6H6v-6zm14 0h6v6h-6v-6z"
+          />
+        </svg>
+      </div>
+      <nav class="chromeless-mockup__nav" aria-label="Component mockup inventory">
+        <ol class="chromeless-mockup__list">
+          <li>
+            <a class="chromeless-mockup__link" href="component-mockup-knob.html" target="_self"
+              >Knob</a
+            >
+          </li>
+          <li>
+            <a class="chromeless-mockup__link" href="component-mockup-dropdown.html" target="_self"
+              >Dropdown</a
+            >
+          </li>
+          <li>
+            <a
+              class="chromeless-mockup__link"
+              href="component-mockup-vertical-slider.html"
+              target="_self"
+              >Vertical slider</a
+            >
+          </li>
+          <li>
+            <a class="chromeless-mockup__link" href="component-mockup-switch.html" target="_self"
+              >Switch</a
+            >
+          </li>
+          <li>
+            <a class="chromeless-mockup__link" href="component-mockup-button.html" target="_self"
+              >Button</a
+            >
+          </li>
+          <li>
+            <a class="chromeless-mockup__link" href="component-mockup-xy-surface.html" target="_self"
+              >XY control surface</a
+            >
+          </li>
+          <li>
+            <a class="chromeless-mockup__link" href="component-mockup-step-control.html" target="_self"
+              >Step control</a
+            >
+          </li>
+        </ol>
+        <p class="chromeless-mockup__footnote">
+          <a href="components-list.html">Full notes &amp; shell context</a>
+        </p>
+      </nav>
+    </div>
+    <script>
+      (function () {
+        var btn = document.querySelector(".chromeless-mockup__close");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          try {
+            var parentBtn = window.parent.document.getElementById("mockup-frame-close");
+            if (parentBtn) parentBtn.click();
+          } catch (e) {}
+        });
+      })();
+    </script>
+  </body>
+</html>

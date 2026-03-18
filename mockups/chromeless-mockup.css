@@ -1,0 +1,134 @@
+/*
+ * Components chromeless inventory: no in-iframe title bar, no fill background.
+ * Shell hides traffic-light strip for this mockup; close is in-page only.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: transparent;
+  color: #334155;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.chromeless-mockup {
+  min-height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 52px 16px 24px;
+  position: relative;
+}
+
+.chromeless-mockup__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.08);
+  color: #475569;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.12s ease,
+    color 0.12s ease;
+}
+
+.chromeless-mockup__close:hover {
+  background: rgba(15, 23, 42, 0.14);
+  color: #0f172a;
+}
+
+.chromeless-mockup__close:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Icon block copied from blank-mockup pattern (no page title / gray canvas) */
+.chromeless-mockup__icon {
+  width: clamp(44px, 11vw, 56px);
+  height: clamp(44px, 11vw, 56px);
+  margin: 8px auto 20px;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.chromeless-mockup__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.chromeless-mockup__icon path {
+  fill: currentColor;
+}
+
+.chromeless-mockup__nav {
+  flex: 1;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.chromeless-mockup__list {
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+  list-style: decimal;
+}
+
+.chromeless-mockup__list li {
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+
+.chromeless-mockup__list a {
+  color: #1d4ed8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.chromeless-mockup__list a:hover {
+  color: #1e40af;
+}
+
+.chromeless-mockup__list a:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.chromeless-mockup__footnote {
+  margin: 20px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  font-size: 0.8125rem;
+}
+
+.chromeless-mockup__footnote a {
+  color: #64748b;
+}
+
+.chromeless-mockup__footnote a:hover {
+  color: #475569;
+}

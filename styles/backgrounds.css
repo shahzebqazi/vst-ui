@@ -823,6 +823,31 @@ body {
   background: #fff;
 }
 
+/* Components chromeless mockup: no host title strip; see data-mockup-chrome in index.html */
+.phone-frame--chromeless-content .phone-frame__chrome {
+  display: none;
+}
+
+.phone-frame--chromeless-content iframe {
+  background: transparent;
+}
+
+.phone-frame--chromeless-content.phone-frame--phone {
+  border-radius: 18px;
+}
+
+.phone-frame--chromeless-content.phone-frame--phone iframe {
+  border-radius: 0 0 16px 16px;
+}
+
+.phone-frame--chromeless-content.phone-frame--ableton iframe {
+  border-radius: 0 0 4px 4px;
+}
+
+.phone-frame--chromeless-content.phone-frame--desktop iframe {
+  border-radius: 0 0 6px 6px;
+}
+
 .phone-frame--desktop iframe {
   flex: 1;
   min-height: 240px;

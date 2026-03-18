@@ -35,7 +35,8 @@ _Items under **Mockups** in `index.html` (iframe viewport). Presets and Export a
 | `mockups/example-pan.html` | Pan | Plugins mock-ups |
 | `mockups/example-eq.html` | EQ | Plugins mock-ups |
 | `mockups/example-saturator.html` | Saturator | Plugins mock-ups |
-| `mockups/components-list.html` | Component mockups | Components (inventory) |
+| `mockups/components-chromeless.html` | Component mockups | Components (shell preview) |
+| `mockups/components-list.html` | (same inventory + notes) | Components (linked from chromeless) |
 | `mockups/component-mockup-*.html` | (per control) | Components (one mockup each) |
 | `mockups/settings.html` | Settings | General User Interface Mockups |
 | `mockups/help.html` | Help | General User Interface Mockups |

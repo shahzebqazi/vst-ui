@@ -204,9 +204,10 @@
                 >
                   <a
                     class="stack-tile stack-tile--link mockup-link"
-                    href="mockups/components-list.html"
+                    href="mockups/components-chromeless.html"
                     target="mockupViewport"
                     data-mockup="components-list"
+                    data-mockup-chrome="chromeless"
                   >
                     <span class="stack-tile__glyph" aria-hidden="true">&#xf0db;</span>
                     <span class="stack-tile__copy">
@@ -408,6 +409,11 @@
             disclosureMockups: !!(disclosureMockups && disclosureMockups.open),
             disclosureDocs: !!(disclosureDocs && disclosureDocs.open),
             mockupId: activeMockup ? activeMockup.getAttribute("data-mockup") : null,
+            mockupChromeless:
+              !!(
+                activeMockup &&
+                activeMockup.getAttribute("data-mockup-chrome") === "chromeless"
+              ),
             mockupSize: phoneFrame.dataset.size || defaultMockupSizeKey(),
           });
         }
@@ -433,6 +439,10 @@
           mockupLinks.forEach(function (l) {
             l.classList.toggle("is-active", l === link);
           });
+          phoneFrame.classList.toggle(
+            "phone-frame--chromeless-content",
+            !!s.mockupChromeless
+          );
           placeholder.hidden = true;
         }
 
@@ -446,6 +456,7 @@
 
         function clearMockup() {
           iframe.src = "about:blank";
+          phoneFrame.classList.remove("phone-frame--chromeless-content");
           mockupLinks.forEach(function (l) {
             l.classList.remove("is-active");
           });
@@ -591,6 +602,10 @@
             e.preventDefault();
             var url = link.getAttribute("href");
             iframe.src = url;
+            phoneFrame.classList.toggle(
+              "phone-frame--chromeless-content",
+              link.getAttribute("data-mockup-chrome") === "chromeless"
+            );
             mockupLinks.forEach(function (l) {
               l.classList.remove("is-active");
             });
