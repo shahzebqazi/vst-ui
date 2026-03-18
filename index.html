@@ -9,162 +9,236 @@
   </head>
   <body class="bg-blueprint">
     <main class="app-shell">
-      <section class="panel left-panel" aria-label="Mockup controls">
-        <h1 class="app-title">
+      <section class="panel left-panel left-panel--stack" aria-label="Mockup controls">
+        <h1 class="app-title app-title--centered">
           <span class="title-icon" aria-hidden="true">&#xf1e6;</span>VST UI Mockups
         </h1>
 
-        <div class="control-block">
-          <h2 class="section-title section-title--themes" id="themes-heading">Themes</h2>
-          <div
-            class="btn-row theme-row"
-            role="group"
-            aria-labelledby="themes-heading"
-          >
-            <button
-              type="button"
-              class="chrome-btn chrome-btn--icon-only"
-              data-theme="bg-blueprint"
-              aria-label="Blueprint theme"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf00a;</span>
-              <span class="btn-label">Blueprint</span>
-            </button>
-            <button
-              type="button"
-              class="chrome-btn chrome-btn--icon-only"
-              data-theme="bg-paper"
-              aria-label="Paper theme"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf15c;</span>
-              <span class="btn-label">Paper</span>
-            </button>
-            <button
-              type="button"
-              class="chrome-btn chrome-btn--icon-only"
-              data-theme="bg-dark-dots"
-              aria-label="Dark Dots theme"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf186;</span>
-              <span class="btn-label">Dark Dots</span>
-            </button>
-          </div>
+        <div class="shell-overview" id="shell-overview">
+          <p>
+            This shell is an extensible library of UI patterns and screen mockups you can
+            reuse when designing plugin interfaces for VST hosts.
+          </p>
+          <p>
+            New views, themes, and documentation can be added without changing the overall
+            layout—swap components in or out as your product grows.
+          </p>
+          <p>
+            Open a section below to configure the workspace background, preview a screen, or
+            read formal design and engineering documents.
+          </p>
         </div>
 
-        <div class="control-block">
-          <h2 class="section-title section-title--mockups" id="mockups-heading">
-            Mockups
-          </h2>
-          <div
-            class="btn-row mockup-row"
-            role="group"
-            aria-labelledby="mockups-heading"
-          >
-            <a
-              class="chrome-btn chrome-btn--icon-only mockup-link is-active"
-              href="mockups/home.html"
-              target="mockupViewport"
-              data-mockup="home"
-              aria-label="Main mockup"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf015;</span>
-              <span class="btn-label">Main</span>
-            </a>
-            <a
-              class="chrome-btn chrome-btn--icon-only mockup-link"
-              href="mockups/capture-modes.html"
-              target="mockupViewport"
-              data-mockup="capture-modes"
-              aria-label="Controls mockup"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf1de;</span>
-              <span class="btn-label">Controls</span>
-            </a>
-            <a
-              class="chrome-btn chrome-btn--icon-only mockup-link"
-              href="mockups/history.html"
-              target="mockupViewport"
-              data-mockup="history"
-              aria-label="Presets mockup"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf1da;</span>
-              <span class="btn-label">Presets</span>
-            </a>
-            <a
-              class="chrome-btn chrome-btn--icon-only mockup-link"
-              href="mockups/export.html"
-              target="mockupViewport"
-              data-mockup="export"
-              aria-label="Export mockup"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf019;</span>
-              <span class="btn-label">Export</span>
-            </a>
-            <a
-              class="chrome-btn chrome-btn--icon-only mockup-link"
-              href="mockups/settings.html"
-              target="mockupViewport"
-              data-mockup="settings"
-              aria-label="Settings mockup"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf013;</span>
-              <span class="btn-label">Settings</span>
-            </a>
-            <a
-              class="chrome-btn chrome-btn--icon-only mockup-link"
-              href="mockups/help.html"
-              target="mockupViewport"
-              data-mockup="help"
-              aria-label="Help mockup"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf059;</span>
-              <span class="btn-label">Help</span>
-            </a>
-          </div>
-        </div>
+        <div class="nav-disclosures">
+          <details class="nav-disclosure" id="disclosure-ui">
+            <summary class="nav-disclosure__summary">
+              <span class="nav-disclosure__chevron" aria-hidden="true"></span>
+              <span class="nav-disclosure__label">UI configuration</span>
+              <span class="nav-disclosure__hint"
+                >Background modifiers for the workspace behind the mockup.</span
+              >
+            </summary>
+            <div class="nav-disclosure__body">
+              <p class="nav-disclosure__intro">
+                Each option is a <strong>background modifier</strong>—it only changes the
+                canvas behind the phone frame, not the mockup itself.
+              </p>
+              <div class="stack-list" role="group" aria-label="Background modifiers">
+                <button
+                  type="button"
+                  class="stack-tile"
+                  data-theme="bg-blueprint"
+                  aria-pressed="true"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf00a;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Blueprint</span>
+                    <span class="stack-tile__desc"
+                      >Blue engineering grid—clear, high-contrast review backdrop.</span
+                    >
+                  </span>
+                </button>
+                <button type="button" class="stack-tile" data-theme="bg-paper" aria-pressed="false">
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf15c;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Paper</span>
+                    <span class="stack-tile__desc"
+                      >Warm paper tone with fine grid—sketch and spec vibe.</span
+                    >
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  class="stack-tile"
+                  data-theme="bg-dark-dots"
+                  aria-pressed="false"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf186;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Dark Dots</span>
+                    <span class="stack-tile__desc"
+                      >Near-black field with dots—low-glare, studio-style context.</span
+                    >
+                  </span>
+                </button>
+              </div>
+            </div>
+          </details>
 
-        <details class="documents-block control-block">
-          <summary
-            class="section-title section-title--documents"
-            id="documents-heading"
-          >
-            <span class="summary-chevron" aria-hidden="true"></span>
-            Documents
-          </summary>
-          <div
-            class="btn-row doc-row"
-            role="group"
-            aria-labelledby="documents-heading"
-          >
-            <a
-              class="chrome-btn doc-link"
-              href="documents/executive-overview.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf0e3;</span>
-              Executive overview
-            </a>
-            <a
-              class="chrome-btn doc-link"
-              href="documents/requirements-cto.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf085;</span>
-              CTO requirements
-            </a>
-            <a
-              class="chrome-btn doc-link"
-              href="documents/design-specification.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="btn-glyph" aria-hidden="true">&#xf1fc;</span>
-              Design specification
-            </a>
-          </div>
-        </details>
+          <details class="nav-disclosure" id="disclosure-mockups">
+            <summary class="nav-disclosure__summary">
+              <span class="nav-disclosure__chevron" aria-hidden="true"></span>
+              <span class="nav-disclosure__label">Mockups</span>
+              <span class="nav-disclosure__hint"
+                >Screen prototypes loaded inside the phone viewport.</span
+              >
+            </summary>
+            <div class="nav-disclosure__body">
+              <div class="stack-list" role="group" aria-label="Screen mockups">
+                <a
+                  class="stack-tile stack-tile--link mockup-link is-active"
+                  href="mockups/home.html"
+                  target="mockupViewport"
+                  data-mockup="home"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf015;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Main</span>
+                    <span class="stack-tile__desc"
+                      >Primary device chrome and landing layout.</span
+                    >
+                  </span>
+                </a>
+                <a
+                  class="stack-tile stack-tile--link mockup-link"
+                  href="mockups/capture-modes.html"
+                  target="mockupViewport"
+                  data-mockup="capture-modes"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf1de;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Controls</span>
+                    <span class="stack-tile__desc"
+                      >Parameters and control surfaces.</span
+                    >
+                  </span>
+                </a>
+                <a
+                  class="stack-tile stack-tile--link mockup-link"
+                  href="mockups/history.html"
+                  target="mockupViewport"
+                  data-mockup="history"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf1da;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Presets</span>
+                    <span class="stack-tile__desc"
+                      >Browsing and recalling saved setups.</span
+                    >
+                  </span>
+                </a>
+                <a
+                  class="stack-tile stack-tile--link mockup-link"
+                  href="mockups/export.html"
+                  target="mockupViewport"
+                  data-mockup="export"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf019;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Export</span>
+                    <span class="stack-tile__desc"
+                      >Output paths and share flows.</span
+                    >
+                  </span>
+                </a>
+                <a
+                  class="stack-tile stack-tile--link mockup-link"
+                  href="mockups/settings.html"
+                  target="mockupViewport"
+                  data-mockup="settings"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf013;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Settings</span>
+                    <span class="stack-tile__desc"
+                      >Preferences and app options.</span
+                    >
+                  </span>
+                </a>
+                <a
+                  class="stack-tile stack-tile--link mockup-link"
+                  href="mockups/help.html"
+                  target="mockupViewport"
+                  data-mockup="help"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf059;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Help</span>
+                    <span class="stack-tile__desc"
+                      >Guidance, shortcuts, and about.</span
+                    >
+                  </span>
+                </a>
+              </div>
+            </div>
+          </details>
+
+          <details class="nav-disclosure" id="disclosure-docs">
+            <summary class="nav-disclosure__summary">
+              <span class="nav-disclosure__chevron" aria-hidden="true"></span>
+              <span class="nav-disclosure__label">Documents</span>
+              <span class="nav-disclosure__hint"
+                >Formal specs—open in a new browser tab.</span
+              >
+            </summary>
+            <div class="nav-disclosure__body">
+              <div class="stack-list" role="group" aria-label="Documents">
+                <a
+                  class="stack-tile stack-tile--link"
+                  href="documents/executive-overview.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf0e3;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Executive overview</span>
+                    <span class="stack-tile__desc"
+                      >Program summary, infrastructure framing, governance.</span
+                    >
+                  </span>
+                </a>
+                <a
+                  class="stack-tile stack-tile--link"
+                  href="documents/requirements-cto.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf085;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">CTO requirements</span>
+                    <span class="stack-tile__desc"
+                      >Hosting, security, repo, and delivery for engineering leads.</span
+                    >
+                  </span>
+                </a>
+                <a
+                  class="stack-tile stack-tile--link"
+                  href="documents/design-specification.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf1fc;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Design specification</span>
+                    <span class="stack-tile__desc"
+                      >UX/UI and frontend/backend handoff for implementation teams.</span
+                    >
+                  </span>
+                </a>
+              </div>
+            </div>
+          </details>
+        </div>
       </section>
 
       <section class="panel right-panel">
@@ -182,6 +256,24 @@
       (function () {
         var themeButtons = document.querySelectorAll("[data-theme]");
         var mockupLinks = document.querySelectorAll(".mockup-link");
+        var disclosures = document.querySelectorAll(".nav-disclosure");
+        var overview = document.getElementById("shell-overview");
+
+        function syncOverviewVisibility() {
+          var anyOpen = false;
+          disclosures.forEach(function (d) {
+            if (d.open) anyOpen = true;
+          });
+          if (overview) {
+            overview.hidden = anyOpen;
+            overview.setAttribute("aria-hidden", anyOpen ? "true" : "false");
+          }
+        }
+
+        disclosures.forEach(function (d) {
+          d.addEventListener("toggle", syncOverviewVisibility);
+        });
+        syncOverviewVisibility();
 
         themeButtons.forEach(function (btn) {
           btn.addEventListener("click", function () {
@@ -189,6 +281,7 @@
             document.body.classList.add(btn.getAttribute("data-theme"));
             themeButtons.forEach(function (b) {
               b.classList.toggle("is-active", b === btn);
+              b.setAttribute("aria-pressed", b === btn ? "true" : "false");
             });
           });
         });
