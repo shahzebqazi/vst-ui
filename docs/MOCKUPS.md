@@ -40,7 +40,7 @@ flowchart TB
   comp --> cm
 ```
 
-_Under **Components**: **Component mockups** → `components-chromeless.html` (transparent viewport, no host traffic-light strip; in-page close + ordered links + grid icon). `components-list.html` keeps shell notes + same inventory. Each control: `component-mockup-*.html` (mock + wireframe). Shell uses `iframe#mockup-iframe` in `.phone-frame`. Presets and Export are not in the menu._
+_Under **Components**: **Component mockups** → `components-chromeless.html` in **`#chromeless-iframe`** (full right column—not inside `.phone-frame`). Phone-sized mockups use `iframe#mockup-iframe` in `.phone-frame`. `components-list.html` keeps shell notes + same inventory._
 
 ## Standalone App Launch image (blueprint page)
 

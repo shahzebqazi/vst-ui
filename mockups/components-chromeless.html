@@ -70,8 +70,12 @@
         if (!btn) return;
         btn.addEventListener("click", function () {
           try {
-            var parentBtn = window.parent.document.getElementById("mockup-frame-close");
-            if (parentBtn) parentBtn.click();
+            if (typeof window.parent.clearVstChromelessMockup === "function") {
+              window.parent.clearVstChromelessMockup();
+            } else {
+              var parentBtn = window.parent.document.getElementById("mockup-frame-close");
+              if (parentBtn) parentBtn.click();
+            }
           } catch (e) {}
         });
       })();

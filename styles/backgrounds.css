@@ -823,29 +823,45 @@ body {
   background: #fff;
 }
 
-/* Components chromeless mockup: no host title strip; see data-mockup-chrome in index.html */
-.phone-frame--chromeless-content .phone-frame__chrome {
+/* Chromeless mockups: full right column, not inside .phone-frame (see index.html) */
+.chromeless-panel {
   display: none;
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  min-width: 0;
+  min-height: min(72vh, 820px);
+  max-height: min(88vh, 900px);
+  flex-direction: column;
 }
 
-.phone-frame--chromeless-content iframe {
+.chromeless-panel:not([hidden]) {
+  display: flex;
+}
+
+.chromeless-panel iframe {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  border: 0;
   background: transparent;
+  border-radius: 10px;
 }
 
-.phone-frame--chromeless-content.phone-frame--phone {
-  border-radius: 18px;
+.app-shell--split-wide .right-panel--chromeless-active {
+  align-items: stretch;
+  justify-content: flex-start;
 }
 
-.phone-frame--chromeless-content.phone-frame--phone iframe {
-  border-radius: 0 0 16px 16px;
+.app-shell--split-narrow .right-panel--chromeless-active {
+  align-items: stretch;
+  width: 100%;
+  max-width: none;
 }
 
-.phone-frame--chromeless-content.phone-frame--ableton iframe {
-  border-radius: 0 0 4px 4px;
-}
-
-.phone-frame--chromeless-content.phone-frame--desktop iframe {
-  border-radius: 0 0 6px 6px;
+.app-shell--split-narrow .chromeless-panel {
+  min-height: min(60vh, 640px);
+  max-height: none;
 }
 
 .phone-frame--desktop iframe {

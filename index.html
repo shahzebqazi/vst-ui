@@ -333,6 +333,19 @@
             src="about:blank"
           ></iframe>
         </div>
+        <div
+          class="chromeless-panel"
+          id="chromeless-panel"
+          hidden
+          aria-hidden="true"
+        >
+          <iframe
+            title="Chromeless mockup viewport"
+            name="chromelessMockupViewport"
+            id="chromeless-iframe"
+            src="about:blank"
+          ></iframe>
+        </div>
         <p class="mockup-placeholder" id="mockup-placeholder">
           Choose an item under <strong>Mockups</strong> to load a preview.
         </p>
@@ -347,6 +360,8 @@
         var rightPanel = document.getElementById("right-panel");
         var phoneFrame = document.getElementById("phone-frame");
         var iframe = document.getElementById("mockup-iframe");
+        var chromelessPanel = document.getElementById("chromeless-panel");
+        var chromelessIframe = document.getElementById("chromeless-iframe");
         var placeholder = document.getElementById("mockup-placeholder");
         var themeButtons = document.querySelectorAll("[data-theme]");
         var sizeButtons = document.querySelectorAll("[data-mockup-size]");
@@ -430,19 +445,45 @@
           if (disclosureDocs) disclosureDocs.open = !!s.disclosureDocs;
         }
 
+        function setViewportMode(chromeless) {
+          if (chromeless) {
+            rightPanel.classList.add("right-panel--chromeless-active");
+            phoneFrame.hidden = true;
+            phoneFrame.setAttribute("aria-hidden", "true");
+            if (chromelessPanel) {
+              chromelessPanel.hidden = false;
+              chromelessPanel.setAttribute("aria-hidden", "false");
+            }
+          } else {
+            rightPanel.classList.remove("right-panel--chromeless-active");
+            phoneFrame.hidden = false;
+            phoneFrame.setAttribute("aria-hidden", "false");
+            if (chromelessPanel) {
+              chromelessPanel.hidden = true;
+              chromelessPanel.setAttribute("aria-hidden", "true");
+            }
+          }
+        }
+
         function restoreMockupFromState(s) {
           if (!s || !s.mockupId || !disclosureMockups || !disclosureMockups.open) return;
           var link = document.querySelector('.mockup-link[data-mockup="' + s.mockupId + '"]');
           if (!link) return;
           var url = link.getAttribute("href");
-          iframe.src = url;
+          var chromeless =
+            link.getAttribute("data-mockup-chrome") === "chromeless" || !!s.mockupChromeless;
+          if (chromeless && chromelessIframe) {
+            setViewportMode(true);
+            chromelessIframe.src = url;
+            iframe.src = "about:blank";
+          } else {
+            setViewportMode(false);
+            iframe.src = url;
+            if (chromelessIframe) chromelessIframe.src = "about:blank";
+          }
           mockupLinks.forEach(function (l) {
             l.classList.toggle("is-active", l === link);
           });
-          phoneFrame.classList.toggle(
-            "phone-frame--chromeless-content",
-            !!s.mockupChromeless
-          );
           placeholder.hidden = true;
         }
 
@@ -456,12 +497,18 @@
 
         function clearMockup() {
           iframe.src = "about:blank";
-          phoneFrame.classList.remove("phone-frame--chromeless-content");
+          if (chromelessIframe) chromelessIframe.src = "about:blank";
+          setViewportMode(false);
           mockupLinks.forEach(function (l) {
             l.classList.remove("is-active");
           });
           placeholder.hidden = false;
         }
+
+        window.clearVstChromelessMockup = function () {
+          clearMockup();
+          persistShellState();
+        };
 
         function mockupsSectionOpen() {
           return disclosureMockups && disclosureMockups.open;
@@ -601,11 +648,16 @@
             if (!mockupsSectionOpen()) return;
             e.preventDefault();
             var url = link.getAttribute("href");
-            iframe.src = url;
-            phoneFrame.classList.toggle(
-              "phone-frame--chromeless-content",
-              link.getAttribute("data-mockup-chrome") === "chromeless"
-            );
+            var chromeless = link.getAttribute("data-mockup-chrome") === "chromeless";
+            if (chromeless && chromelessIframe) {
+              setViewportMode(true);
+              chromelessIframe.src = url;
+              iframe.src = "about:blank";
+            } else {
+              setViewportMode(false);
+              iframe.src = url;
+              if (chromelessIframe) chromelessIframe.src = "about:blank";
+            }
             mockupLinks.forEach(function (l) {
               l.classList.remove("is-active");
             });
