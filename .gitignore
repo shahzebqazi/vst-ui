@@ -1,3 +1,6 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# Third-party: Neural Amp Modeler (trainer) — cloned locally, not vendored in git
+neural-amp-modeler/
