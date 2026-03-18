@@ -22,6 +22,73 @@ body {
   gap: 0;
 }
 
+/* —— Collapsible: mockups + wireframes (outside launch art) —— */
+.blueprint-mockups-wireframes {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blueprint-mockups-wireframes__summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px clamp(16px, 4vw, 24px);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #334155;
+  background: #dce0e6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  user-select: none;
+  transition: background 0.15s ease;
+}
+
+.blueprint-mockups-wireframes__summary::-webkit-details-marker {
+  display: none;
+}
+
+.blueprint-mockups-wireframes__summary::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid #475569;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.blueprint-mockups-wireframes[open] .blueprint-mockups-wireframes__summary::after {
+  transform: rotate(180deg);
+}
+
+.blueprint-mockups-wireframes__summary:hover {
+  background: #d0d5dd;
+}
+
+.blueprint-mockups-wireframes__summary:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+}
+
+.blueprint-mockups-wireframes__hint {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  opacity: 0.65;
+}
+
+.blueprint-mockups-wireframes__body {
+  display: flex;
+  flex-direction: column;
+}
+
 /* —— Standalone launch art (matches main.html mood) —— */
 .landing-art {
   position: relative;

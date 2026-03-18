@@ -24,9 +24,8 @@ flowchart TB
 
 `mockups/blueprint-01-mockup-wireframe.html` + `mockups/blueprint-mockup-wireframe.css`:
 
-- **Standalone app launch art** — same gradient / mark / progress bar language as `main.html`.
-- **“You are a…” mockup** — labeled mockup card with placeholder copy.
-- **Wireframe** — white canvas, **black** 2px box strokes; **subtext** states this is a wireframe and that **every wireframe in this project** should carry that kind of label.
+- **Standalone app launch art** — primary viewport content; same gradient / mark / progress bar language as `main.html`.
+- **Mockups and Wireframes** — collapsible section below launch art. When expanded: **“You are a…” mockup** (labeled card) and **wireframe** canvas (**black** 2px strokes) plus project-standard wireframe subtext.
 
 ## Settings Screen Skeleton
 
