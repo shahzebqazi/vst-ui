@@ -34,9 +34,13 @@ flowchart TB
   mockups --> gui
   gui --> settings
   gui --> help
+  comp[Components]
+  cm[Components page]
+  mockups --> comp
+  comp --> cm
 ```
 
-_Presets and Export are not listed in the shell menu._
+_Under **Plugins mock-ups**: Utility, Pan, EQ, Saturator, then **Components** → `components.html` (200×200 mini windows + wireframes). Presets and Export are not in the menu._
 
 ## Standalone App Launch image (blueprint page)
 
