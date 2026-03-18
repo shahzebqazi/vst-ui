@@ -5,7 +5,6 @@
   --left-panel-border: rgba(255, 255, 255, 0.45);
   --mockup-card-bg: #ffffff;
   --mockup-card-shadow: 0 12px 40px rgba(0, 0, 0, 0.18), 0 2px 0 rgba(255, 255, 255, 0.6) inset;
-  --summary-h: 4.25rem;
   --stack-tile-min-h: 4.35rem;
 }
 
@@ -90,15 +89,13 @@ body {
   --panel-border: rgba(255, 255, 255, 0.2);
 }
 
-.bg-dark-dots .stack-tile,
-.bg-dark-dots .nav-disclosure__summary {
+.bg-dark-dots .stack-tile {
   background: rgba(20, 20, 22, 0.88);
   color: #eee;
   border-color: rgba(255, 255, 255, 0.18);
 }
 
-.bg-dark-dots .stack-tile:hover,
-.bg-dark-dots .nav-disclosure__summary:hover {
+.bg-dark-dots .stack-tile:hover {
   background: rgba(32, 32, 36, 0.92);
 }
 
@@ -298,19 +295,29 @@ body {
 .nav-disclosure__summary {
   list-style: none;
   cursor: pointer;
-  min-height: var(--summary-h);
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px 12px;
-  border: 1px solid var(--panel-border);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.88);
-  transition: background 0.15s ease, border-color 0.15s ease;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 6px 0 8px;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-family: "NF FiraCode", ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: normal;
+  letter-spacing: 0.04em;
+  text-align: left;
   user-select: none;
+  transition: opacity 0.12s ease;
+}
+
+.app-shell--intro .nav-disclosure__summary {
+  justify-content: center;
 }
 
 .nav-disclosure__summary::-webkit-details-marker {
@@ -318,24 +325,19 @@ body {
 }
 
 .nav-disclosure__summary:hover {
-  background: rgba(255, 255, 255, 0.96);
+  opacity: 0.85;
 }
 
 .nav-disclosure[open] > .nav-disclosure__summary {
-  margin-bottom: 10px;
-  border-color: rgba(30, 100, 200, 0.35);
-  background: rgba(255, 255, 255, 0.95);
-}
-
-.bg-dark-dots .nav-disclosure[open] > .nav-disclosure__summary {
-  border-color: rgba(120, 170, 255, 0.35);
+  margin-bottom: 8px;
+  opacity: 1;
 }
 
 .nav-disclosure__chevron {
-  font-size: 0.5rem;
+  font-size: 0.55rem;
   line-height: 1;
-  opacity: 0.7;
-  margin-bottom: 2px;
+  opacity: 0.65;
+  flex-shrink: 0;
 }
 
 .nav-disclosure__chevron::before {
@@ -348,37 +350,15 @@ body {
   transform: rotate(90deg);
 }
 
-.nav-disclosure__label {
-  font-family: "NF FiraCode", ui-monospace, monospace;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.nav-disclosure__hint {
-  font-size: 0.62rem;
-  line-height: 1.35;
-  opacity: 0.8;
-  max-width: 15rem;
-  font-family: "NF UbuntuMono", ui-monospace, monospace;
-}
-
 .nav-disclosure__body {
   text-align: left;
   width: 100%;
+  padding-left: 1.1rem;
+  margin-bottom: 4px;
 }
 
-.nav-disclosure__intro {
-  font-size: 0.65rem;
-  line-height: 1.45;
-  margin: 0 0 10px;
-  opacity: 0.9;
-}
-
-.nav-disclosure__intro--spaced {
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid var(--panel-border);
+.stack-list--tight {
+  margin-top: 10px;
 }
 
 .stack-list {
