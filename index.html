@@ -355,7 +355,7 @@
       </section>
 
       <section class="right-panel" id="right-panel" aria-hidden="true">
-        <!-- Phone frame hidden until a real mockup is selected — never show blank iframe -->
+        <!-- Standard mockup viewport -->
         <div
           class="phone-frame phone-frame--phone"
           id="phone-frame"
@@ -375,7 +375,6 @@
               <span class="phone-frame__traffic-light phone-frame__traffic-light--green"></span>
             </div>
           </div>
-          <!-- No default src: totally blank document (about:blank) is never shown in shell -->
           <iframe title="Mockup viewport" name="mockupViewport" id="mockup-iframe"></iframe>
         </div>
         <div
@@ -384,7 +383,6 @@
           hidden
           aria-hidden="true"
         >
-          <!-- No default src: blank mockup never rendered here (reference-only pattern) -->
           <iframe
             title="Chromeless mockup viewport"
             name="chromelessMockupViewport"
