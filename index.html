@@ -15,7 +15,7 @@
       data-layout-wide="false"
       data-layout-split="false"
     >
-      <section class="panel left-panel left-panel--stack" aria-label="Blueprint controls">
+      <section class="panel left-panel left-panel--stack" aria-label="Mockup controls">
         <h1 class="app-title app-title--centered">
           <span class="app-title__stack">
             <span class="app-title__line">Iconoclast Audio</span>
@@ -30,7 +30,7 @@
 
         <div class="shell-overview" id="shell-overview">
           <p>
-            Use the sections below to set the workspace backdrop, open blueprint previews in the
+            Use the sections below to set the workspace backdrop, open mockup previews in the
             viewport, or jump to formal design and engineering write-ups. Everything here is meant
             to be copied, extended, or replaced piecemeal across your own VST UI work.
           </p>
@@ -121,15 +121,15 @@
             </div>
           </details>
 
-          <details class="nav-disclosure" id="disclosure-blueprints">
+          <details class="nav-disclosure" id="disclosure-mockups">
             <summary class="nav-disclosure__summary">
               <span class="nav-disclosure__chevron" aria-hidden="true"></span>
-              Blueprints
+              Mockups
             </summary>
             <div class="nav-disclosure__body">
-              <div class="stack-list" role="group" aria-label="Blueprints">
+              <div class="stack-list stack-list--mockup-nav" role="group" aria-label="Mockups">
                 <a
-                  class="stack-tile stack-tile--link mockup-link mockup-link--main"
+                  class="stack-tile stack-tile--link mockup-link"
                   href="mockups/blueprint-01-mockup-wireframe.html"
                   target="mockupViewport"
                   data-mockup="blueprint-01"
@@ -143,13 +143,90 @@
                       >Launch art, “You are a…” mockup card, and labeled wireframe in one
                       screen.</span
                     >
-                    <span
-                      class="stack-tile__mockup-preview"
-                      aria-hidden="true"
-                      title="Launch art preview"
-                    ></span>
                   </span>
                 </a>
+                <p class="mockup-group-heading" id="mockup-group-plugins">Plugins mock-ups</p>
+                <div
+                  class="mockup-group-links mockup-group-links--flat"
+                  role="group"
+                  aria-labelledby="mockup-group-plugins"
+                >
+                  <a
+                    class="stack-tile stack-tile--link mockup-link"
+                    href="mockups/example-utility.html"
+                    target="mockupViewport"
+                    data-mockup="example-utility"
+                  >
+                    <span class="stack-tile__glyph" aria-hidden="true">&#xf0ad;</span>
+                    <span class="stack-tile__copy">
+                      <span class="stack-tile__title">Utility</span>
+                    </span>
+                  </a>
+                  <a
+                    class="stack-tile stack-tile--link mockup-link"
+                    href="mockups/example-pan.html"
+                    target="mockupViewport"
+                    data-mockup="example-pan"
+                  >
+                    <span class="stack-tile__glyph" aria-hidden="true">&#xf07e;</span>
+                    <span class="stack-tile__copy">
+                      <span class="stack-tile__title">Pan</span>
+                    </span>
+                  </a>
+                  <a
+                    class="stack-tile stack-tile--link mockup-link"
+                    href="mockups/example-eq.html"
+                    target="mockupViewport"
+                    data-mockup="example-eq"
+                  >
+                    <span class="stack-tile__glyph" aria-hidden="true">&#xf1de;</span>
+                    <span class="stack-tile__copy">
+                      <span class="stack-tile__title">EQ</span>
+                    </span>
+                  </a>
+                  <a
+                    class="stack-tile stack-tile--link mockup-link"
+                    href="mockups/example-saturator.html"
+                    target="mockupViewport"
+                    data-mockup="example-saturator"
+                  >
+                    <span class="stack-tile__glyph" aria-hidden="true">&#xf0e7;</span>
+                    <span class="stack-tile__copy">
+                      <span class="stack-tile__title">Saturator</span>
+                    </span>
+                  </a>
+                </div>
+                <p class="mockup-group-heading" id="mockup-group-general-ui">
+                  General User Interface Mockups
+                </p>
+                <div
+                  class="mockup-group-links mockup-group-links--flat"
+                  role="group"
+                  aria-labelledby="mockup-group-general-ui"
+                >
+                  <a
+                    class="stack-tile stack-tile--link mockup-link"
+                    href="mockups/settings.html"
+                    target="mockupViewport"
+                    data-mockup="settings"
+                  >
+                    <span class="stack-tile__glyph" aria-hidden="true">&#xf013;</span>
+                    <span class="stack-tile__copy">
+                      <span class="stack-tile__title">Settings</span>
+                    </span>
+                  </a>
+                  <a
+                    class="stack-tile stack-tile--link mockup-link"
+                    href="mockups/help.html"
+                    target="mockupViewport"
+                    data-mockup="help"
+                  >
+                    <span class="stack-tile__glyph" aria-hidden="true">&#xf059;</span>
+                    <span class="stack-tile__copy">
+                      <span class="stack-tile__title">Help</span>
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </details>
@@ -215,14 +292,14 @@
         <div class="phone-frame phone-frame--phone" id="phone-frame" data-size="phone">
           <div class="phone-frame__chrome" aria-hidden="true"></div>
           <iframe
-            title="Blueprint viewport"
+            title="Mockup viewport"
             name="mockupViewport"
             id="mockup-iframe"
             src="about:blank"
           ></iframe>
         </div>
         <p class="mockup-placeholder" id="mockup-placeholder">
-          Choose a blueprint under <strong>Blueprints</strong> to load a preview.
+          Choose an item under <strong>Mockups</strong> to load a preview.
         </p>
       </section>
     </main>
@@ -240,7 +317,7 @@
         var sizeButtons = document.querySelectorAll("[data-mockup-size]");
         var mockupLinks = document.querySelectorAll(".mockup-link");
         var disclosures = document.querySelectorAll(".nav-disclosure");
-        var disclosureBlueprints = document.getElementById("disclosure-blueprints");
+        var disclosureMockups = document.getElementById("disclosure-mockups");
         var overview = document.getElementById("shell-overview");
         var THEME_STORAGE_KEY = "vst-ui-wallpaper";
         var SHELL_STATE_KEY = "vst-ui-shell-state";
@@ -293,7 +370,7 @@
           var activeMockup = document.querySelector(".mockup-link.is-active");
           writeShellState({
             disclosureUi: !!(disclosureUi && disclosureUi.open),
-            disclosureBlueprints: !!(disclosureBlueprints && disclosureBlueprints.open),
+            disclosureMockups: !!(disclosureMockups && disclosureMockups.open),
             disclosureDocs: !!(disclosureDocs && disclosureDocs.open),
             mockupId: activeMockup ? activeMockup.getAttribute("data-mockup") : null,
             mockupSize: phoneFrame.dataset.size || defaultMockupSizeKey(),
@@ -303,12 +380,17 @@
         function applyDisclosuresFromState(s) {
           if (!s) return;
           if (disclosureUi) disclosureUi.open = !!s.disclosureUi;
-          if (disclosureBlueprints) disclosureBlueprints.open = !!s.disclosureBlueprints;
+          if (disclosureMockups) {
+            disclosureMockups.open = !!(
+              s.disclosureMockups ||
+              s.disclosureBlueprints
+            );
+          }
           if (disclosureDocs) disclosureDocs.open = !!s.disclosureDocs;
         }
 
         function restoreMockupFromState(s) {
-          if (!s || !s.mockupId || !disclosureBlueprints || !disclosureBlueprints.open) return;
+          if (!s || !s.mockupId || !disclosureMockups || !disclosureMockups.open) return;
           var link = document.querySelector('.mockup-link[data-mockup="' + s.mockupId + '"]');
           if (!link) return;
           var url = link.getAttribute("href");
@@ -335,13 +417,13 @@
           placeholder.hidden = false;
         }
 
-        function blueprintsSectionOpen() {
-          return disclosureBlueprints && disclosureBlueprints.open;
+        function mockupsSectionOpen() {
+          return disclosureMockups && disclosureMockups.open;
         }
 
         function applyLayout() {
           var wide = mq.matches;
-          var split = blueprintsSectionOpen();
+          var split = mockupsSectionOpen();
           shell.dataset.layoutWide = wide ? "true" : "false";
           shell.dataset.layoutSplit = split ? "true" : "false";
           shell.classList.remove(
@@ -463,7 +545,7 @@
 
         mockupLinks.forEach(function (link) {
           link.addEventListener("click", function (e) {
-            if (!blueprintsSectionOpen()) return;
+            if (!mockupsSectionOpen()) return;
             e.preventDefault();
             var url = link.getAttribute("href");
             iframe.src = url;

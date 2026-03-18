@@ -11,16 +11,34 @@ flowchart LR
   leftMenu -->|SelectMenu| rightViewport
 ```
 
-## Blueprints navigation (shell)
+## Mockups navigation (shell)
 
 ```mermaid
 flowchart TB
-  blueprints[Blueprints]
-  b1[Standalone App Launch image]
-  blueprints --> b1
+  mockups[Mockups]
+  launch[Standalone App Launch image]
+  plugins[Plugins mock-ups]
+  u[Utility]
+  pan[Pan]
+  eq[EQ]
+  sat[Saturator]
+  gui[General User Interface Mockups]
+  settings[Settings]
+  help[Help]
+  mockups --> launch
+  mockups --> plugins
+  plugins --> u
+  plugins --> pan
+  plugins --> eq
+  plugins --> sat
+  mockups --> gui
+  gui --> settings
+  gui --> help
 ```
 
-## Blueprint 1 — Standalone App Launch image
+_Presets and Export are not listed in the shell menu._
+
+## Standalone App Launch image (blueprint page)
 
 `mockups/blueprint-01-mockup-wireframe.html` + `mockups/blueprint-mockup-wireframe.css`:
 
@@ -41,5 +59,5 @@ flowchart TB
 
 ## Notes
 
-- Replace placeholder rows with user-defined menu items from `docs/MENU_INVENTORY.md`.
-- Add more blueprint rows in `index.html` as the inventory grows; each loads a different iframe target.
+- Inventory: `docs/MENU_INVENTORY.md`.
+- Under **Mockups**, rows use a flat list style (no white card per link); group headings separate **Plugins mock-ups** and **General User Interface Mockups**.

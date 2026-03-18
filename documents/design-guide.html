@@ -44,10 +44,12 @@
           <td>Background modifiers and mockup viewport size presets.</td>
         </tr>
         <tr>
-          <td>Blueprints</td>
+          <td>Mockups</td>
           <td
-            >Blueprint entries load HTML from <code>mockups/</code> into the viewport (e.g.
-            <strong>Standalone App Launch image</strong> — launch art, “You are a…” mockup, labeled wireframe).</td
+            >Loads HTML from <code>mockups/</code>: <strong>Standalone App Launch image</strong>;
+            <strong>Plugins mock-ups</strong> (Utility, Pan, EQ, Saturator);
+            <strong>General User Interface Mockups</strong> (Settings, Help). Presets/Export not in the
+            menu.</td
           >
         </tr>
         <tr>
@@ -57,10 +59,10 @@
         <tr>
           <td>Viewport</td>
           <td
-            >Frame appears only when <strong>Blueprints</strong> is open; loads HTML when the user picks an
+            >Frame appears only when <strong>Mockups</strong> is open; loads HTML when the user picks an
             entry. UI configuration / Documents alone do not show an empty frame. Background theme is
-            persisted (localStorage). Open sections (UI configuration, Blueprints, Documents),
-            selected blueprint, and viewport size are restored after refresh.</td
+            persisted (localStorage). Open sections, selected mockup, and viewport size are restored after
+            refresh.</td
           >
         </tr>
       </tbody>
@@ -74,10 +76,10 @@
     </ul>
     <h3>3.2 Visual tokens</h3>
     <ul>
-      <li>Panel: translucent left rail; mockup card: opaque, elevated.</li>
-      <li>List actions: stack tiles with title and optional description.</li>
+      <li>Panel: translucent left rail; viewport frame when Mockups is open.</li>
+      <li>UI configuration / Documents: stack tiles (cards). Mockups: flat rows + section headings.</li>
     </ul>
-    <h3>3.3 Blueprint pages</h3>
+    <h3>3.3 Mockup pages</h3>
     <ul>
       <li
         ><code>mockups/blueprint-01-mockup-wireframe.html</code>: standalone launch art (same language as

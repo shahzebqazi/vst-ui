@@ -480,6 +480,79 @@ body {
   width: 100%;
 }
 
+.mockup-group-links--flat {
+  gap: 2px;
+}
+
+/* Mockups nav: no white “card” per row; headings without divider “cut” */
+.stack-list--mockup-nav {
+  gap: 2px;
+}
+
+.stack-list--mockup-nav > .mockup-group-heading {
+  margin-top: 14px;
+  margin-bottom: 0;
+  padding: 6px 2px 8px;
+  border-top: none;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.stack-list--mockup-nav > .mockup-group-heading:first-of-type {
+  margin-top: 10px;
+}
+
+.bg-dark-dots .stack-list--mockup-nav > .mockup-group-heading {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.bg-paper .stack-list--mockup-nav > .mockup-group-heading {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.stack-list--mockup-nav .mockup-link.stack-tile {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  box-shadow: none;
+  min-height: 2.75rem;
+  padding: 8px 10px;
+}
+
+.stack-list--mockup-nav .mockup-link.stack-tile:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: transparent;
+}
+
+.stack-list--mockup-nav .mockup-link.stack-tile .stack-tile__title {
+  margin-bottom: 0;
+}
+
+.stack-list--mockup-nav .mockup-link.stack-tile .stack-tile__desc {
+  margin-top: 4px;
+}
+
+.stack-list--mockup-nav .mockup-link.stack-tile.is-active {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: transparent;
+  box-shadow: inset 3px 0 0 #2563eb;
+}
+
+.bg-dark-dots .stack-list--mockup-nav .mockup-link.stack-tile:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.bg-dark-dots .stack-list--mockup-nav .mockup-link.stack-tile.is-active {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 3px 0 0 #60a5fa;
+}
+
+.bg-paper .stack-list--mockup-nav .mockup-link.stack-tile.is-active {
+  background: rgba(255, 252, 245, 0.85);
+  box-shadow: inset 3px 0 0 #b45309;
+}
+
 .bg-dark-dots .mockup-group-heading {
   color: rgba(255, 255, 255, 0.5);
   border-top-color: rgba(255, 255, 255, 0.12);

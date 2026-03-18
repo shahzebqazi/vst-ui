@@ -24,15 +24,19 @@ For each menu below, answer:
 | ---------- | --------------------- | -------------------- | ----- |
 | TODO | row | MUST | |
 
-## Blueprints (shell)
+## Mockups (shell)
 
-_Iframe targets under **Blueprints** in `index.html`._
+_Items under **Mockups** in `index.html` (iframe viewport). Presets and Export are not in the menu._
 
-| Screen file | Shell label | Notes |
+| Screen file | Shell label | Group |
 | ----------- | ----------- | ----- |
-| `mockups/blueprint-01-mockup-wireframe.html` | Standalone App Launch image | Launch art, “You are a…” mockup, labeled wireframe |
-
-_Legacy HTML under `mockups/` (main, example-*, history, etc.) remains on disk but is not listed in the shell until re-added._
+| `mockups/blueprint-01-mockup-wireframe.html` | Standalone App Launch image | (top) |
+| `mockups/example-utility.html` | Utility | Plugins mock-ups |
+| `mockups/example-pan.html` | Pan | Plugins mock-ups |
+| `mockups/example-eq.html` | EQ | Plugins mock-ups |
+| `mockups/example-saturator.html` | Saturator | Plugins mock-ups |
+| `mockups/settings.html` | Settings | General User Interface Mockups |
+| `mockups/help.html` | Help | General User Interface Mockups |
 
 ## Menu: History
 
