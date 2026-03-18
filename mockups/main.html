@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main — standalone launch</title>
+    <title>Main — Badass Music</title>
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="mockup-chrome.css" />
     <style>
       * {
         box-sizing: border-box;
@@ -15,15 +16,16 @@
         height: 100%;
       }
       body {
+        display: flex;
+        flex-direction: column;
         font-family: system-ui, "Segoe UI", Roboto, sans-serif;
         background: #0a1628;
         overflow: hidden;
       }
-      /* Full-viewport landing image (CSS illustration — replace with raster in product) */
       .landing {
         position: relative;
-        min-height: 100%;
-        min-height: 100dvh;
+        flex: 1;
+        min-height: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -124,6 +126,17 @@
     </style>
   </head>
   <body>
+    <nav class="mockup-chrome" aria-label="Badass Music — screens">
+      <span class="mockup-chrome__brand">Badass Music</span>
+      <ul class="mockup-chrome__menu">
+        <li><a href="main.html" aria-current="page">Main</a></li>
+        <li><a href="capture-modes.html">Controls</a></li>
+        <li><a href="history.html">Presets</a></li>
+        <li><a href="export.html">Export</a></li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="help.html">Help</a></li>
+      </ul>
+    </nav>
     <main class="landing" role="img" aria-label="Standalone application launch screen: brand artwork and loading state">
       <div class="landing-inner">
         <div class="landing-mark" aria-hidden="true">
@@ -133,7 +146,7 @@
             />
           </svg>
         </div>
-        <h1>Your plugin</h1>
+        <h1>Badass Music</h1>
         <p class="tagline">Standalone launch — full-screen landing while the app starts.</p>
         <div class="launch-bar" aria-hidden="true"></div>
         <p class="caption">Launch image</p>

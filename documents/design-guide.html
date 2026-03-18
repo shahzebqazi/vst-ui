@@ -53,7 +53,11 @@
         </tr>
         <tr>
           <td>Viewport</td>
-          <td>Frame loads selected mockup HTML when the user chooses a screen.</td>
+          <td
+            >Frame appears only when <strong>Mockups</strong> is open; loads HTML when the user picks a
+            screen. UI configuration / Documents alone do not show an empty frame. Background theme is
+            persisted (localStorage).</td
+          >
         </tr>
       </tbody>
     </table>
@@ -71,7 +75,10 @@
     </ul>
     <h3>3.3 Mockup pages</h3>
     <ul>
-      <li>Each file under <code>mockups/</code> should remain self-contained for iframe embedding.</li>
+      <li
+        >Each file under <code>mockups/</code> remains self-contained for iframe embedding; shared
+        <code>mockup-chrome.css</code> supplies the Badass Music brand bar and symmetric screen nav.</li
+      >
       <li>Prefer semantic HTML and focus order matching visual order.</li>
     </ul>
 
@@ -149,6 +156,6 @@
       Related: <a href="../docs/MENU_INVENTORY.md">docs/MENU_INVENTORY.md</a> ·
       <a href="../docs/MOCKUPS.md">docs/MOCKUPS.md</a>
     </p>
-    <a class="back" href="../index.html">← Back to VST UI Mockups</a>
+    <a class="back" href="../index.html">← Back to Project menu</a>
   </body>
 </html>

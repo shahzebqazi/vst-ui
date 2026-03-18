@@ -401,7 +401,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 20px;
+  gap: 10px;
   width: 100%;
   min-height: var(--stack-tile-min-h);
   padding: 10px 12px;
@@ -432,12 +432,11 @@ body {
   opacity: 0.88;
   line-height: 1.2;
   margin-top: 2px;
-  min-width: 1.75rem;
+  min-width: 1.5rem;
   text-align: center;
   box-sizing: content-box;
-  /* Clear separation from title/description (icon fonts bleed visually) */
-  padding-inline-end: 12px;
-  margin-inline-end: 4px;
+  padding-inline-end: 4px;
+  margin-inline-end: 0;
 }
 
 .stack-tile__copy {

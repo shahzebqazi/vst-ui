@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://sqazi.sh/vst-ui/" />
-    <title>VST UI Mockups</title>
+    <title>Project menu — VST UI</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles/backgrounds.css" />
   </head>
@@ -17,7 +17,7 @@
     >
       <section class="panel left-panel left-panel--stack" aria-label="Mockup controls">
         <h1 class="app-title app-title--centered">
-          <span class="title-icon" aria-hidden="true">&#xf1e6;</span>VST UI Mockups
+          <span class="title-icon" aria-hidden="true">&#xf1e6;</span>Project menu
         </h1>
 
         <div class="shell-overview" id="shell-overview">
@@ -154,9 +154,9 @@
                 >
                   <span class="stack-tile__glyph" aria-hidden="true">&#xf1de;</span>
                   <span class="stack-tile__copy">
-                    <span class="stack-tile__title">Controls</span>
+                    <span class="stack-tile__title">Examples</span>
                     <span class="stack-tile__desc"
-                      >Parameters and control surfaces.</span
+                      >Reference UIs and control patterns.</span
                     >
                   </span>
                 </a>
@@ -313,7 +313,10 @@
         var sizeButtons = document.querySelectorAll("[data-mockup-size]");
         var mockupLinks = document.querySelectorAll(".mockup-link");
         var disclosures = document.querySelectorAll(".nav-disclosure");
+        var disclosureMockups = document.getElementById("disclosure-mockups");
         var overview = document.getElementById("shell-overview");
+        var THEME_STORAGE_KEY = "vst-ui-wallpaper";
+        var THEME_CLASSES = ["bg-blueprint", "bg-paper", "bg-dark-dots"];
 
         var MOCKUP_SIZES = {
           phone: { w: 390, h: 844, className: "phone-frame--phone" },
@@ -352,9 +355,13 @@
           mockupContext.hidden = !isMain;
         }
 
+        function mockupsSectionOpen() {
+          return disclosureMockups && disclosureMockups.open;
+        }
+
         function applyLayout() {
           var wide = mq.matches;
-          var split = anyDisclosureOpen();
+          var split = mockupsSectionOpen();
           shell.dataset.layoutWide = wide ? "true" : "false";
           shell.dataset.layoutSplit = split ? "true" : "false";
           shell.classList.remove(
@@ -366,7 +373,6 @@
             shell.classList.add("app-shell--intro");
             rightPanel.setAttribute("aria-hidden", "true");
             rightPanel.hidden = true;
-            clearMockup();
           } else {
             rightPanel.hidden = false;
             rightPanel.setAttribute("aria-hidden", "false");
@@ -414,22 +420,41 @@
           return narrow ? "phone" : "desktop";
         }
 
+        function restoreThemeFromStorage() {
+          var saved = localStorage.getItem(THEME_STORAGE_KEY);
+          document.body.classList.remove("bg-blueprint", "bg-paper", "bg-dark-dots");
+          if (saved && THEME_CLASSES.indexOf(saved) !== -1) {
+            document.body.classList.add(saved);
+          } else {
+            document.body.classList.add("bg-blueprint");
+          }
+          themeButtons.forEach(function (b) {
+            var t = b.getAttribute("data-theme");
+            var on = document.body.classList.contains(t);
+            b.classList.toggle("is-active", on);
+            b.setAttribute("aria-pressed", on ? "true" : "false");
+          });
+        }
+
+        restoreThemeFromStorage();
         syncOverviewVisibility();
         applyLayout();
         applyMockupSize(defaultMockupSizeKey());
 
         themeButtons.forEach(function (btn) {
           btn.addEventListener("click", function () {
+            var theme = btn.getAttribute("data-theme");
             document.body.classList.remove("bg-blueprint", "bg-paper", "bg-dark-dots");
-            document.body.classList.add(btn.getAttribute("data-theme"));
+            document.body.classList.add(theme);
+            try {
+              localStorage.setItem(THEME_STORAGE_KEY, theme);
+            } catch (e) {}
             themeButtons.forEach(function (b) {
               b.classList.toggle("is-active", b === btn);
               b.setAttribute("aria-pressed", b === btn ? "true" : "false");
             });
           });
         });
-
-        document.querySelector("[data-theme=\"bg-blueprint\"]").classList.add("is-active");
 
         sizeButtons.forEach(function (btn) {
           btn.addEventListener("click", function () {
@@ -439,7 +464,7 @@
 
         mockupLinks.forEach(function (link) {
           link.addEventListener("click", function (e) {
-            if (!anyDisclosureOpen()) return;
+            if (!mockupsSectionOpen()) return;
             e.preventDefault();
             var url = link.getAttribute("href");
             iframe.src = url;
