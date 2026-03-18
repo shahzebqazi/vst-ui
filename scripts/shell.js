@@ -1,5 +1,6 @@
 /**
- * Shell behavior for index.html: theme, disclosures, mockup iframes, localStorage.
+ * Shell behavior for index.html: theme, disclosures, mockup iframe, localStorage.
+ * Single-iframe architecture: one viewport for all mockups; chromeless mode hides frame chrome.
  * See PLAYBOOK.md §5 deliverables.
  */
 (function () {
@@ -9,8 +10,6 @@
   var rightPanel = document.getElementById("right-panel");
   var phoneFrame = document.getElementById("phone-frame");
   var iframe = document.getElementById("mockup-iframe");
-  var chromelessPanel = document.getElementById("chromeless-panel");
-  var chromelessIframe = document.getElementById("chromeless-iframe");
   var themeButtons = document.querySelectorAll("[data-theme]");
   var sizeButtons = document.querySelectorAll("[data-mockup-size]");
   var mockupLinks = document.querySelectorAll(".mockup-link");
@@ -19,8 +18,6 @@
   var overview = document.getElementById("shell-overview");
   var THEME_STORAGE_KEY = "vst-ui-wallpaper";
   var THEME_CLASSES = ["bg-blueprint", "bg-paper", "bg-dark-dots"];
-  var disclosureUi = document.getElementById("disclosure-ui");
-  var disclosureDocs = document.getElementById("disclosure-docs");
   var mockupFrameClose = document.getElementById("mockup-frame-close");
   var chromelessResizeObserver = null;
 
@@ -32,14 +29,15 @@
   }
 
   function syncChromelessIframeHeight() {
-    if (!chromelessIframe || !chromelessPanel || chromelessPanel.hidden) return;
+    if (!iframe || !phoneFrame || phoneFrame.hidden) return;
+    if (!phoneFrame.classList.contains("phone-frame--chromeless")) return;
     try {
-      var doc = chromelessIframe.contentDocument;
+      var doc = iframe.contentDocument;
       if (!doc) return;
       var loc = doc.location;
       var href = loc && loc.href ? String(loc.href) : "";
       if (!href || href.indexOf("about:blank") === 0) {
-        chromelessIframe.style.height = "";
+        iframe.style.height = "";
         return;
       }
       var el = doc.documentElement;
@@ -48,15 +46,16 @@
       if (b) {
         h = Math.max(h, b.scrollHeight, b.offsetHeight);
       }
-      chromelessIframe.style.height = Math.ceil(Math.max(h, 72)) + "px";
+      iframe.style.height = Math.ceil(Math.max(h, 72)) + "px";
     } catch (err) {}
   }
 
   function attachChromelessResizeTracking() {
     disconnectChromelessResizeTracking();
-    if (!chromelessIframe || chromelessPanel.hidden) return;
+    if (!iframe || phoneFrame.hidden || !phoneFrame.classList.contains("phone-frame--chromeless"))
+      return;
     try {
-      var doc = chromelessIframe.contentDocument;
+      var doc = iframe.contentDocument;
       if (!doc || !doc.body || typeof ResizeObserver === "undefined") return;
       chromelessResizeObserver = new ResizeObserver(function () {
         syncChromelessIframeHeight();
@@ -66,8 +65,8 @@
     } catch (e) {}
   }
 
-  if (chromelessIframe) {
-    chromelessIframe.addEventListener("load", function () {
+  if (iframe) {
+    iframe.addEventListener("load", function () {
       requestAnimationFrame(function () {
         syncChromelessIframeHeight();
         requestAnimationFrame(function () {
@@ -105,28 +104,6 @@
     shell.classList.toggle("app-shell--nav-compact", compact);
   }
 
-  function setViewportMode(chromeless) {
-    if (chromeless) {
-      rightPanel.classList.add("right-panel--chromeless-active");
-      phoneFrame.hidden = true;
-      phoneFrame.setAttribute("aria-hidden", "true");
-      if (chromelessPanel) {
-        chromelessPanel.hidden = false;
-        chromelessPanel.setAttribute("aria-hidden", "false");
-      }
-    } else {
-      rightPanel.classList.remove("right-panel--chromeless-active");
-      phoneFrame.hidden = false;
-      phoneFrame.setAttribute("aria-hidden", "false");
-      if (chromelessPanel) {
-        chromelessPanel.hidden = true;
-        chromelessPanel.setAttribute("aria-hidden", "true");
-      }
-      disconnectChromelessResizeTracking();
-      if (chromelessIframe) chromelessIframe.style.height = "";
-    }
-  }
-
   function mockupsSectionOpen() {
     return disclosureMockups && disclosureMockups.open;
   }
@@ -141,21 +118,21 @@
 
   function hideAllMockupViewports() {
     rightPanel.classList.remove("right-panel--chromeless-active");
+    phoneFrame.classList.remove("phone-frame--chromeless");
     phoneFrame.hidden = true;
     phoneFrame.setAttribute("aria-hidden", "true");
-    if (chromelessPanel) {
-      chromelessPanel.hidden = true;
-      chromelessPanel.setAttribute("aria-hidden", "true");
-    }
     disconnectChromelessResizeTracking();
-    if (chromelessIframe) chromelessIframe.style.height = "";
+    if (iframe) {
+      iframe.src = "about:blank";
+      iframe.style.height = "";
+    }
   }
 
   /**
-   * Idle: hide the entire mockup pane so no blank component or placeholder renders.
-   * Active: load only the selected mockup URL.
+   * Single viewport: load URL in iframe, set chromeless mode (hide chrome) or standard mode.
+   * Idle: hide frame and clear iframe so no blank or stale content renders.
    */
-  function applyActiveMockupViewport() {
+  function applyViewport() {
     if (!rightPanel || !shouldShowMockupPanel()) {
       hideAllMockupViewports();
       return;
@@ -164,14 +141,21 @@
     var active = activeMockupLink();
     var url = active.getAttribute("href");
     var chromeless = active.getAttribute("data-mockup-chrome") === "chromeless";
-    if (chromeless && chromelessIframe) {
-      setViewportMode(true);
-      chromelessIframe.src = url;
-      iframe.src = "about:blank";
-    } else {
-      setViewportMode(false);
+
+    phoneFrame.hidden = false;
+    phoneFrame.setAttribute("aria-hidden", "false");
+
+    if (chromeless) {
+      rightPanel.classList.add("right-panel--chromeless-active");
+      phoneFrame.classList.add("phone-frame--chromeless");
       iframe.src = url;
-      if (chromelessIframe) chromelessIframe.src = "about:blank";
+      iframe.setAttribute("title", "Component mockups");
+    } else {
+      rightPanel.classList.remove("right-panel--chromeless-active");
+      phoneFrame.classList.remove("phone-frame--chromeless");
+      iframe.src = url;
+      iframe.style.height = "";
+      iframe.setAttribute("title", "Mockup viewport");
     }
   }
 
@@ -188,7 +172,7 @@
       l.classList.remove("is-active");
     });
     applyLayout();
-    applyActiveMockupViewport();
+    applyViewport();
   }
 
   window.clearVstChromelessMockup = function () {
@@ -244,7 +228,7 @@
       syncOverviewVisibility();
       syncNavDensity();
       applyLayout();
-      applyActiveMockupViewport();
+      applyViewport();
     });
   });
 
@@ -257,10 +241,6 @@
   function defaultMockupSizeKey() {
     var narrow = window.matchMedia("(max-width: 767px)").matches;
     return narrow ? "phone" : "desktop";
-  }
-
-  function validMockupSizeKey(k) {
-    return k === "phone" || k === "ableton" || k === "desktop";
   }
 
   function restoreThemeFromStorage() {
@@ -285,7 +265,7 @@
   applyLayout();
   var sizeKey = defaultMockupSizeKey();
   applyMockupSize(sizeKey);
-  applyActiveMockupViewport();
+  applyViewport();
 
   if (mockupFrameClose) {
     mockupFrameClose.addEventListener("click", function () {
@@ -323,7 +303,7 @@
       });
       link.classList.add("is-active");
       applyLayout();
-      applyActiveMockupViewport();
+      applyViewport();
     });
   });
 })();

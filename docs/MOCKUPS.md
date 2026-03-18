@@ -60,7 +60,7 @@ flowchart TB
   gui --> help
 ```
 
-**Components:** **Component mockups** → `components-chromeless.html` in **`#chromeless-iframe`**. Per-control pages: `component-mockup-knob`, `-dropdown`, `-vertical-slider`, `-switch`, `-button`, `-xy-surface`, `-step-control`. **`components-list.html`** — notes + inventory (linked from chromeless).
+**Components:** **Component mockups** → `components-chromeless.html` in **`#mockup-iframe`** (chromeless mode: frame chrome hidden via `.phone-frame--chromeless`). Per-control pages: `component-mockup-knob`, `-dropdown`, `-vertical-slider`, `-switch`, `-button`, `-xy-surface`, `-step-control`. **`components-list.html`** — notes + inventory (linked from chromeless).
 
 ## Standalone App Launch image (blueprint page)
 
@@ -80,6 +80,10 @@ flowchart TB
   aboutRow[AboutRow]
   settingsHeader --> generalRow --> shortcutsRow --> notificationsRow --> aboutRow
 ```
+
+## Architecture (single-iframe)
+
+One viewport (`#mockup-iframe` inside `#phone-frame`) loads all mockups. Chromeless mockups (Components) add `.phone-frame--chromeless` to hide the traffic-light strip; standard mockups show full device chrome. Responsive: 320–767px stacked, 768px+ side-by-side; scales for HiDPI and HD.
 
 ## Notes
 

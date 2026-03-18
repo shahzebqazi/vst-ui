@@ -62,11 +62,12 @@
         <tr>
           <td>Viewport</td>
           <td
-            >Frame appears only when <strong>Mockups</strong> is open; loads HTML when the user picks an
-            entry. UI configuration / Documents alone do not show an empty frame. Background theme is
-            persisted (localStorage). Open sections, selected mockup, and viewport size are restored after
-            refresh. The frame title strip mimics macOS window controls; the <strong>red</strong> control
-            closes the mockup (clears the viewport) for any loaded page.</td
+            >Single iframe (<code>#mockup-iframe</code>) loads all mockups. Frame appears only when
+            <strong>Mockups</strong> is open; loads HTML when the user picks an entry. UI configuration /
+            Documents alone do not show an empty frame. Background theme is persisted (localStorage). Open
+            sections, selected mockup, and viewport size are restored after refresh. Standard mockups show
+            the frame title strip (macOS-style traffic lights); the <strong>red</strong> control closes
+            the mockup. <strong>Component mockups</strong> use chromeless mode (chrome hidden).</td
           >
         </tr>
       </tbody>

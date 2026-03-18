@@ -913,28 +913,28 @@ body {
   background: #fff;
 }
 
-/* Chromeless: height follows document (no fixed plugin window; no iframe scrollbar) */
-.chromeless-panel {
+/* Chromeless mode: hide frame chrome, full-width, height follows content */
+.phone-frame--chromeless .phone-frame__chrome {
   display: none;
-  flex: 0 0 auto;
-  align-self: stretch;
+}
+
+.phone-frame--chromeless {
   width: 100%;
+  max-width: 100%;
   min-width: 0;
-  overflow: visible;
-}
-
-.chromeless-panel:not([hidden]) {
-  display: block;
-}
-
-.chromeless-panel iframe {
-  display: block;
-  width: 100%;
-  height: 120px;
-  border: 0;
+  align-self: stretch;
+  border: none;
+  box-shadow: none;
   background: transparent;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.phone-frame--chromeless iframe {
+  display: block;
+  width: 100%;
+  min-height: 72px;
+  background: transparent;
 }
 
 .app-shell--split-wide .right-panel--chromeless-active {
