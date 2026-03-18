@@ -206,7 +206,7 @@
                     class="stack-tile stack-tile--link mockup-link"
                     href="mockups/components-chromeless.html"
                     target="mockupViewport"
-                    data-mockup="components-list"
+                    data-mockup="components-chromeless"
                     data-mockup-chrome="chromeless"
                   >
                     <span class="stack-tile__glyph" aria-hidden="true">&#xf0db;</span>
@@ -236,6 +236,28 @@
                     <span class="stack-tile__glyph" aria-hidden="true">&#xf013;</span>
                     <span class="stack-tile__copy">
                       <span class="stack-tile__title">Settings</span>
+                    </span>
+                  </a>
+                  <a
+                    class="stack-tile stack-tile--link mockup-link"
+                    href="mockups/presets.html"
+                    target="mockupViewport"
+                    data-mockup="presets"
+                  >
+                    <span class="stack-tile__glyph" aria-hidden="true">&#xf0c5;</span>
+                    <span class="stack-tile__copy">
+                      <span class="stack-tile__title">Presets</span>
+                    </span>
+                  </a>
+                  <a
+                    class="stack-tile stack-tile--link mockup-link"
+                    href="mockups/export.html"
+                    target="mockupViewport"
+                    data-mockup="export"
+                  >
+                    <span class="stack-tile__glyph" aria-hidden="true">&#xf56e;</span>
+                    <span class="stack-tile__copy">
+                      <span class="stack-tile__title">Export</span>
                     </span>
                   </a>
                   <a
@@ -305,6 +327,27 @@
                     >
                   </span>
                 </a>
+                <p class="mockup-group-heading" id="doc-group-archived">Archived &amp; supplementary</p>
+                <div
+                  class="stack-list stack-list--tight"
+                  role="group"
+                  aria-labelledby="doc-group-archived"
+                >
+                  <a
+                    class="stack-tile stack-tile--link"
+                    href="documents/archived-documents.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span class="stack-tile__glyph" aria-hidden="true">&#xf187;</span>
+                    <span class="stack-tile__copy">
+                      <span class="stack-tile__title">Archived documents hub</span>
+                      <span class="stack-tile__desc"
+                        >Index of older or alternate specs not in the primary doc set.</span
+                      >
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </details>
@@ -312,7 +355,13 @@
       </section>
 
       <section class="right-panel" id="right-panel" aria-hidden="true">
-        <div class="phone-frame phone-frame--phone" id="phone-frame" data-size="phone">
+        <!-- Phone frame hidden until a real mockup is selected — never show blank iframe -->
+        <div
+          class="phone-frame phone-frame--phone"
+          id="phone-frame"
+          data-size="phone"
+          hidden
+        >
           <div class="phone-frame__chrome" role="group" aria-label="Window">
             <div class="phone-frame__traffic" aria-hidden="true">
               <button
@@ -326,12 +375,8 @@
               <span class="phone-frame__traffic-light phone-frame__traffic-light--green"></span>
             </div>
           </div>
-          <iframe
-            title="Mockup viewport"
-            name="mockupViewport"
-            id="mockup-iframe"
-            src="about:blank"
-          ></iframe>
+          <!-- No default src: totally blank document (about:blank) is never shown in shell -->
+          <iframe title="Mockup viewport" name="mockupViewport" id="mockup-iframe"></iframe>
         </div>
         <div
           class="chromeless-panel"
@@ -339,11 +384,11 @@
           hidden
           aria-hidden="true"
         >
+          <!-- No default src: blank mockup never rendered here (reference-only pattern) -->
           <iframe
             title="Chromeless mockup viewport"
             name="chromelessMockupViewport"
             id="chromeless-iframe"
-            src="about:blank"
           ></iframe>
         </div>
         <p class="mockup-placeholder" id="mockup-placeholder">
@@ -526,26 +571,58 @@
           }
         }
 
+        function mockupsSectionOpen() {
+          return disclosureMockups && disclosureMockups.open;
+        }
+
+        /**
+         * Idle: hide both viewports so no blank / about:blank mockup appears.
+         * Active: load only the selected mockup URL (never assign about:blank to visible UI).
+         */
+        function applyActiveMockupViewport() {
+          if (!rightPanel || rightPanel.hidden) return;
+          if (!mockupsSectionOpen()) return;
+
+          var active = document.querySelector(".mockup-link.is-active");
+          if (!active) {
+            rightPanel.classList.remove("right-panel--chromeless-active");
+            phoneFrame.hidden = true;
+            phoneFrame.setAttribute("aria-hidden", "true");
+            if (chromelessPanel) {
+              chromelessPanel.hidden = true;
+              chromelessPanel.setAttribute("aria-hidden", "true");
+            }
+            if (placeholder) placeholder.hidden = false;
+            disconnectChromelessResizeTracking();
+            if (chromelessIframe) chromelessIframe.style.height = "";
+            /* Totally blank mockup (about:blank) must not render — reference-only:
+            if (iframe) iframe.src = "about:blank";
+            if (chromelessIframe) chromelessIframe.src = "about:blank";
+            */
+            return;
+          }
+
+          var url = active.getAttribute("href");
+          var chromeless = active.getAttribute("data-mockup-chrome") === "chromeless";
+          if (chromeless && chromelessIframe) {
+            setViewportMode(true);
+            chromelessIframe.src = url;
+            /* if (iframe) iframe.src = "about:blank"; */
+          } else {
+            setViewportMode(false);
+            iframe.src = url;
+            /* if (chromelessIframe) chromelessIframe.src = "about:blank"; */
+          }
+          if (placeholder) placeholder.hidden = true;
+        }
+
         function restoreMockupFromState(s) {
           if (!s || !s.mockupId || !disclosureMockups || !disclosureMockups.open) return;
           var link = document.querySelector('.mockup-link[data-mockup="' + s.mockupId + '"]');
           if (!link) return;
-          var url = link.getAttribute("href");
-          var chromeless =
-            link.getAttribute("data-mockup-chrome") === "chromeless" || !!s.mockupChromeless;
-          if (chromeless && chromelessIframe) {
-            setViewportMode(true);
-            chromelessIframe.src = url;
-            iframe.src = "about:blank";
-          } else {
-            setViewportMode(false);
-            iframe.src = url;
-            if (chromelessIframe) chromelessIframe.src = "about:blank";
-          }
           mockupLinks.forEach(function (l) {
             l.classList.toggle("is-active", l === link);
           });
-          placeholder.hidden = true;
         }
 
         function syncOverviewVisibility() {
@@ -557,23 +634,20 @@
         }
 
         function clearMockup() {
-          iframe.src = "about:blank";
-          if (chromelessIframe) chromelessIframe.src = "about:blank";
-          setViewportMode(false);
           mockupLinks.forEach(function (l) {
             l.classList.remove("is-active");
           });
-          placeholder.hidden = false;
+          /* Do not set iframe src to about:blank — that renders a visible blank mockup:
+          iframe.src = "about:blank";
+          if (chromelessIframe) chromelessIframe.src = "about:blank";
+          */
+          applyActiveMockupViewport();
         }
 
         window.clearVstChromelessMockup = function () {
           clearMockup();
           persistShellState();
         };
-
-        function mockupsSectionOpen() {
-          return disclosureMockups && disclosureMockups.open;
-        }
 
         function applyLayout() {
           var wide = mq.matches;
@@ -623,6 +697,9 @@
             syncOverviewVisibility();
             syncNavDensity();
             applyLayout();
+            if (d === disclosureMockups && disclosureMockups && disclosureMockups.open) {
+              applyActiveMockupViewport();
+            }
             persistShellState();
           });
         });
@@ -670,6 +747,7 @@
             : defaultMockupSizeKey();
         applyMockupSize(sizeKey);
         restoreMockupFromState(initialShell);
+        applyActiveMockupViewport();
         if (initialShell) {
           persistShellState();
         }
@@ -708,22 +786,11 @@
           link.addEventListener("click", function (e) {
             if (!mockupsSectionOpen()) return;
             e.preventDefault();
-            var url = link.getAttribute("href");
-            var chromeless = link.getAttribute("data-mockup-chrome") === "chromeless";
-            if (chromeless && chromelessIframe) {
-              setViewportMode(true);
-              chromelessIframe.src = url;
-              iframe.src = "about:blank";
-            } else {
-              setViewportMode(false);
-              iframe.src = url;
-              if (chromelessIframe) chromelessIframe.src = "about:blank";
-            }
             mockupLinks.forEach(function (l) {
               l.classList.remove("is-active");
             });
             link.classList.add("is-active");
-            placeholder.hidden = true;
+            applyActiveMockupViewport();
             persistShellState();
           });
         });
