@@ -17,36 +17,36 @@ flowchart LR
 flowchart TB
   menuRoot[MenuRoot]
   mainMenu[Main]
-  controlsMenu[Controls]
+  examplePluginsMenu[ExamplePlugins]
   historyMenu[History]
   exportMenu[Export]
   settingsMenu[Settings]
   helpMenu[Help]
   menuRoot --> mainMenu
-  menuRoot --> controlsMenu
+  menuRoot --> examplePluginsMenu
   menuRoot --> historyMenu
   menuRoot --> exportMenu
   menuRoot --> settingsMenu
   menuRoot --> helpMenu
 ```
 
-## Controls Screen (desktop-focused)
+## ExamplePlugins Screen
 
 ```mermaid
 flowchart TB
-  controlsHeader[ControlsHeader]
-  paramsCol[ParametersAccordion]
-  canvasSplit[SplitCanvasTwoTiles]
-  controlsHeader --> paramsCol
-  controlsHeader --> canvasSplit
-  tileA[TileA_Oscillator_ChromePlusWidgets]
-  tileB[TileB_FilterEnv_ChromePlusWidgets]
-  canvasSplit --> tileA
-  canvasSplit --> tileB
+  epHeader[ExamplePluginsHeader]
+  chainMenu[PluginChainMenu]
+  win1[Window_Utility]
+  win2[Window_Pan]
+  win3[Window_EQ]
+  win4[Window_Saturator]
+  epHeader --> chainMenu
+  epHeader --> win1 --> win2 --> win3 --> win4
+  chainMenu -.->|anchors| win1
 ```
 
-- **Narrow iframe:** parameters stack above canvas; tiles stack or sit in one column.
-- **Desktop iframe (960×600):** parameters column + two tiles side by side; minimized/Ableton sizes out of scope for this layout.
+- **Desktop / wide viewport:** chain menu on the left; Utility, Pan, EQ, Saturator as stacked plugin windows on the right (blank canvas + centered title each).
+- **Mobile / narrow:** menu first, then the same windows stacked vertically.
 
 ## Settings Screen Skeleton
 

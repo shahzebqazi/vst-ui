@@ -45,7 +45,7 @@
         </tr>
         <tr>
           <td>Mockups</td>
-          <td>Screens: Main, Controls, Presets, Export, Settings, Help → <code>mockups/</code>.</td>
+          <td>Screens: Main, ExamplePlugins, Presets, Export, Settings, Help → <code>mockups/</code>.</td>
         </tr>
         <tr>
           <td>Documents</td>
@@ -76,8 +76,8 @@
     <h3>3.3 Mockup pages</h3>
     <ul>
       <li
-        >Each file under <code>mockups/</code> remains self-contained for iframe embedding; shared
-        <code>mockup-chrome.css</code> supplies the Badass Music brand bar and symmetric screen nav.</li
+        >Mockup HTML under <code>mockups/</code> is iframe-only: blank light-gray canvas with a single
+        centered icon via shared <code>blank-mockup.css</code> (no in-frame chrome or copy).</li
       >
       <li>Prefer semantic HTML and focus order matching visual order.</li>
     </ul>
@@ -144,12 +144,11 @@
       </tbody>
     </table>
 
-    <h2>7. Brand &amp; launch imagery</h2>
+    <h2>7. Mockup placeholders</h2>
     <p>
-      The <strong>standalone launch landing page</strong> (full-screen image while the standalone app
-      starts) is mocked on <strong>Main</strong> (<code>mockups/main.html</code>). Tab/site mark:
-      <code>assets/favicon.svg</code>. Additional icons, logos, and marketing art are product TBD;
-      this guide does not reproduce the Main launch screen.
+      Each screen file under <code>mockups/</code> is a minimal placeholder (centered icon only).
+      Product branding, launch imagery, and real layouts are TBD. Site favicon:
+      <code>assets/favicon.svg</code>.
     </p>
 
     <p class="doc-footer" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">

@@ -136,28 +136,17 @@
                   <span class="stack-tile__glyph" aria-hidden="true">&#xf015;</span>
                   <span class="stack-tile__copy">
                     <span class="stack-tile__title">Main</span>
-                    <span class="stack-tile__desc"
-                      >Landing, assets, standalone launch vs DAW.</span
-                    >
-                    <span
-                      class="stack-tile__launch-thumb"
-                      aria-hidden="true"
-                      title="Standalone launch image (shown in mockup; not in DAW)"
-                    ></span>
                   </span>
                 </a>
                 <a
                   class="stack-tile stack-tile--link mockup-link"
                   href="mockups/capture-modes.html"
                   target="mockupViewport"
-                  data-mockup="capture-modes"
+                  data-mockup="example-plugins"
                 >
                   <span class="stack-tile__glyph" aria-hidden="true">&#xf1de;</span>
                   <span class="stack-tile__copy">
-                    <span class="stack-tile__title">Examples</span>
-                    <span class="stack-tile__desc"
-                      >Reference UIs and control patterns.</span
-                    >
+                    <span class="stack-tile__title">ExamplePlugins</span>
                   </span>
                 </a>
                 <a
@@ -290,12 +279,6 @@
         <p class="mockup-placeholder" id="mockup-placeholder">
           Choose a screen under <strong>Mockups</strong> to load a preview.
         </p>
-        <p class="mockup-context" id="mockup-context" hidden>
-          <strong>Main</strong> is the <strong>standalone launch landing page</strong>: the full-screen
-          image users see while the <strong>standalone application</strong> is starting. If the user
-          opens the plugin <strong>inside a DAW</strong>, this screen usually <strong>does not appear</strong>
-          — the editor loads directly in the plugin window.
-        </p>
       </section>
     </main>
 
@@ -308,7 +291,6 @@
         var phoneFrame = document.getElementById("phone-frame");
         var iframe = document.getElementById("mockup-iframe");
         var placeholder = document.getElementById("mockup-placeholder");
-        var mockupContext = document.getElementById("mockup-context");
         var themeButtons = document.querySelectorAll("[data-theme]");
         var sizeButtons = document.querySelectorAll("[data-mockup-size]");
         var mockupLinks = document.querySelectorAll(".mockup-link");
@@ -346,13 +328,6 @@
             l.classList.remove("is-active");
           });
           placeholder.hidden = false;
-          if (mockupContext) mockupContext.hidden = true;
-        }
-
-        function setMockupContextForLink(link) {
-          if (!mockupContext) return;
-          var isMain = link && link.getAttribute("data-mockup") === "main";
-          mockupContext.hidden = !isMain;
         }
 
         function mockupsSectionOpen() {
@@ -473,7 +448,6 @@
             });
             link.classList.add("is-active");
             placeholder.hidden = true;
-            setMockupContextForLink(link);
           });
         });
       })();
