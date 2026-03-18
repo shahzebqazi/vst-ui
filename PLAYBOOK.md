@@ -1,58 +1,99 @@
-# Capture Plugin Documentation and Mockup Playbook
+# AI agent playbook — VST UI mockups repository
 
-This playbook defines an execution workflow in Cursor for generating and maintaining Capture Plugin requirements, mockups, diagrams, and HTML previews.
+Instructions for **AI coding agents** (e.g. Cursor) working in this repo. Follow these rules unless the user explicitly overrides them.
 
-## Working Mode
+---
 
-- Work in Cursor ([cursor.com](https://cursor.com)).
-- Use this repository as the source of truth.
-- Apply one logical change at a time.
-- After each logical change, commit and push.
+## 1. Agent conduct
 
-## Phase 0: Instantiate Repository
+### 1.1 Ask before guessing
 
-Run this phase once when starting a new project from an empty folder.
+- If requirements are **ambiguous**, **contradictory**, or **missing**, **ask the user** for clarification instead of inventing product decisions.
+- Offer **at most two concrete options** when proposing a choice, then wait for the user’s answer.
+- Do not assume hosting URLs, menu names, or scope changes without confirmation when the user’s message is unclear.
 
-1. Initialize git with `main`.
-2. Add minimal scaffold (`README.md`, `.gitignore`).
-3. Commit the scaffold.
-4. Create remote repository with `gh repo create ... --source=. --remote=origin --push` or create in GitHub UI and add remote manually.
-5. Confirm `main` tracks `origin/main`.
+### 1.2 Complete the Git workflow when work is done
 
-## Commit and Push Rule (Mandatory)
+When you finish a **coherent unit of work** (a feature, fix, or doc update the user requested):
 
-After every code or documentation modification:
+1. **`git add`** — stage only paths you changed (avoid unrelated files).
+2. **`git commit`** — use a **clear, scoped message** (see §4).
+3. **`git push origin main`** — publish to GitHub.
 
-1. `git add` only touched paths.
-2. `git commit` with a precise message.
-3. `git push origin main`.
+**Do not** leave completed work uncommitted or unpushed unless the user asked you not to push (e.g. local-only experiment).
 
-Do not batch unrelated changes into a single commit unless explicitly requested by the user.
+If **push fails** (auth, network, conflicts): **stop**, report the error and suggested next steps; do not claim the work is “shipped.”
 
-If push fails, stop and report the failure before proceeding.
+### 1.3 Commits: one logical change per commit
 
-## Cursor Model Traceability Rule (Mandatory)
+- Prefer **one commit per logical change**; avoid mixing unrelated edits.
+- If the user asks for a **single commit** with everything, comply.
 
-Every commit message must include the model tag line in the body:
+---
 
-`Agent-model: <ModelDisplayName>`
+## 2. Design: responsive & aesthetic principles
 
-Use the current model display name shown in Cursor.
+Apply these when editing **`index.html`**, **`styles/backgrounds.css`**, **`mockups/*.html`**, or **`documents/*.html`**.
 
-## Commit Message Convention
+### 2.1 Responsive
 
-- `docs:` for markdown documentation changes
-- `mockups:` for HTML mockup changes
-- `style:` for CSS changes
-- `chore:` for repository/setup changes
+- Treat the **mockup viewport** as **390×844** (mobile-first reference); shell layout should **degrade gracefully** on smaller desktops and narrow windows.
+- Use **flex/grid** with **wrap** and sensible **`min-width`** / **`max-width`** so controls do not overflow the left panel.
+- Prefer **relative units** (`rem`, `%`, `min()`, `clamp()`) where appropriate; avoid fixed widths that break on small screens.
+- Ensure **touch targets** for interactive controls are at least ~**44×44px** where possible.
+- Test mentally: **320px-wide** panel, **stacked shell** on narrow viewports (existing `@media` patterns in `backgrounds.css`).
 
-Examples:
+### 2.2 Aesthetic
 
-- `docs: add menu inventory worksheet`
-- `mockups: add settings screen structure`
-- `style: add blueprint paper and dot backgrounds`
+- Keep **visual hierarchy** clear: section titles → grouped controls → primary viewport.
+- Maintain **consistent spacing**, **border-radius**, and **typography** with existing Nerd Font / chrome patterns unless the user requests a redesign.
+- **Contrast**: text and controls must remain readable on **Blueprint**, **Paper**, and **Dark Dots** themes (including translucent left panel).
+- **Motion**: subtle transitions only; avoid distracting animation.
+- **Accessibility**: preserve **`aria-label`**, **`aria-labelledby`**, focus styles (`:focus-visible`), and semantic HTML when changing buttons or navigation.
 
-## Deliverables
+---
+
+## 3. GitHub & GitHub Pages
+
+### 3.1 Repository hygiene
+
+- **Branch:** default work on **`main`** unless the user specifies a feature branch.
+- **README** and **`docs/REQUIREMENTS.md`** should stay aligned with **canonical live URL** and document structure when those change.
+- Do not commit **secrets** (tokens, `.env` with real credentials). Use `.gitignore` for local-only files.
+
+### 3.2 GitHub Pages (static site)
+
+- Site is **static HTML/CSS/JS**; **no build step required** for basic changes.
+- Publishing typically uses **`main`** with site root at repo root (or `/docs` if configured that way).
+- After deploy-affecting changes, ensure:
+  - **`index.html`** exists at the published root.
+  - **Relative paths** (`styles/`, `mockups/`, `documents/`) work from the **deployed base URL** (including path prefix if the site lives under e.g. `/vst-ui/`).
+- **Canonical URL** for this project: **`https://sqazi.sh/vst-ui/`** — keep **`index.html`** `<link rel="canonical">` and docs in sync when URL policy changes.
+
+### 3.3 Optional: commit message metadata
+
+When the environment allows, append to the commit body:
+
+`Agent-model: <display name>`
+
+---
+
+## 4. Commit message convention
+
+| Prefix    | Use for                          |
+| --------- | -------------------------------- |
+| `docs:`   | Markdown under `docs/`           |
+| `mockups:`| HTML under `mockups/`           |
+| `style:`  | CSS / visual shell               |
+| `feat:`   | New user-facing behavior         |
+| `fix:`    | Bug fixes                        |
+| `chore:`  | Repo config, cleanup             |
+
+Examples: `docs: sync MENU_INVENTORY`, `mockups: tighten settings layout`, `style: theme tooltip contrast`.
+
+---
+
+## 5. Deliverables (source of truth)
 
 - `docs/REQUIREMENTS.md`
 - `docs/MENU_INVENTORY.md`
@@ -60,91 +101,79 @@ Examples:
 - `docs/DIAGRAMS.md`
 - `styles/backgrounds.css`
 - `index.html`
-- `mockups/*.html` for each top-level menu
+- `mockups/*.html` per screen
+- `documents/*.html` — executive, CTO, design specs as linked from the shell
 
-## Prompt Workflow (Mandatory)
+---
 
-Use this exact two-round solicitation workflow before finalizing requirements.
+## 6. Prompt workflow (requirements depth)
 
-### Prompt A: Top-Level Menus
+Use this **two-round** workflow when defining or overhauling menus (unless the user waives it).
 
-Ask the user:
+### Prompt A: Top-level menus
 
-`Provide your final top-level menu list (add, rename, remove as needed).`
+Ask the user for the **final** top-level menu list (add / rename / remove). Baseline reference:
 
-Starter baseline:
+- Home · Capture Modes · History · Export · Settings · Help  
+  (or current **VST UI mockups** labels: Main, Controls, Presets, etc. — follow repo reality.)
 
-- Home
-- Capture Modes
-- History
-- Export
-- Settings
-- Help
+### Prompt B: Items per menu
 
-### Prompt B: Items Per Menu
+For each menu:
 
-For each final menu from Prompt A, ask:
+`Under "<MenuName>", list every row, tab, section, and action. Mark MUST or NICE.`
 
-`Under "<MenuName>", list every row, tab, section, and action the user should see. Mark each as MUST or NICE.`
+### Completion gate
 
-Do this for every menu. No exceptions.
+`docs/REQUIREMENTS.md` is incomplete until `docs/MENU_INVENTORY.md` has real items or `N/A`, and core menu TODOs are resolved.
 
-## Completion Gate for Requirements
+---
 
-`docs/REQUIREMENTS.md` is not considered complete until:
+## 7. Artifact build order
 
-- Every menu in `docs/MENU_INVENTORY.md` has items, or explicit `N/A`.
-- No unresolved `TODO` markers remain for core menu structure.
+1. `docs/MENU_INVENTORY.md`
+2. `docs/REQUIREMENTS.md`
+3. `docs/MOCKUPS.md` / `docs/DIAGRAMS.md` (Mermaid)
+4. `index.html`, `styles/backgrounds.css`, `mockups/*.html`
+5. Verify navigation + iframe target + responsive shell
 
-## Artifact Build Order
+**After each step:** commit and push (per §1.2).
 
-1. Create and fill `docs/MENU_INVENTORY.md`.
-2. Sync finalized menu structure into `docs/REQUIREMENTS.md`.
-3. Update `docs/MOCKUPS.md` and `docs/DIAGRAMS.md` Mermaid blocks to match menu structure.
-4. Build or update `index.html`, `styles/backgrounds.css`, and `mockups/*.html`.
-5. Verify the shell navigation and right-pane rendering.
+---
 
-Commit and push after each step.
+## 8. Sync: inventory → docs → HTML
 
-## Sync Procedure: Inventory to Docs and HTML
+When menus change:
 
-Whenever menu items change, run this sequence in order:
+1. `MENU_INVENTORY.md` → commit + push  
+2. `REQUIREMENTS.md` → commit + push  
+3. Mermaid docs → commit + push  
+4. `mockups/*.html` + `index.html` → commit + push  
 
-1. Update the relevant menu section in `docs/MENU_INVENTORY.md`, then commit and push.
-2. Mirror those menu changes into `docs/REQUIREMENTS.md`, then commit and push.
-3. Update Mermaid structures in `docs/MOCKUPS.md` and `docs/DIAGRAMS.md`, then commit and push.
-4. Update corresponding screen content in `mockups/*.html` and any shell navigation references in `index.html`, then commit and push.
+Do not claim sync done until all layers are updated **and** pushed.
 
-Do not skip steps, and do not mark the sync complete until every updated layer has been committed and pushed.
+---
 
-## HTML Mockup Rules
+## 9. HTML mockup rules
 
-- Left column: menu list.
-- Right column: phone-sized viewport (`390x844` suggested).
-- Clicking a left menu item loads its corresponding mockup page.
-- Mockups should represent only defined menu items.
+- Shell: **left** controls, **right** phone frame (**390×844** iframe).
+- Mockup pages should match **defined** menu / screen inventory.
+- Theme switcher and mockup controls: follow **§2** (responsive + aesthetic).
 
-## Background Styles
+---
 
-Implement these CSS-only options in `styles/backgrounds.css`:
+## 10. Verification before “done”
 
-1. Blueprint: blue background with white grid lines.
-2. Paper: paper-toned background with brown grid lines.
-3. Dark Dots: black background with dot pattern.
+1. Links and paths resolve for **GitHub Pages** base path.
+2. Mermaid blocks valid (if touched).
+3. Changes **committed and pushed**.
+4. User asked for clarification where needed (§1.1).
 
-## Verification Checklist
+---
 
-Before declaring a step complete:
+## Phase 0: New repo (once)
 
-1. Confirm files exist and links are correct.
-2. Confirm Mermaid syntax is valid.
-3. Confirm each changed step was committed and pushed.
-4. Confirm model tag is present in commit body.
-
-## GitHub Pages
-
-For static publishing:
-
-- Use `main` branch and either root or `/docs` source.
-- Ensure the served path contains `index.html`.
-- Record the live URL in `docs/REQUIREMENTS.md` when available.
+1. `git init` on **`main`**
+2. Minimal `README.md`, `.gitignore`
+3. Commit; add remote; **`git push -u origin main`**
+4. Configure GitHub Pages if applicable; record live URL in `docs/REQUIREMENTS.md`
