@@ -30,6 +30,12 @@ Top-level menus (subject to Prompt A updates):
 
 Menu item definitions are maintained in `docs/MENU_INVENTORY.md`.
 
+Published design documents (under **Documents** on the live site):
+
+- **Executive overview** — program & infrastructure (executive audience).
+- **CTO requirements** — technical & hosting requirements for engineering leadership.
+- **Design specification** — UX/UI and frontend/backend handoff.
+
 ## Prompt Gates
 
 Requirements are not final until:

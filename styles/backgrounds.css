@@ -298,6 +298,66 @@ body {
   speak: none;
 }
 
+/* Icon-only theme + mockup: label on hover */
+.chrome-btn--icon-only {
+  position: relative;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  flex: 1 1 calc(33.333% - 6px);
+}
+
+.mockup-row .chrome-btn--icon-only {
+  flex: 1 1 calc(33.333% - 6px);
+}
+
+.chrome-btn--icon-only .btn-label {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s ease, visibility 0.12s ease;
+  background: rgba(20, 24, 32, 0.95);
+  color: #f0f4f8;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+}
+
+.chrome-btn--icon-only .btn-label::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-top-color: rgba(20, 24, 32, 0.95);
+}
+
+.chrome-btn--icon-only:hover .btn-label,
+.chrome-btn--icon-only:focus-visible .btn-label {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bg-dark-dots .chrome-btn--icon-only .btn-label {
+  background: rgba(240, 244, 248, 0.96);
+  color: #111;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.bg-dark-dots .chrome-btn--icon-only .btn-label::after {
+  border-top-color: rgba(240, 244, 248, 0.96);
+}
+
 .phone-frame {
   width: 390px;
   height: 844px;

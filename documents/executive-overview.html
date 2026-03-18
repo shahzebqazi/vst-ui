@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Executive overview — VST UI mockups</title>
+    <link rel="stylesheet" href="doc-styles.css" />
+  </head>
+  <body>
+    <h1>Executive overview</h1>
+    <p class="meta">
+      <strong>Classification:</strong> Internal · <strong>Version:</strong> 1.0 ·
+      <strong>Audience:</strong> Leadership, sponsors ·
+      <strong>Primary focus:</strong> Infrastructure &amp; program alignment
+    </p>
+
+    <div class="callout">
+      This is the <strong>main program document</strong> for the VST UI mockups initiative.
+      It frames hosting, delivery model, and governance. Technical depth for engineering
+      leadership is in <a href="requirements-cto.html">CTO requirements</a>; product
+      experience detail is in the <a href="design-specification.html">design specification</a>.
+    </div>
+
+    <h2>1. Executive summary</h2>
+    <p>
+      The VST UI mockups program maintains a <strong>static, version-controlled design surface</strong>
+      published at <strong>https://sqazi.sh/vst-ui/</strong>, backed by a public Git repository.
+      The objective is to align stakeholders on screen inventory, visual themes, and written
+      specifications without committing to runtime plugin infrastructure in this phase.
+    </p>
+
+    <h2>2. Strategic objectives</h2>
+    <ol>
+      <li>Single canonical URL for mockups and design artifacts (low friction for reviews).</li>
+      <li>Infrastructure minimalism: static hosting, no application servers, predictable cost.</li>
+      <li>Traceability: every published view maps to committed HTML/CSS and <code>docs/</code>.</li>
+      <li>Scalable documentation model (executive → CTO → design) without duplication of truth.</li>
+    </ol>
+
+    <h2>3. Infrastructure &amp; delivery (executive view)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Decision</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Source of truth</td>
+          <td>Git repository (<code>main</code>); peer review via standard PR workflow.</td>
+        </tr>
+        <tr>
+          <td>Publication</td>
+          <td>Static site generation implied (HTML/CSS/JS only); deployed to user-facing URL.</td>
+        </tr>
+        <tr>
+          <td>Public entry</td>
+          <td><code>https://sqazi.sh/vst-ui/</code> (canonical); infrastructure path documented for CTO.</td>
+        </tr>
+        <tr>
+          <td>Availability</td>
+          <td>Aligned with hosting provider SLA (typically 99.9%+ for static CDN-class services).</td>
+        </tr>
+        <tr>
+          <td>Data &amp; PII</td>
+          <td>No user accounts or persistent user data in this surface; low regulatory surface area.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>4. Governance</h2>
+    <ul>
+      <li><strong>Product / design</strong> owns mockup IA, labels, and design specification content.</li>
+      <li><strong>Engineering leadership (CTO)</strong> owns technical requirements, deploy path, and security posture.</li>
+      <li><strong>Executive</strong> approves scope changes that imply new infrastructure or vendor commitments.</li>
+    </ul>
+
+    <h2>5. Investment &amp; risk (summary)</h2>
+    <ul>
+      <li><strong>Cost:</strong> Dominated by engineering time; marginal hosting cost for static assets.</li>
+      <li><strong>Key risk:</strong> Drift between published site and repo if deploy automation is bypassed—mitigated by single-branch publish discipline.</li>
+      <li><strong>Dependency risk:</strong> Reliance on DNS and TLS for custom domain; documented under CTO requirements.</li>
+    </ul>
+
+    <h2>6. Roadmap (indicative)</h2>
+    <ol>
+      <li>Maintain living mockups and three document streams (this overview, CTO requirements, design spec).</li>
+      <li>Expand mockup set as product definition stabilizes.</li>
+      <li>Future phase (out of scope here): optional integration with real VST shell or design tokens pipeline.</li>
+    </ol>
+
+    <p class="doc-footer" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+      Related: <a href="requirements-cto.html">CTO requirements</a> ·
+      <a href="design-specification.html">Design specification</a>
+    </p>
+    <a class="back" href="../index.html">← Back to VST UI Mockups</a>
+  </body>
+</html>
