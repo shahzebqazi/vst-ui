@@ -128,6 +128,9 @@
     if (s.mockupId === "components-list") {
       s.mockupId = "components-chromeless";
     }
+    /* Mockup selection should never auto-restore. */
+    s.mockupId = null;
+    s.mockupChromeless = false;
     return s;
   }
 
@@ -138,17 +141,13 @@
   }
 
   function persistShellState() {
-    var activeMockup = document.querySelector(".mockup-link.is-active");
     writeShellState({
       disclosureUi: !!(disclosureUi && disclosureUi.open),
       disclosureMockups: !!(disclosureMockups && disclosureMockups.open),
       disclosureDocs: !!(disclosureDocs && disclosureDocs.open),
-      mockupId: activeMockup ? activeMockup.getAttribute("data-mockup") : null,
-      mockupChromeless:
-        !!(
-          activeMockup &&
-          activeMockup.getAttribute("data-mockup-chrome") === "chromeless"
-        ),
+      /* Never persist a selected mockup: opening Mockups must stay blank until click. */
+      mockupId: null,
+      mockupChromeless: false,
       mockupSize: phoneFrame.dataset.size || defaultMockupSizeKey(),
     });
   }
@@ -298,8 +297,13 @@
       syncOverviewVisibility();
       syncNavDensity();
       applyLayout();
-      if (d === disclosureMockups && disclosureMockups && disclosureMockups.open) {
-        applyActiveMockupViewport();
+      if (d === disclosureMockups && disclosureMockups) {
+        if (disclosureMockups.open) {
+          /* Opening Mockups should show only the placeholder until an explicit click. */
+          clearMockup();
+        } else {
+          clearMockup();
+        }
       }
       persistShellState();
     });
@@ -347,7 +351,7 @@
       ? initialShell.mockupSize
       : defaultMockupSizeKey();
   applyMockupSize(sizeKey);
-  restoreMockupFromState(initialShell);
+  /* Never restore a previously selected mockup on page load. */
   applyActiveMockupViewport();
   if (initialShell) {
     persistShellState();
