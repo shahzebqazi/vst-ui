@@ -167,9 +167,11 @@
     if (chromeless && chromelessIframe) {
       setViewportMode(true);
       chromelessIframe.src = url;
+      iframe.src = "about:blank";
     } else {
       setViewportMode(false);
       iframe.src = url;
+      if (chromelessIframe) chromelessIframe.src = "about:blank";
     }
   }
 
