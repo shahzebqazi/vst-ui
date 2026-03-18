@@ -44,4 +44,4 @@ Requirements are not final until:
 - Ensure published path contains `index.html`.
 - Record live URL here once configured.
 
-Live URL: `TODO`
+Live URL: `https://sqazi.sh/vst-ui/`
