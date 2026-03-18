@@ -41,7 +41,7 @@ Design and implement the **Controls** mockup as a self-contained HTML page that 
 
 - Plugin metaphor (amp modeler vs synth vs FX generic).
 - Density: few large controls vs many small parameters.
-- Whether **Main** (`mockups/home.html`) should link or cross-nav to Controls (out of scope unless user asks).
+- Whether **Main** (`mockups/main.html`) should link or cross-nav to Controls (out of scope unless user asks).
 
 ## Do not
 

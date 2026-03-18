@@ -16,13 +16,13 @@ flowchart LR
 ```mermaid
 flowchart TB
   menuRoot[MenuRoot]
-  homeMenu[Home]
+  mainMenu[Main]
   controlsMenu[Controls]
   historyMenu[History]
   exportMenu[Export]
   settingsMenu[Settings]
   helpMenu[Help]
-  menuRoot --> homeMenu
+  menuRoot --> mainMenu
   menuRoot --> controlsMenu
   menuRoot --> historyMenu
   menuRoot --> exportMenu

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://sqazi.sh/vst-ui/" />
     <title>VST UI Mockups</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles/backgrounds.css" />
   </head>
   <body class="bg-blueprint">
@@ -128,16 +129,21 @@
               <div class="stack-list" role="group" aria-label="Screen mockups">
                 <a
                   class="stack-tile stack-tile--link mockup-link"
-                  href="mockups/home.html"
+                  href="mockups/main.html"
                   target="mockupViewport"
-                  data-mockup="home"
+                  data-mockup="main"
                 >
                   <span class="stack-tile__glyph" aria-hidden="true">&#xf015;</span>
                   <span class="stack-tile__copy">
                     <span class="stack-tile__title">Main</span>
                     <span class="stack-tile__desc"
-                      >Primary device chrome and landing layout.</span
+                      >Landing, assets, standalone launch vs DAW.</span
                     >
+                    <span
+                      class="stack-tile__launch-thumb"
+                      aria-hidden="true"
+                      title="Standalone launch image (shown in mockup; not in DAW)"
+                    ></span>
                   </span>
                 </a>
                 <a
@@ -389,9 +395,14 @@
           mq.addListener(applyLayout);
         }
 
+        function defaultMockupSizeKey() {
+          var narrow = window.matchMedia("(max-width: 767px)").matches;
+          return narrow ? "phone" : "desktop";
+        }
+
         syncOverviewVisibility();
         applyLayout();
-        applyMockupSize("phone");
+        applyMockupSize(defaultMockupSizeKey());
 
         themeButtons.forEach(function (btn) {
           btn.addEventListener("click", function () {

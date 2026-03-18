@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main — VST UI mockups</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --card: #fff;
+        --border: #d8dee8;
+        --text: #1a1f2e;
+        --muted: #5c6578;
+        --accent: #1a4a7a;
+        --splash: linear-gradient(145deg, #1a4a7a 0%, #2d6aaa 45%, #1e3d5c 100%);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+        font-size: 15px;
+        line-height: 1.45;
+        color: var(--text);
+        background: var(--bg);
+      }
+      main {
+        padding: 16px;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 1.25rem;
+        margin: 0 0 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .web-tab-icons {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .web-tab-icons figcaption {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 6px;
+        text-align: center;
+      }
+      .icon-web {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--splash);
+        display: grid;
+        place-items: center;
+        box-shadow: 0 4px 12px rgba(26, 74, 122, 0.35);
+      }
+      .icon-web svg {
+        width: 22px;
+        height: 22px;
+        fill: #c9e4ff;
+      }
+      .icon-tab {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        background: var(--splash);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .overview {
+        margin: 0 0 20px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+      .overview strong {
+        color: var(--text);
+      }
+      h2 {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin: 20px 0 10px;
+        font-weight: 700;
+      }
+      .asset-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .asset-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        text-align: center;
+      }
+      .asset-card .slot {
+        margin: 0 auto 10px;
+        display: grid;
+        place-items: center;
+      }
+      .asset-card h3 {
+        margin: 0 0 4px;
+        font-size: 0.82rem;
+      }
+      .asset-card p {
+        margin: 0;
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+      /* Desktop app icon — window + knob */
+      .ico-desktop {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #2a3140 0%, #1a1f28 100%);
+        border: 2px solid #3d4454;
+        position: relative;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+      .ico-desktop::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        height: 6px;
+        background: #3d4454;
+        border-radius: 2px;
+      }
+      .ico-desktop::after {
+        content: "";
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 3px solid #5b8cff;
+        box-shadow: 0 0 0 2px #232730;
+      }
+      /* Phone app icon */
+      .ico-phone {
+        width: 48px;
+        height: 72px;
+        border-radius: 10px;
+        background: linear-gradient(180deg, #2d333d 0%, #1a1d24 100%);
+        border: 3px solid #4a5568;
+        position: relative;
+      }
+      .ico-phone::before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 6px;
+        right: 6px;
+        bottom: 14px;
+        background: linear-gradient(180deg, #1a4a7a 0%, #0d2844 100%);
+        border-radius: 4px;
+      }
+      .ico-phone::after {
+        content: "";
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 18px;
+        height: 3px;
+        background: #4a5568;
+        border-radius: 2px;
+      }
+      .ico-placeholder {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        border: 2px dashed var(--border);
+        background: repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 4px,
+          rgba(26, 74, 122, 0.06) 4px,
+          rgba(26, 74, 122, 0.06) 8px
+        );
+        color: var(--muted);
+        font-size: 10px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 4px;
+      }
+      .launch-block {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        margin-top: 8px;
+      }
+      .launch-splash {
+        aspect-ratio: 9 / 16;
+        max-height: 280px;
+        margin: 0 auto;
+        background: var(--splash);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        text-align: center;
+        color: #e8f0ff;
+      }
+      .launch-splash .logo-mark {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        margin-bottom: 16px;
+        display: grid;
+        place-items: center;
+      }
+      .launch-splash .logo-mark svg {
+        width: 36px;
+        height: 36px;
+        fill: currentColor;
+      }
+      .launch-splash .title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin: 0 0 8px;
+      }
+      .launch-splash .sub {
+        font-size: 0.85rem;
+        opacity: 0.85;
+        margin: 0;
+      }
+      .launch-copy {
+        padding: 14px 16px;
+        font-size: 0.88rem;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+      }
+      .launch-copy strong {
+        color: var(--text);
+      }
+      .style-prompt {
+        margin-top: 20px;
+        padding: 14px 16px;
+        background: #fff9e6;
+        border: 1px solid #e8d48a;
+        border-radius: 12px;
+        font-size: 0.9rem;
+      }
+      .style-prompt strong {
+        display: block;
+        color: #6b5900;
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>
+        <span class="icon-web" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+            />
+          </svg>
+        </span>
+        Main
+      </h1>
+
+      <div class="web-tab-icons" role="group" aria-label="Web and browser tab branding">
+        <figure style="margin: 0">
+          <div class="icon-web" title="Web / PWA mark (example 40×40 display)">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+              />
+            </svg>
+          </div>
+          <figcaption>Web icon</figcaption>
+        </figure>
+        <figure style="margin: 0">
+          <div class="icon-tab" title="Browser tab favicon (32×32)"></div>
+          <figcaption>Tab icon</figcaption>
+        </figure>
+      </div>
+
+      <p class="overview">
+        This screen is part of an <strong>extensible VST UI mockup library</strong>: portable HTML/CSS
+        patterns for plugin surfaces (phone, minimized host strip, desktop window). Product teams can
+        swap screens and tokens without rebuilding the shell.
+      </p>
+
+      <h2>Target assets (placeholders)</h2>
+      <div class="asset-grid">
+        <div class="asset-card">
+          <div class="slot ico-desktop" title="Desktop application icon" aria-hidden="true"></div>
+          <h3>Desktop app</h3>
+          <p>Standalone + plugin installer branding.</p>
+        </div>
+        <div class="asset-card">
+          <div class="slot ico-phone" title="Phone application icon" aria-hidden="true"></div>
+          <h3>Phone app</h3>
+          <p>Companion / remote surface.</p>
+        </div>
+        <div class="asset-card">
+          <div class="slot ico-placeholder" title="Reserved">TBD</div>
+          <h3>Feature A</h3>
+          <p>To be defined.</p>
+        </div>
+        <div class="asset-card">
+          <div class="slot ico-placeholder" title="Reserved">TBD</div>
+          <h3>Feature B</h3>
+          <p>To be defined.</p>
+        </div>
+      </div>
+
+      <h2>Standalone launch (splash)</h2>
+      <div class="launch-block">
+        <div class="launch-splash" role="img" aria-label="Standalone app launch screen mockup">
+          <div class="logo-mark">
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path
+                d="M8 22V10h3v4.5h3V10h3v12h-3v-5h-3v5H8zM23 11.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"
+              />
+            </svg>
+          </div>
+          <p class="title">Your plugin</p>
+          <p class="sub">Standalone launch — mockup only</p>
+        </div>
+        <div class="launch-copy">
+          <strong>DAW users:</strong> When the instrument runs <strong>inside a host</strong> (Ableton,
+          Logic, etc.), there is typically <strong>no full-screen launch image</strong>—the UI opens
+          directly in the plugin window. Reserve splash / hero art for standalone and marketing.
+        </div>
+      </div>
+
+      <div class="style-prompt">
+        <strong>What visual style do you want?</strong>
+        Before locking pixels, decide: e.g. <em>flat minimal</em> vs <em>skeuomorphic hardware</em> vs
+        <em>brutalist / high-contrast</em>, and whether chrome matches host (neutral) or brand-forward.
+        Reply to your design lead with a reference product or mood board so the mockups can align.
+      </div>
+    </main>
+  </body>
+</html>

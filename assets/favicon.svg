@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="VST UI">
+  <rect width="32" height="32" rx="6" fill="#1a4a7a"/>
+  <path fill="#7eb8ff" d="M8 22V10h3v4.5h3V10h3v12h-3v-5h-3v5H8z"/>
+  <circle cx="23" cy="14" r="2.5" fill="#c9e4ff"/>
+</svg>
