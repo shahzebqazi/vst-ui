@@ -188,6 +188,10 @@ body {
   .app-shell--split-wide.app-shell--nav-compact .right-panel {
     min-height: min(72vh, 780px);
   }
+
+  .app-shell--split-wide.app-shell--nav-compact .right-panel.right-panel--chromeless-active {
+    min-height: 0;
+  }
 }
 
 /* —— Wide + split: menu left, mockup right —— */
@@ -237,6 +241,15 @@ body {
     position: sticky;
     top: 16px;
     overflow: auto;
+  }
+
+  .app-shell--split-wide .right-panel.right-panel--chromeless-active {
+    min-height: 0;
+    overflow: visible;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: relative;
+    top: auto;
   }
 }
 
@@ -823,45 +836,48 @@ body {
   background: #fff;
 }
 
-/* Chromeless mockups: full right column, not inside .phone-frame (see index.html) */
+/* Chromeless: height follows document (no fixed plugin window; no iframe scrollbar) */
 .chromeless-panel {
   display: none;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   align-self: stretch;
   width: 100%;
   min-width: 0;
-  min-height: min(72vh, 820px);
-  max-height: min(88vh, 900px);
-  flex-direction: column;
+  overflow: visible;
 }
 
 .chromeless-panel:not([hidden]) {
-  display: flex;
+  display: block;
 }
 
 .chromeless-panel iframe {
-  flex: 1;
+  display: block;
   width: 100%;
-  min-height: 0;
+  height: 120px;
   border: 0;
   background: transparent;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .app-shell--split-wide .right-panel--chromeless-active {
   align-items: stretch;
   justify-content: flex-start;
+  overflow: visible;
+  min-height: 0;
+  max-height: none;
+}
+
+.app-shell--split-wide.app-shell--nav-compact .right-panel--chromeless-active {
+  min-height: 0;
 }
 
 .app-shell--split-narrow .right-panel--chromeless-active {
   align-items: stretch;
   width: 100%;
   max-width: none;
-}
-
-.app-shell--split-narrow .chromeless-panel {
-  min-height: min(60vh, 640px);
-  max-height: none;
+  overflow: visible;
+  min-height: 0;
 }
 
 .phone-frame--desktop iframe {

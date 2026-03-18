@@ -11,6 +11,8 @@ body {
   margin: 0;
   background: transparent;
   color: #1e293b;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 body {

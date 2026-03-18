@@ -375,6 +375,65 @@
         var disclosureUi = document.getElementById("disclosure-ui");
         var disclosureDocs = document.getElementById("disclosure-docs");
         var mockupFrameClose = document.getElementById("mockup-frame-close");
+        var chromelessResizeObserver = null;
+
+        function disconnectChromelessResizeTracking() {
+          if (chromelessResizeObserver) {
+            chromelessResizeObserver.disconnect();
+            chromelessResizeObserver = null;
+          }
+        }
+
+        function syncChromelessIframeHeight() {
+          if (!chromelessIframe || !chromelessPanel || chromelessPanel.hidden) return;
+          try {
+            var doc = chromelessIframe.contentDocument;
+            if (!doc) return;
+            var loc = doc.location;
+            var href = loc && loc.href ? String(loc.href) : "";
+            if (!href || href.indexOf("about:blank") === 0) {
+              chromelessIframe.style.height = "";
+              return;
+            }
+            var el = doc.documentElement;
+            var b = doc.body;
+            var h = el ? el.scrollHeight : 0;
+            if (b) {
+              h = Math.max(h, b.scrollHeight, b.offsetHeight);
+            }
+            chromelessIframe.style.height = Math.ceil(Math.max(h, 72)) + "px";
+          } catch (err) {}
+        }
+
+        function attachChromelessResizeTracking() {
+          disconnectChromelessResizeTracking();
+          if (!chromelessIframe || chromelessPanel.hidden) return;
+          try {
+            var doc = chromelessIframe.contentDocument;
+            if (!doc || !doc.body || typeof ResizeObserver === "undefined") return;
+            chromelessResizeObserver = new ResizeObserver(function () {
+              syncChromelessIframeHeight();
+            });
+            chromelessResizeObserver.observe(doc.documentElement);
+            chromelessResizeObserver.observe(doc.body);
+          } catch (e) {}
+        }
+
+        if (chromelessIframe) {
+          chromelessIframe.addEventListener("load", function () {
+            requestAnimationFrame(function () {
+              syncChromelessIframeHeight();
+              requestAnimationFrame(function () {
+                syncChromelessIframeHeight();
+                attachChromelessResizeTracking();
+              });
+            });
+          });
+        }
+
+        window.addEventListener("resize", function () {
+          syncChromelessIframeHeight();
+        });
 
         var MOCKUP_SIZES = {
           phone: { w: 390, h: 844, className: "phone-frame--phone" },
@@ -462,6 +521,8 @@
               chromelessPanel.hidden = true;
               chromelessPanel.setAttribute("aria-hidden", "true");
             }
+            disconnectChromelessResizeTracking();
+            if (chromelessIframe) chromelessIframe.style.height = "";
           }
         }
 
