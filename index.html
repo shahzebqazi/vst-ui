@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="styles/backgrounds.css" />
   </head>
   <body class="bg-blueprint">
-    <main class="app-shell">
+    <main
+      class="app-shell app-shell--intro"
+      id="app-shell"
+      data-layout-wide="false"
+      data-layout-split="false"
+    >
       <section class="panel left-panel left-panel--stack" aria-label="Mockup controls">
         <h1 class="app-title app-title--centered">
           <span class="title-icon" aria-hidden="true">&#xf1e6;</span>VST UI Mockups
@@ -41,7 +46,7 @@
             <div class="nav-disclosure__body">
               <p class="nav-disclosure__intro">
                 Each option is a <strong>background modifier</strong>—it only changes the
-                canvas behind the phone frame, not the mockup itself.
+                canvas behind the mockup frame, not the page inside it.
               </p>
               <div class="stack-list" role="group" aria-label="Background modifiers">
                 <button
@@ -82,6 +87,46 @@
                   </span>
                 </button>
               </div>
+              <p class="nav-disclosure__intro nav-disclosure__intro--spaced">
+                <strong>Mockup viewport size</strong>—pick a frame that matches where the UI
+                will appear (phone, DAW rack slot, or desktop plugin window).
+              </p>
+              <div class="stack-list" role="group" aria-label="Mockup viewport size">
+                <button
+                  type="button"
+                  class="stack-tile"
+                  data-mockup-size="phone"
+                  aria-pressed="true"
+                >
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf10b;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Phone (390×844)</span>
+                    <span class="stack-tile__desc"
+                      >Mobile-first preview—tall portrait like a handheld device.</span
+                    >
+                  </span>
+                </button>
+                <button type="button" class="stack-tile" data-mockup-size="ableton" aria-pressed="false">
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf001;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Ableton minimized (340×200)</span>
+                    <span class="stack-tile__desc"
+                      >Compact footprint similar to a device slot / minimized plugin strip in
+                      Ableton-style hosts (approx. rack column width × short height).</span
+                    >
+                  </span>
+                </button>
+                <button type="button" class="stack-tile" data-mockup-size="desktop" aria-pressed="false">
+                  <span class="stack-tile__glyph" aria-hidden="true">&#xf108;</span>
+                  <span class="stack-tile__copy">
+                    <span class="stack-tile__title">Desktop plugin window (960×600)</span>
+                    <span class="stack-tile__desc"
+                      >Wide resizable-GUI style window—typical floating plugin on a large
+                      monitor (fixed size here; real plugins scale with user resize).</span
+                    >
+                  </span>
+                </button>
+              </div>
             </div>
           </details>
 
@@ -90,13 +135,13 @@
               <span class="nav-disclosure__chevron" aria-hidden="true"></span>
               <span class="nav-disclosure__label">Mockups</span>
               <span class="nav-disclosure__hint"
-                >Screen prototypes loaded inside the phone viewport.</span
+                >Screen prototypes loaded inside the mockup frame.</span
               >
             </summary>
             <div class="nav-disclosure__body">
               <div class="stack-list" role="group" aria-label="Screen mockups">
                 <a
-                  class="stack-tile stack-tile--link mockup-link is-active"
+                  class="stack-tile stack-tile--link mockup-link"
                   href="mockups/home.html"
                   target="mockupViewport"
                   data-mockup="home"
@@ -241,39 +286,127 @@
         </div>
       </section>
 
-      <section class="panel right-panel">
-        <div class="phone-frame">
+      <section class="right-panel" id="right-panel" aria-hidden="true">
+        <div class="phone-frame phone-frame--phone" id="phone-frame" data-size="phone">
+          <div class="phone-frame__chrome" aria-hidden="true"></div>
           <iframe
-            title="Mobile mockup viewport"
+            title="Mockup viewport"
             name="mockupViewport"
-            src="mockups/home.html"
+            id="mockup-iframe"
+            src="about:blank"
           ></iframe>
         </div>
+        <p class="mockup-placeholder" id="mockup-placeholder">
+          Choose a screen under <strong>Mockups</strong> to load a preview.
+        </p>
       </section>
     </main>
 
     <script>
       (function () {
+        var WIDE_MQ = "(min-width: 768px)";
+        var mq = window.matchMedia(WIDE_MQ);
+        var shell = document.getElementById("app-shell");
+        var rightPanel = document.getElementById("right-panel");
+        var phoneFrame = document.getElementById("phone-frame");
+        var iframe = document.getElementById("mockup-iframe");
+        var placeholder = document.getElementById("mockup-placeholder");
         var themeButtons = document.querySelectorAll("[data-theme]");
+        var sizeButtons = document.querySelectorAll("[data-mockup-size]");
         var mockupLinks = document.querySelectorAll(".mockup-link");
         var disclosures = document.querySelectorAll(".nav-disclosure");
         var overview = document.getElementById("shell-overview");
 
-        function syncOverviewVisibility() {
-          var anyOpen = false;
+        var MOCKUP_SIZES = {
+          phone: { w: 390, h: 844, className: "phone-frame--phone" },
+          ableton: { w: 340, h: 200, className: "phone-frame--ableton" },
+          desktop: { w: 960, h: 600, className: "phone-frame--desktop" },
+        };
+
+        function anyDisclosureOpen() {
+          var open = false;
           disclosures.forEach(function (d) {
-            if (d.open) anyOpen = true;
+            if (d.open) open = true;
           });
+          return open;
+        }
+
+        function syncOverviewVisibility() {
+          var anyOpen = anyDisclosureOpen();
           if (overview) {
             overview.hidden = anyOpen;
             overview.setAttribute("aria-hidden", anyOpen ? "true" : "false");
           }
         }
 
+        function clearMockup() {
+          iframe.src = "about:blank";
+          mockupLinks.forEach(function (l) {
+            l.classList.remove("is-active");
+          });
+          placeholder.hidden = false;
+        }
+
+        function applyLayout() {
+          var wide = mq.matches;
+          var split = anyDisclosureOpen();
+          shell.dataset.layoutWide = wide ? "true" : "false";
+          shell.dataset.layoutSplit = split ? "true" : "false";
+          shell.classList.remove(
+            "app-shell--intro",
+            "app-shell--split-wide",
+            "app-shell--split-narrow"
+          );
+          if (!split) {
+            shell.classList.add("app-shell--intro");
+            rightPanel.setAttribute("aria-hidden", "true");
+            rightPanel.hidden = true;
+            clearMockup();
+          } else {
+            rightPanel.hidden = false;
+            rightPanel.setAttribute("aria-hidden", "false");
+            if (wide) {
+              shell.classList.add("app-shell--split-wide");
+            } else {
+              shell.classList.add("app-shell--split-narrow");
+            }
+          }
+        }
+
+        function applyMockupSize(key) {
+          var spec = MOCKUP_SIZES[key] || MOCKUP_SIZES.phone;
+          phoneFrame.style.width = "";
+          phoneFrame.style.height = "";
+          phoneFrame.classList.remove(
+            "phone-frame--phone",
+            "phone-frame--ableton",
+            "phone-frame--desktop"
+          );
+          phoneFrame.classList.add(spec.className);
+          phoneFrame.dataset.size = key;
+          sizeButtons.forEach(function (b) {
+            var on = b.getAttribute("data-mockup-size") === key;
+            b.classList.toggle("is-active", on);
+            b.setAttribute("aria-pressed", on ? "true" : "false");
+          });
+        }
+
         disclosures.forEach(function (d) {
-          d.addEventListener("toggle", syncOverviewVisibility);
+          d.addEventListener("toggle", function () {
+            syncOverviewVisibility();
+            applyLayout();
+          });
         });
+
+        if (typeof mq.addEventListener === "function") {
+          mq.addEventListener("change", applyLayout);
+        } else {
+          mq.addListener(applyLayout);
+        }
+
         syncOverviewVisibility();
+        applyLayout();
+        applyMockupSize("phone");
 
         themeButtons.forEach(function (btn) {
           btn.addEventListener("click", function () {
@@ -288,12 +421,23 @@
 
         document.querySelector("[data-theme=\"bg-blueprint\"]").classList.add("is-active");
 
+        sizeButtons.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            applyMockupSize(btn.getAttribute("data-mockup-size"));
+          });
+        });
+
         mockupLinks.forEach(function (link) {
-          link.addEventListener("click", function () {
+          link.addEventListener("click", function (e) {
+            if (!anyDisclosureOpen()) return;
+            e.preventDefault();
+            var url = link.getAttribute("href");
+            iframe.src = url;
             mockupLinks.forEach(function (l) {
               l.classList.remove("is-active");
             });
             link.classList.add("is-active");
+            placeholder.hidden = true;
           });
         });
       })();
