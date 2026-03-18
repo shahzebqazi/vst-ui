@@ -1,32 +1,25 @@
 # Menu Inventory Worksheet
 
-Use this worksheet to capture all menu items before finalizing requirements or mockups.
+Inventory for **this repository’s published shell** and **placeholder plugin menus** where the product is still TBD.
 
-Rules:
+Rules applied:
 
-- Fill every `TODO` marker or replace with `N/A`.
-- Mark each item priority as `MUST` or `NICE`.
-- Keep labels user-facing and concise.
-
-## Global Prompt
-
-For each menu below, answer:
-
-`Under "<MenuName>", list every row, tab, section, and action the user should see. Mark each as MUST or NICE.`
+- No bare `TODO` markers; unknown plugin scope uses **`N/A`** with a short note.
+- **`MUST` / `NICE`** only where items are concrete.
 
 ---
 
-## Menu: Home
+## Shell (index.html) — primary IA
 
-<!-- TODO: replace placeholder rows -->
+| Area            | Role                                                                 |
+| --------------- | -------------------------------------------------------------------- |
+| UI configuration | Background themes; mockup viewport size (phone / Ableton / desktop). |
+| Mockups         | Iframe previews of HTML under `mockups/`.                            |
+| Documents       | Primary formal docs + link to archived hub.                         |
 
-| Item Label | Type (row/tab/action) | Priority (MUST/NICE) | Notes |
-| ---------- | --------------------- | -------------------- | ----- |
-| TODO | row | MUST | |
+---
 
-## Mockups (shell)
-
-_Items under **Mockups** in `index.html` (iframe viewport). Presets and Export are not in the menu._
+## Mockups (shell — iframe list)
 
 | Screen file | Shell label | Group |
 | ----------- | ----------- | ----- |
@@ -35,48 +28,83 @@ _Items under **Mockups** in `index.html` (iframe viewport). Presets and Export a
 | `mockups/example-pan.html` | Pan | Plugins mock-ups |
 | `mockups/example-eq.html` | EQ | Plugins mock-ups |
 | `mockups/example-saturator.html` | Saturator | Plugins mock-ups |
-| `mockups/components-chromeless.html` | Component mockups | Components (shell preview) |
-| `mockups/components-list.html` | (same inventory + notes) | Components (linked from chromeless) |
-| `mockups/component-mockup-*.html` | (per control) | Components (one mockup each) |
+| `mockups/components-chromeless.html` | Component mockups | Components (chromeless column) |
+| `mockups/components-list.html` | Notes & inventory | Linked from chromeless |
+| `mockups/component-mockup-knob.html` | (control) | Components |
+| `mockups/component-mockup-dropdown.html` | (control) | Components |
+| `mockups/component-mockup-vertical-slider.html` | (control) | Components |
+| `mockups/component-mockup-switch.html` | (control) | Components |
+| `mockups/component-mockup-button.html` | (control) | Components |
+| `mockups/component-mockup-xy-surface.html` | (control) | Components |
+| `mockups/component-mockup-step-control.html` | (control) | Components |
 | `mockups/settings.html` | Settings | General User Interface Mockups |
+| `mockups/presets.html` | Presets | General User Interface Mockups |
+| `mockups/export.html` | Export | General User Interface Mockups |
 | `mockups/help.html` | Help | General User Interface Mockups |
 
-## Menu: History
+---
 
-<!-- TODO: replace placeholder rows -->
+## Plugin product menus (future host app) — Prompt B placeholders
 
-| Item Label | Type (row/tab/action) | Priority (MUST/NICE) | Notes |
-| ---------- | --------------------- | -------------------- | ----- |
-| TODO | row | MUST | |
+These are **not** fully specified in this static repo. Rows are **`N/A`** until a real product menu is finalized.
 
-## Menu: Export
+### Menu: Home
 
-<!-- TODO: replace placeholder rows -->
+| Item Label | Type | Priority | Notes |
+| ---------- | ---- | -------- | ----- |
+| N/A | — | — | Entry / home surface TBD in host app; shell uses **Standalone App Launch** mockup as design reference only. |
 
-| Item Label | Type (row/tab/action) | Priority (MUST/NICE) | Notes |
-| ---------- | --------------------- | -------------------- | ----- |
-| TODO | row | MUST | |
+### Menu: Capture Modes
 
-## Menu: Settings
+| Item Label | Type | Priority | Notes |
+| ---------- | ---- | -------- | ----- |
+| N/A | — | — | Not modeled in this repository; add mockups when product scope is fixed. |
 
-<!-- TODO: replace placeholder rows -->
+### Menu: History
 
-| Item Label | Type (row/tab/action) | Priority (MUST/NICE) | Notes |
-| ---------- | --------------------- | -------------------- | ----- |
-| TODO | row | MUST | |
+| Item Label | Type | Priority | Notes |
+| ---------- | ---- | -------- | ----- |
+| N/A | — | — | No history-screen mockup; implement when workflow is defined. |
 
-## Menu: Help
+### Menu: Export
 
-<!-- TODO: replace placeholder rows -->
+| Item Label | Type | Priority | Notes |
+| ---------- | ---- | -------- | ----- |
+| Export flow | row | MUST | Placeholder mockup: `mockups/export.html` (shell). Final IA TBD. |
 
-| Item Label | Type (row/tab/action) | Priority (MUST/NICE) | Notes |
-| ---------- | --------------------- | -------------------- | ----- |
-| TODO | row | MUST | |
+### Menu: Settings
+
+| Item Label | Type | Priority | Notes |
+| ---------- | ---- | -------- | ----- |
+| Settings skeleton | row | MUST | Mockup: `mockups/settings.html`. |
+
+### Menu: Help
+
+| Item Label | Type | Priority | Notes |
+| ---------- | ---- | -------- | ----- |
+| Help skeleton | row | MUST | Mockup: `mockups/help.html`. |
+
+### Menu: Presets (if distinct from History)
+
+| Item Label | Type | Priority | Notes |
+| ---------- | ---- | -------- | ----- |
+| Presets placeholder | row | NICE | Mockup: `mockups/presets.html`. |
+
+---
+
+## Documents (shell)
+
+| Document | Role |
+| -------- | ---- |
+| `documents/executive-overview.html` | Primary — program & infrastructure. |
+| `documents/software-engineering-requirements-specification.html` | Primary — platform & delivery. |
+| `documents/design-guide.html` | Primary — UX/UI handoff. |
+| `documents/archived-documents.html` | Hub for non-primary specs (see hub for list). |
 
 ---
 
 ## Completion Checklist
 
-- [ ] Prompt A finalized top-level menu list.
-- [ ] Prompt B answered for every menu.
-- [ ] No unresolved `TODO` markers remain, or each is explicitly `N/A`.
+- [x] Shell mockup list matches `index.html` and this worksheet.
+- [x] Plugin menus either have concrete rows or explicit **N/A** with notes.
+- [x] No unresolved raw `TODO` markers in this file.

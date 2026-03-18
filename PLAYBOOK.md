@@ -24,6 +24,8 @@ When you finish a **coherent unit of work** (a feature, fix, or doc update the u
 
 If **push fails** (auth, network, conflicts): **stop**, report the error and suggested next steps; do not claim the work is “shipped.”
 
+If the workspace is **not a git repository** (no `.git`), skip `git add` / `commit` / `push` until the user initializes git and adds a remote; still complete file changes and summarize work.
+
 ### 1.3 Commits: one logical change per commit
 
 - Prefer **one commit per logical change**; avoid mixing unrelated edits.
@@ -100,9 +102,10 @@ Examples: `docs: sync MENU_INVENTORY`, `mockups: tighten settings layout`, `styl
 - `docs/MOCKUPS.md`
 - `docs/DIAGRAMS.md`
 - `styles/backgrounds.css`
+- `scripts/shell.js` — shell logic for `index.html` (theme, disclosures, mockup iframes, persistence)
 - `index.html`
 - `mockups/*.html` per screen
-- `documents/*.html` — executive overview, software engineering requirements specification, design guide
+- `documents/*.html` — primary: executive overview, software engineering requirements specification, design guide; archived hub: `archived-documents.html` (+ linked legacy pages)
 
 ---
 
@@ -125,7 +128,7 @@ For each menu:
 
 ### Completion gate
 
-`docs/REQUIREMENTS.md` is incomplete until `docs/MENU_INVENTORY.md` has real items or `N/A`, and core menu TODOs are resolved.
+`docs/REQUIREMENTS.md` should stay aligned with `docs/MENU_INVENTORY.md` (concrete rows or explicit **`N/A`** per section).
 
 ---
 

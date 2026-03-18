@@ -23,7 +23,12 @@
     <h2>1. Repository &amp; branching</h2>
     <ul>
       <li>Primary branch: <code>main</code>; protected merges recommended.</li>
-      <li>Site root: <code>index.html</code>, <code>styles/</code>, <code>mockups/</code>, <code>documents/</code>.</li>
+      <li
+        >Site root: <code>index.html</code>, <code>styles/</code>, <code>scripts/</code>,
+        <code>mockups/</code>, <code>documents/</code>. Primary formal docs are the executive overview,
+        this specification, and the design guide; older drafts live under
+        <a href="archived-documents.html">Archived documents</a>.</li
+      >
       <li>All deployable assets must be committed; no build-time secrets in client-side bundles.</li>
     </ul>
 
@@ -31,7 +36,10 @@
     <ul>
       <li><strong>Canonical public URL:</strong> <code>https://sqazi.sh/vst-ui/</code></li>
       <li>Implement via GitHub Pages, reverse proxy, or equivalent static host; TLS required.</li>
-      <li>Ensure path prefix <code>/vst-ui/</code> resolves correctly for relative links (<code>styles/</code>, <code>mockups/</code>, <code>documents/</code>).</li>
+      <li
+        >Ensure path prefix <code>/vst-ui/</code> resolves correctly for relative links
+        (<code>styles/</code>, <code>scripts/</code>, <code>mockups/</code>, <code>documents/</code>).</li
+      >
       <li>If host differs from canonical, set <code>rel="canonical"</code> on <code>index.html</code> (already present).</li>
     </ul>
 

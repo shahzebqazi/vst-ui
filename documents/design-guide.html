@@ -47,14 +47,17 @@
           <td>Mockups</td>
           <td
             >Loads HTML from <code>mockups/</code>: <strong>Standalone App Launch image</strong>;
-            <strong>Plugins mock-ups</strong> (Utility, Pan, EQ, Saturator);
-            <strong>General User Interface Mockups</strong> (Settings, Help). Presets/Export not in the
-            menu.</td
+            <strong>Plugins mock-ups</strong> (Utility, Pan, EQ, Saturator); <strong>Components</strong>
+            (chromeless list + per-control pages); <strong>General User Interface Mockups</strong>
+            (Settings, Presets, Export, Help).</td
           >
         </tr>
         <tr>
           <td>Documents</td>
-          <td>Executive overview, software engineering requirements specification, this design guide.</td>
+          <td
+            >Executive overview, software engineering requirements specification, this design guide;
+            <strong>Archived documents</strong> hub for non-primary specs.</td
+          >
         </tr>
         <tr>
           <td>Viewport</td>
@@ -72,7 +75,10 @@
     <h2>3. Frontend implementation</h2>
     <h3>3.1 Stack (current)</h3>
     <ul>
-      <li>Static HTML, CSS (<code>styles/backgrounds.css</code>), minimal vanilla JS.</li>
+      <li
+        >Static HTML, CSS (<code>styles/backgrounds.css</code>), vanilla JS in
+        <code>scripts/shell.js</code> (shell only).</li
+      >
       <li>Nerd Font families loaded for UI chrome; icons via patched font glyphs.</li>
     </ul>
     <h3>3.2 Visual tokens</h3>
@@ -153,6 +159,14 @@
         </tr>
       </tbody>
     </table>
+    <p>
+      <strong>Third-party fonts (operational):</strong> Shell Nerd Font files are served from
+      <strong>jsDelivr</strong> (see <code>@font-face</code> in <code>styles/backgrounds.css</code>).
+      That implies a network request on first paint, CDN availability, and (for strict privacy policies) a
+      third-party domain. Mitigations if needed: self-host font files under <code>assets/fonts/</code> and
+      point <code>src:</code> to local URLs; or rely on <code>ui-monospace</code> / system stacks only
+      (visual change).
+    </p>
 
     <h2>7. Launch art &amp; wireframes</h2>
     <p>

@@ -22,8 +22,20 @@ flowchart TB
   pan[Pan]
   eq[EQ]
   sat[Saturator]
+  comp[Components]
+  chrome[components-chromeless.html]
+  list[components-list.html]
+  knob[knob]
+  dd[dropdown]
+  vsl[vertical-slider]
+  sw[switch]
+  btn[button]
+  xy[xy-surface]
+  step[step-control]
   gui[General User Interface Mockups]
   settings[Settings]
+  presets[Presets]
+  export[Export]
   help[Help]
   mockups --> launch
   mockups --> plugins
@@ -31,23 +43,31 @@ flowchart TB
   plugins --> pan
   plugins --> eq
   plugins --> sat
+  mockups --> comp
+  comp --> chrome
+  chrome --> list
+  list --> knob
+  list --> dd
+  list --> vsl
+  list --> sw
+  list --> btn
+  list --> xy
+  list --> step
   mockups --> gui
   gui --> settings
+  gui --> presets
+  gui --> export
   gui --> help
-  comp[Components]
-  cm[Components page]
-  mockups --> comp
-  comp --> cm
 ```
 
-_Under **Components**: **Component mockups** → `components-chromeless.html` in **`#chromeless-iframe`** (full right column—not inside `.phone-frame`). Phone-sized mockups use `iframe#mockup-iframe` in `.phone-frame`. `components-list.html` keeps shell notes + same inventory._
+**Components:** **Component mockups** → `components-chromeless.html` in **`#chromeless-iframe`**. Per-control pages: `component-mockup-knob`, `-dropdown`, `-vertical-slider`, `-switch`, `-button`, `-xy-surface`, `-step-control`. **`components-list.html`** — notes + inventory (linked from chromeless).
 
 ## Standalone App Launch image (blueprint page)
 
 `mockups/blueprint-01-mockup-wireframe.html` + `mockups/blueprint-mockup-wireframe.css`:
 
-- **Standalone app launch art** — primary viewport content; same gradient / mark / progress bar language as `main.html`.
-- **Mockups and Wireframes** — collapsible section below launch art. When expanded: **“You are a…” mockup** (labeled card) and **wireframe** canvas (**black** 2px strokes) plus project-standard wireframe subtext.
+- **Standalone app launch art** — same language as `main.html`.
+- **Mockups and Wireframes** — collapsible block with **You are a…** card and wireframe canvas.
 
 ## Settings Screen Skeleton
 
@@ -64,4 +84,4 @@ flowchart TB
 ## Notes
 
 - Inventory: `docs/MENU_INVENTORY.md`.
-- Under **Mockups**, rows use a flat list style (no white card per link); group headings separate **Plugins mock-ups** and **General User Interface Mockups**.
+- Mockups list uses flat rows + group headings.
