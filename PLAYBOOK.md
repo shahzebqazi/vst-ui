@@ -67,9 +67,14 @@ Apply these when editing **`index.html`**, **`styles/backgrounds.css`**, **`mock
 
 - Site is **static HTML/CSS/JS**; **no build step required** for basic changes.
 - Publishing typically uses **`main`** with site root at repo root (or `/docs` if configured that way).
+- Header status for the published site lives in **`index.html`** and is driven by
+  **`build-status.json`** + **`scripts/build-status.js`**:
+  - `build-status.json` stores repo metadata (`owner`, `repo`, `branch`) and an optional fallback build id.
+  - `scripts/build-status.js` reads that file, fetches the latest public GitHub commit for the configured branch, and renders the header text as the current GitHub Pages build/status indicator.
+  - If the GitHub API is unavailable, the header may fall back to the committed fallback build id or an unavailable message.
 - After deploy-affecting changes, ensure:
   - **`index.html`** exists at the published root.
-  - **Relative paths** (`styles/`, `mockups/`, `documents/`) work from the **deployed base URL** (including path prefix if the site lives under e.g. `/vst-ui/`).
+  - **Relative paths** (`styles/`, `scripts/`, `mockups/`, `documents/`, `build-status.json`) work from the **deployed base URL** (including path prefix if the site lives under e.g. `/vst-ui/`).
 - **Canonical URL** for this project: **`https://sqazi.sh/vst-ui/`** — keep **`index.html`** `<link rel="canonical">` and docs in sync when URL policy changes.
 
 ### 3.3 Optional: commit message metadata
@@ -101,7 +106,9 @@ Examples: `docs: sync MENU_INVENTORY`, `mockups: tighten settings layout`, `styl
 - `docs/MENU_INVENTORY.md`
 - `docs/MOCKUPS.md`
 - `docs/DIAGRAMS.md`
+- `build-status.json` — GitHub Pages status header config / fallback build id
 - `styles/backgrounds.css`
+- `scripts/build-status.js` — header status loader for latest public GitHub commit
 - `scripts/shell.js` — shell logic for `index.html` (theme, disclosures, mockup iframes, persistence)
 - `index.html`
 - `mockups/*.html` per screen
@@ -169,8 +176,9 @@ Do not claim sync done until all layers are updated **and** pushed.
 
 1. Links and paths resolve for **GitHub Pages** base path.
 2. Mermaid blocks valid (if touched).
-3. Changes **committed and pushed**.
-4. User asked for clarification where needed (§1.1).
+3. Header build/status text resolves or falls back gracefully if `build-status.json` / GitHub API is unavailable.
+4. Changes **committed and pushed**.
+5. User asked for clarification where needed (§1.1).
 
 ---
 
