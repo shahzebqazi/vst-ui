@@ -372,6 +372,33 @@ body {
   width: 100%;
 }
 
+.mockup-group-heading {
+  margin: 10px 0 0;
+  padding: 6px 2px 2px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.45);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.mockup-group-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.bg-dark-dots .mockup-group-heading {
+  color: rgba(255, 255, 255, 0.5);
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.bg-paper .mockup-group-heading {
+  color: rgba(0, 0, 0, 0.4);
+}
+
 .stack-tile {
   display: flex;
   flex-direction: row;

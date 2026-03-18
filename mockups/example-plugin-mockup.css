@@ -1,0 +1,30 @@
+/* Centered-title canvas for example plugin mockups */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+body {
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  background: #181b22;
+  color: #e8eaef;
+}
+.example-plugin-mockup {
+  min-height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 24px;
+}
+.example-plugin-mockup__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 5vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-align: center;
+}

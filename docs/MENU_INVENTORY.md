@@ -24,19 +24,16 @@ For each menu below, answer:
 | ---------- | --------------------- | -------------------- | ----- |
 | TODO | row | MUST | |
 
-## Menu: ExamplePlugins
+## Example plugin mockups (shell)
 
-_Screen: `mockups/capture-modes.html` (shell label: ExamplePlugins)._
+_Four standalone iframe targets under **Mockups** in `index.html`._
 
-| Item Label | Type (row/tab/action) | Priority (MUST/NICE) | Notes |
-| ---------- | --------------------- | -------------------- | ----- |
-| Plugin chain menu | nav (anchors) | MUST | Utility, Pan, EQ, Saturator |
-| Desktop layout | region | MUST | Menu beside vertically stacked plugin windows |
-| Mobile / narrow layout | region | MUST | Menu above stacked plugin windows |
-| Plugin window — Utility | window + blank canvas | MUST | Centered title |
-| Plugin window — Pan | window + blank canvas | MUST | Centered title |
-| Plugin window — EQ | window + blank canvas | MUST | Centered title |
-| Plugin window — Saturator | window + blank canvas | MUST | Centered title |
+| Screen file | Shell label | Notes |
+| ----------- | ----------- | ----- |
+| `mockups/example-utility.html` | Utility | Blank canvas + centered title |
+| `mockups/example-pan.html` | Pan | Blank canvas + centered title |
+| `mockups/example-eq.html` | EQ | Blank canvas + centered title |
+| `mockups/example-saturator.html` | Saturator | Blank canvas + centered title |
 
 ## Menu: History
 

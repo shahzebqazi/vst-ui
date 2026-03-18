@@ -17,36 +17,28 @@ flowchart LR
 flowchart TB
   menuRoot[MenuRoot]
   mainMenu[Main]
-  examplePluginsMenu[ExamplePlugins]
+  util[Utility]
+  pan[Pan]
+  eq[EQ]
+  sat[Saturator]
   historyMenu[History]
   exportMenu[Export]
   settingsMenu[Settings]
   helpMenu[Help]
   menuRoot --> mainMenu
-  menuRoot --> examplePluginsMenu
+  menuRoot --> util
+  menuRoot --> pan
+  menuRoot --> eq
+  menuRoot --> sat
   menuRoot --> historyMenu
   menuRoot --> exportMenu
   menuRoot --> settingsMenu
   menuRoot --> helpMenu
 ```
 
-## ExamplePlugins Screen
+## Example plugin mockups
 
-```mermaid
-flowchart TB
-  epHeader[ExamplePluginsHeader]
-  chainMenu[PluginChainMenu]
-  win1[Window_Utility]
-  win2[Window_Pan]
-  win3[Window_EQ]
-  win4[Window_Saturator]
-  epHeader --> chainMenu
-  epHeader --> win1 --> win2 --> win3 --> win4
-  chainMenu -.->|anchors| win1
-```
-
-- **Desktop / wide viewport:** chain menu on the left; Utility, Pan, EQ, Saturator as stacked plugin windows on the right (blank canvas + centered title each).
-- **Mobile / narrow:** menu first, then the same windows stacked vertically.
+Four standalone pages (`example-utility.html`, `example-pan.html`, `example-eq.html`, `example-saturator.html`): full-viewport blank canvas with centered plugin title each.
 
 ## Settings Screen Skeleton
 

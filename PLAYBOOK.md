@@ -115,7 +115,7 @@ Use this **two-round** workflow when defining or overhauling menus (unless the u
 Ask the user for the **final** top-level menu list (add / rename / remove). Baseline reference:
 
 - Home · Capture Modes · History · Export · Settings · Help  
-  (or current **VST UI mockups** labels: Main, ExamplePlugins, Presets, etc. — follow repo reality.)
+  (or current **VST UI mockups** labels: Main, example plugin screens, Presets, etc. — follow repo reality.)
 
 ### Prompt B: Items per menu
 
